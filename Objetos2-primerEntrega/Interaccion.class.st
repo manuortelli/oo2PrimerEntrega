@@ -10,18 +10,23 @@ Class {
 	#category : #'Objetos2-primerEntrega'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #adding }
 Interaccion >> agregarLike: unUsuario [
 	
 	likes add: (Like initializeConUsuario: unUsuario).
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #adding }
+Interaccion >> agregarRespuestaConTexto:unTexto usuario: unUsuario [ 
+	self subclassResponsibility 
+]
+
+{ #category : #acccessing }
 Interaccion >> getDislikes [
 	^ (likes collect: [ :each | each getState = false ]) size
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #acccessing }
 Interaccion >> getLikes [
 	^ (likes collect: [ :each | each getState]) size
 ]
@@ -33,7 +38,7 @@ Interaccion >> initialize [
 	hora := Time now
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #acccessing }
 Interaccion >> usuarioPropietario [
 	^ usuarioCreador 
 ]
