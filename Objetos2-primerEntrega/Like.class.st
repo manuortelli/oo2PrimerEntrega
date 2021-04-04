@@ -15,6 +15,11 @@ Like class >> initializeConUsuario: unUsuario [
 	^ self new initializeConUsuario: unUsuario
 ]
 
+{ #category : #'as yet unclassified' }
+Like >> getState [ 
+	^ estado 
+]
+
 { #category : #initialization }
 Like >> initialize [
 	estado := true.
