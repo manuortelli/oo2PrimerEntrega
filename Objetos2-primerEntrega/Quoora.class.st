@@ -9,6 +9,13 @@ Class {
 	#category : #'Objetos2-primerEntrega'
 }
 
+{ #category : #'as yet unclassified' }
+Quoora >> CalcularPuntajeDe: unUsuario [
+	| preg resp  |
+	preg := (self getPreguntasDeUnUsuario: unUsuario) size * 20.
+	resp := (self getPregunta)
+]
+
 { #category : #adding }
 Quoora >> agregarFollower: unFollower usuario:unUsuario [ 
 	unUsuario agregarFollower: unFollower .
@@ -53,8 +60,9 @@ Quoora >> borrarPregunta: unaPregunta [
 
 { #category : #adding }
 Quoora >> crearUsuarioNombre: unNombre password: unaPassword [
-	usuarios
+	^ usuarios
 		add: (UsuarioQuoora initializeConNombre: unNombre password: unaPassword)
+		
 ]
 
 { #category : #accesing }
