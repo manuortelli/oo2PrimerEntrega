@@ -11,9 +11,8 @@ Class {
 
 { #category : #'as yet unclassified' }
 Quoora >> CalcularPuntajeDe: unUsuario [
-	| preg resp  |
-	preg := (self getPreguntasDeUnUsuario: unUsuario) size * 20.
-	resp := (self getPregunta)
+	| preg |
+	preg := (self getPreguntasDeUnUsuario: unUsuario) size * 20
 ]
 
 { #category : #adding }
@@ -22,8 +21,8 @@ Quoora >> agregarFollower: unFollower usuario:unUsuario [
 ]
 
 { #category : #adding }
-Quoora >> agregarLikePregunta: unaPregunta usuario:unUsuario [
-	unaPregunta agregarLike: unUsuario 
+Quoora >> agregarLikePregunta: unaPregunta usuario: unUsuario [
+	unaPregunta agregarLikeDe: unUsuario
 ]
 
 { #category : #adding }
