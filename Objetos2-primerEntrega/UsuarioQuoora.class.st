@@ -23,7 +23,7 @@ UsuarioQuoora >> agregarFollower: unFollower [
 
 { #category : #adding }
 UsuarioQuoora >> agregarTopicoDeinteres: unTopico [
-	topicosDeInteres := unTopico .
+	topicosDeInteres add: unTopico
 ]
 
 { #category : #accessing }
