@@ -22,8 +22,9 @@ Quoora >> agregarFollower: unFollower usuario:unUsuario [
 ]
 
 { #category : #adding }
-Quoora >> agregarLikePregunta: unaPregunta usuario:unUsuario [
-	unaPregunta agregarLike: unUsuario 
+Quoora >> agregarLikePregunta: unaPregunta usuario: unUsuario [
+	(preguntas includes: [ :each | each == unaPregunta ])
+		ifNotNil: [ (unaPregunta agregarLike: unUsuario) ]
 ]
 
 { #category : #adding }
@@ -39,7 +40,7 @@ Quoora >> agregarPreguntaConTopico: unTopico titulo: unTitulo descripcion: unaDe
 		titulo: unTitulo
 		descripcion: unaDescripcion.
 	nuevaPregunta agregarTopico: unTopico.
-	preguntas add: nuevaPregunta
+	^ preguntas add: nuevaPregunta
 ]
 
 { #category : #adding }
@@ -89,7 +90,7 @@ Quoora >> getRespuestas: unaPregunta [
 Quoora >> getRespuestasDeUnUsuario: unUsuario [
 	| respuestas |
 	respuestas := preguntas collect: [ :each | each getRespuestas ].
-	^respuestas collect: [ :each | each usuarioPropietario =unUsuario ]
+	^ respuestas collect: [ :each | each usuarioPropietario == unUsuario ]
 ]
 
 { #category : #initialization }
