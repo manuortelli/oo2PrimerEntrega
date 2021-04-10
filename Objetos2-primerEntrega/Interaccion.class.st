@@ -23,12 +23,12 @@ Interaccion >> agregarRespuestaConTexto:unTexto usuario: unUsuario [
 
 { #category : #acccessing }
 Interaccion >> getDislikes [
-	^ (likes collect: [ :each | each getState = false ]) size
+	^ (likes collect: [ :each | each getState = false ]) 
 ]
 
 { #category : #acccessing }
 Interaccion >> getLikes [
-	^ (likes collect: [ :each | each getState]) size
+	^ (likes collect: [ :each | each getState ])
 ]
 
 { #category : #initialization }

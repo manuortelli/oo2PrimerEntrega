@@ -18,6 +18,16 @@ TestPregunta >> setUp [
 ]
 
 { #category : #tests }
+TestPregunta >> testAgregarLike [
+	| usuario |
+	usuario := UsuarioQuoora
+		initializeConNombre: 'Manuel'
+		password: 'Sabelobelo'.
+	pregunta agregarLike: usuario.
+	self assert: (pregunta getLikes ) size equals:1
+]
+
+{ #category : #tests }
 TestPregunta >> testAgregarRespuestaConTexto: unTexto unUsuario: usuario1 [
 	pregunta
 		agregarRespuestaConTexto: 'La respuesta esperada por todos'
