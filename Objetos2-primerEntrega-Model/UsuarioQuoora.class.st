@@ -32,11 +32,11 @@ UsuarioQuoora >> getFollowers [
 ]
 
 { #category : #initialization }
-UsuarioQuoora >> initializeConNombre:unNombre password: unaPassword [
+UsuarioQuoora >> initializeConNombre: unNombre password: unaPassword [
 	nombreDeUsuario := unNombre.
 	password := unaPassword.
 	topicosDeInteres := Set new.
-	followers := Set new.
+	followers := Set new
 ]
 
 { #category : #'as yet unclassified' }

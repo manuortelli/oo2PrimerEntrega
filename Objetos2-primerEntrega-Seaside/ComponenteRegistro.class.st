@@ -8,19 +8,11 @@ Class {
 }
 
 { #category : #accessing }
-ComponenteRegistro >> name [
-	^name
-]
-
-{ #category : #accessing }
-ComponenteRegistro >> name: unNombre [ 
-	name:= unNombre
-]
-
-{ #category : #accessing }
 ComponenteRegistro >> registrarseYLoguearse [
 	| elUsuario |
-	elUsuario := self model crearUsuarioNombre:  name password: password.
+	elUsuario := self model
+		crearUsuarioNombre: usuario
+		password: password.
 	self proceedWith: elUsuario quoora: self model
 ]
 
@@ -31,8 +23,6 @@ ComponenteRegistro >> renderButtonsOn: aCanvas [
 
 { #category : #accessing }
 ComponenteRegistro >> renderInputElementsOn: aCanvas [
-	aCanvas label: 'Nombre'.
-	aCanvas paragraph: [ aCanvas textInput on: #usuario of: self ].
 	super renderInputElementsOn: aCanvas
 ]
 

@@ -25,5 +25,6 @@ SesionConUsuario >> usuario [
 
 { #category : #accessing }
 SesionConUsuario >> usuario: unUsuario [
-	usuario := unUsuario
+	usuario := unUsuario.
+
 ]

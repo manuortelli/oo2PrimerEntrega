@@ -57,3 +57,8 @@ Pregunta >> initializePreguntaConUsuario: unUsuario titulo: unTitulo descripcion
 	respuestas := OrderedCollection new.
 	likes := OrderedCollection new.
 ]
+
+{ #category : #accesing }
+Pregunta >> titulo [ 
+	^titulo
+]

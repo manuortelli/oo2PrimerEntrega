@@ -1,10 +1,6 @@
 Class {
 	#name : #ComponentePrincipal,
 	#superclass : #WAComponent,
-	#instVars : [
-		'usuario',
-		'password'
-	],
 	#category : #'Objetos2-primerEntrega-Seaside'
 }
 
@@ -25,7 +21,7 @@ ComponentePrincipal >> renderContentOn: aCanvas [
 ComponentePrincipal >> renderLogoutButtonOn: aCanvas [
 	aCanvas
 		paragraph: [ aCanvas anchor
-				callback: ComponenteLogin;
+				callback: [ self answer ];
 				with: [ aCanvas button with: 'Salir' ] ]
 ]
 
@@ -34,10 +30,9 @@ ComponentePrincipal >> renderPostsOn: aCanvas [
 	aCanvas heading
 		level: 2;
 		with: 'Preguntas'.
-	"aCanvas
-		unorderedList: [ self session quoora
-				getPreguntasDeUnUsuario: self session usuario;
-				do: [ :each | aCanvas listItem: each text ] ]."
+	aCanvas
+		unorderedList: [ (self session quoora getPreguntasDeUnUsuario: self session usuario)
+				do: [ :each | aCanvas listItem: each titulo ]].
 	aCanvas anchor
 		callback: [ self crearNuevaPregunta ];
 		with: [ aCanvas button: 'New post' ]

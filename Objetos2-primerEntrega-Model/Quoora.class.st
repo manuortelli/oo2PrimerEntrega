@@ -94,8 +94,11 @@ Quoora >> getPreguntasConTopico: unTopico [
 ]
 
 { #category : #accesing }
-Quoora >> getPreguntasDeUnUsuario:unUsuario [
-	^preguntas collect: [:each | each usuarioPropietario = unUsuario ]
+Quoora >> getPreguntasDeUnUsuario: unUsuario [
+ |pregunta|
+	pregunta := preguntas collect: [ :each | each usuarioPropietario = unUsuario ].
+	self halt.
+	^pregunta
 ]
 
 { #category : #accesing }
