@@ -6,8 +6,8 @@ Class {
 
 { #category : #'private protocol' }
 ComponenteLogin >> login [
-	(self model usuarioConEmail: usuario protegidoPor: password)
-		ifNotNil: [ :it | self proceedWith: it ].
+	(self model usuario: usuario protegidoPor: password)
+		ifNotNil: [ :it | self proceedWith: it quoora: self model  ].
 	usuario := nil.
 	password := nil
 ]
@@ -21,7 +21,7 @@ ComponenteLogin >> registrarNuevoUsuario [
 ComponenteLogin >> renderButtonsOn: aCanvas [
 	self renderSignInButtonOn: aCanvas.
 	aCanvas horizontalRule.
-	aCanvas paragraph: 'Quieres registrarte'.
+	aCanvas paragraph: '¿Quieres registrarte?'.
 	self renderSignUpButtonOn: aCanvas
 ]
 
