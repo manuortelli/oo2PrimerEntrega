@@ -6,13 +6,33 @@ Class {
 		'topicos',
 		'usuarios'
 	],
+	#classInstVars : [
+		'soleInstance'
+	],
 	#category : #'Objetos2-primerEntrega-Model-Dominio'
 }
+
+{ #category : #accessing }
+Quoora class >> clearSoleInstance [
+	soleInstance := nil
+]
+
+{ #category : #accessing }
+Quoora class >> soleInstance [
+	^ soleInstance ifNil: [ soleInstance := self new ]
+]
 
 { #category : #'as yet unclassified' }
 Quoora >> CalcularPuntajeDe: unUsuario [
 	| preg |
 	preg := (self getPreguntasDeUnUsuario: unUsuario) size * 20
+]
+
+{ #category : #deleting }
+Quoora >> UsuarioQueMacheCon: aString [
+	^ usuarios
+		select:
+			[ :each | each name asLowercase includesSubstring: aString asLowercase ]
 ]
 
 { #category : #adding }
@@ -38,7 +58,8 @@ Quoora >> agregarPreguntaConTopico: unTopico titulo: unTitulo descripcion: unaDe
 		titulo: unTitulo
 		descripcion: unaDescripcion.
 	nuevaPregunta agregarTopico: unTopico.
-	^ preguntas add: nuevaPregunta
+	preguntas add: nuevaPregunta.
+	^ nuevaPregunta
 ]
 
 { #category : #adding }
@@ -59,9 +80,12 @@ Quoora >> borrarPregunta: unaPregunta [
 
 { #category : #adding }
 Quoora >> crearUsuarioNombre: unNombre password: unaPassword [
-	^ usuarios
-		add: (UsuarioQuoora initializeConNombre: unNombre password: unaPassword)
-		
+	| unUsuario |
+	unUsuario := UsuarioQuoora
+		initializeConNombre: unNombre
+		password: unaPassword.
+	usuarios add: unUsuario.
+	^ unUsuario
 ]
 
 { #category : #accesing }
@@ -96,4 +120,11 @@ Quoora >> initialize [
 	preguntas := OrderedCollection new.
 	topicos := Set new.
 	usuarios := Set new.
+]
+
+{ #category : #adding }
+Quoora >> usuario: unUsuario protegidoPor: unaPassword [
+	^ usuarios
+		detect: [ :each | each name = unUsuario & (each password == unaPassword) ]
+		ifNone: [ nil ]
 ]

@@ -9,8 +9,8 @@ Class {
 }
 
 { #category : #accessing }
-ComponenteDeAcceso >> model [ 	
-	^ Ingreso soleInstance 
+ComponenteDeAcceso >> model [
+	^ Quoora  soleInstance
 ]
 
 { #category : #accessing }
@@ -24,9 +24,10 @@ ComponenteDeAcceso >> password: aPassword [
 ]
 
 { #category : #accessing }
-ComponenteDeAcceso >> proceedWith: aUser [
-	self session user: aUser.
-	self call: HomeComponent new
+ComponenteDeAcceso >> proceedWith: aUser quoora: unQuoora [
+	self session quoora: unQuoora.
+	self session usuario: aUser.
+	self call: ComponentePrincipal new
 ]
 
 { #category : #accessing }

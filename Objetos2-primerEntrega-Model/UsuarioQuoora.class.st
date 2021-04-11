@@ -39,6 +39,21 @@ UsuarioQuoora >> initializeConNombre:unNombre password: unaPassword [
 	followers := Set new.
 ]
 
+{ #category : #'as yet unclassified' }
+UsuarioQuoora >> name [
+	^ nombreDeUsuario
+]
+
+{ #category : #'as yet unclassified' }
+UsuarioQuoora >> nombreUsuario [
+	^ nombreDeUsuario 
+]
+
+{ #category : #'as yet unclassified' }
+UsuarioQuoora >> password [ 
+	^password 
+]
+
 { #category : #accessing }
 UsuarioQuoora >> topicosDeInteres [
 	^ topicosDeInteres 
