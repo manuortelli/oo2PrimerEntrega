@@ -1,9 +1,6 @@
 Class {
 	#name : #ComponenteRegistro,
 	#superclass : #ComponenteDeAcceso,
-	#instVars : [
-		'name'
-	],
 	#category : #'Objetos2-primerEntrega-Seaside'
 }
 

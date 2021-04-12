@@ -28,28 +28,26 @@ ComponenteNuevaPregunta >> post [
 		titulo: (self titulo)
 		descripcion: self descripcion
 		usuario: self session usuario.
-	self halt.
 	self answer
 ]
 
 { #category : #rendering }
 ComponenteNuevaPregunta >> renderContentOn: aCanvas [
-	.
-	"aCanvas label: 'Titulo'.
-	aCanvas paragraph: [ aCanvas textInput on: #titulo of: self ]."
 	aCanvas
-		form: [ 
-			aCanvas label: 'titulo'.
-			aCanvas paragraph: [ aCanvas textInput on: #titulo of: self ].
-			aCanvas label: 'topico'.
-			aCanvas textInput on: #topico of: self.
+		form: [ aCanvas
+				paragraph: [ aCanvas label: 'pregunta:  '.
+					aCanvas textInput on: #titulo of: self ].
+			aCanvas
+				paragraph: [ aCanvas label: 'topico:  '.
+					aCanvas textInput on: #topico of: self ].
+			aCanvas paragraph: 'Desripcion'.
 			(aCanvas textArea on: #descripcion of: self)
-				columns: 80;
-				rows: 5.
+				columns: 60;
+				rows: 3.
 			aCanvas break.
 			aCanvas submitButton
 				callback: [ self post ];
-				with: 'post' ]
+				with: 'Preguntar' ]
 ]
 
 { #category : #accessing }

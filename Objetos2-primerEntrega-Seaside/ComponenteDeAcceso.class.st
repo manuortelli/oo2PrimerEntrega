@@ -10,7 +10,6 @@ Class {
 
 { #category : #accessing }
 ComponenteDeAcceso >> model [
-	Quoora clearSoleInstance.
 	^ Quoora soleInstance
 ]
 

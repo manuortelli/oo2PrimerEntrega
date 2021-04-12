@@ -21,7 +21,7 @@ ComponentePrincipal >> renderContentOn: aCanvas [
 ComponentePrincipal >> renderLogoutButtonOn: aCanvas [
 	aCanvas
 		paragraph: [ aCanvas anchor
-				callback: [ self answer ];
+				callback: [ self call: ComponenteLogin new. ];
 				with: [ aCanvas button with: 'Salir' ] ]
 ]
 

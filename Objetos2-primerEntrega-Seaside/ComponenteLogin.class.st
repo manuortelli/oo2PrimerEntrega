@@ -6,8 +6,11 @@ Class {
 
 { #category : #'private protocol' }
 ComponenteLogin >> login [
-	(self model usuario: usuario protegidoPor: password)
-		ifNotNil: [ :it | self proceedWith: it quoora: self model ].
+	| usuarioss |
+	usuarioss := self model
+		usuario: self usuario
+		protegidoPor: self password.
+	usuarioss ifNotNil: [ :it | self proceedWith: it quoora: self model ].
 	usuario := nil.
 	password := nil
 ]

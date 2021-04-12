@@ -90,15 +90,16 @@ Quoora >> crearUsuarioNombre: unNombre password: unaPassword [
 
 { #category : #accesing }
 Quoora >> getPreguntasConTopico: unTopico [
-	^ preguntas collect: [ :each | each getTopico = unTopico ]
+	^ preguntas select: [ :each | each getTopico = unTopico ]
 ]
 
 { #category : #accesing }
 Quoora >> getPreguntasDeUnUsuario: unUsuario [
- |pregunta|
-	pregunta := preguntas collect: [ :each | each usuarioPropietario = unUsuario ].
-	self halt.
-	^pregunta
+	| pregunta |
+	pregunta := preguntas
+		select: [ :each | 
+			each usuarioPropietario = unUsuario].
+	^ pregunta
 ]
 
 { #category : #accesing }
@@ -115,7 +116,8 @@ Quoora >> getRespuestas: unaPregunta [
 Quoora >> getRespuestasDeUnUsuario: unUsuario [
 	| respuestas |
 	respuestas := preguntas collect: [ :each | each getRespuestas ].
-	^ respuestas collect: [ :each | each usuarioPropietario == unUsuario ]
+	^ respuestas
+		select: [ :each | each usuarioPropietario == unUsuario ]
 ]
 
 { #category : #initialization }
@@ -128,6 +130,7 @@ Quoora >> initialize [
 { #category : #adding }
 Quoora >> usuario: unUsuario protegidoPor: unaPassword [
 	^ usuarios
-		detect: [ :each | each name = unUsuario & (each password == unaPassword) ]
-		ifNone: [ nil ]
+		detect:
+			[ :each | each nombreUsuario = unUsuario & (each password = unaPassword) ]
+		ifNone: [ "Algo" ]
 ]
