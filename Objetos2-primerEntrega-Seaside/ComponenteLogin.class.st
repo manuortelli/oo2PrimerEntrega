@@ -24,20 +24,26 @@ ComponenteLogin >> registrarNuevoUsuario [
 ComponenteLogin >> renderButtonsOn: aCanvas [
 	self renderSignInButtonOn: aCanvas.
 	aCanvas horizontalRule.
-	aCanvas paragraph: '¿Quieres registrarte?'.
 	self renderSignUpButtonOn: aCanvas
 ]
 
 { #category : #rendering }
 ComponenteLogin >> renderSignInButtonOn: aCanvas [
-	aCanvas submitButton
+	aCanvas formButton
+		bePrimary;
+		beLarge;
 		callback: [ self login ];
-		with: 'Ingresar'
+		with: '   Entrar   '
 ]
 
 { #category : #rendering }
 ComponenteLogin >> renderSignUpButtonOn: aCanvas [
-	aCanvas submitButton
-		callback: [ self registrarNuevoUsuario  ];
+	aCanvas heading
+		level:4;
+		with: [ aCanvas space.
+			aCanvas small textMuted with: '¿Desea Registrarse?' ].
+	aCanvas outlineButton
+		bePrimary;
+		callback: [ self registrarNuevoUsuario ];
 		with: 'Registrarse'
 ]

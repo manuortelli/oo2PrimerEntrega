@@ -1,6 +1,6 @@
 Class {
 	#name : #ComponenteNuevaPregunta,
-	#superclass : #WAComponent,
+	#superclass : #SBSComponent,
 	#instVars : [
 		'descripcion',
 		'titulo',
@@ -31,23 +31,47 @@ ComponenteNuevaPregunta >> post [
 	self answer
 ]
 
+{ #category : #accessing }
+ComponenteNuevaPregunta >> renderButtonOn: aCanvas [
+	aCanvas submitButton
+		class: 'btn btn-outline-primary';
+		callback: [ self post ];
+		with: 'Agregar pregunta'.
+	aCanvas space.
+	aCanvas space.
+	aCanvas submitButton
+		class: 'btn btn-outline-secondary';
+		callback: [ self answer ];
+		with: 'Volver'.
+	aCanvas space.
+	aCanvas space.
+	aCanvas submitButton
+		class: 'btn btn-danger';
+		callback: [ self call: ComponenteLogin new ];
+		with: 'Salir'
+]
+
 { #category : #rendering }
 ComponenteNuevaPregunta >> renderContentOn: aCanvas [
-	aCanvas
-		form: [ aCanvas
-				paragraph: [ aCanvas label: 'pregunta:  '.
-					aCanvas textInput on: #titulo of: self ].
-			aCanvas
-				paragraph: [ aCanvas label: 'topico:  '.
-					aCanvas textInput on: #topico of: self ].
-			aCanvas paragraph: 'Desripcion'.
-			(aCanvas textArea on: #descripcion of: self)
-				columns: 60;
-				rows: 3.
-			aCanvas break.
-			aCanvas submitButton
-				callback: [ self post ];
-				with: 'Preguntar' ]
+	aCanvas 
+		form: [ self renderInputElementon: aCanvas.
+			self renderButtonOn: aCanvas ]
+]
+
+{ #category : #accessing }
+ComponenteNuevaPregunta >> renderInputElementon: aCanvas [
+	aCanvas heading
+		level: 5;
+		with: 'Titulo'.
+	aCanvas paragraph: [ aCanvas textInput on: #titulo of: self ].
+	aCanvas heading
+		level: 5;
+		with: 'Topico ' greaseString.
+	aCanvas paragraph: [ aCanvas textInput on: #topico of: self ].
+	aCanvas heading
+		level: 5;
+		with: 'Descripcion ' greaseString.
+	aCanvas paragraph: [ aCanvas textArea on: #descripcion of: self ]
 ]
 
 { #category : #accessing }

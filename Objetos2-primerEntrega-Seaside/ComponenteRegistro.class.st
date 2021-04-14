@@ -25,7 +25,9 @@ ComponenteRegistro >> renderInputElementsOn: aCanvas [
 
 { #category : #accessing }
 ComponenteRegistro >> renderSignUpButtonOn: aCanvas [
-	aCanvas submitButton
-		callback: [ self registrarseYLoguearse  ];
-		with: 'Registrarse'
+	aCanvas outlineButton
+		bePrimary;
+		callback: [ self registrarseYLoguearse ];
+		with: 'Registrarse'.
+	aCanvas space
 ]

@@ -22,22 +22,16 @@ Quoora class >> soleInstance [
 	^ soleInstance ifNil: [ soleInstance := self new ]
 ]
 
-{ #category : #'as yet unclassified' }
-Quoora >> CalcularPuntajeDe: unUsuario [
-	| preg |
-	preg := (self getPreguntasDeUnUsuario: unUsuario) size * 20
-]
-
-{ #category : #deleting }
-Quoora >> UsuarioQueMacheCon: aString [
-	^ usuarios
-		select:
-			[ :each | each name asLowercase includesSubstring: aString asLowercase ]
-]
-
 { #category : #adding }
 Quoora >> agregarFollower: unFollower usuario:unUsuario [ 
 	unUsuario agregarFollower: unFollower .
+]
+
+{ #category : #adding }
+Quoora >> agregarFollowerName: unFollowerName usuario: unUsuario [
+	| us |
+	us := self usuarioQueMacheCon: unFollowerName.
+	us ifNotNil: [	unUsuario agregarFollower: us ] 
 ]
 
 { #category : #adding }
@@ -73,9 +67,23 @@ Quoora >> agregarTopicoNombre: unNombre descripcion:unaDescripcion [
 	topicos add: (Topico nuevoConNombre: unNombre descripcion: unaDescripcion )
 ]
 
+{ #category : #adding }
+Quoora >> agregarTopicoNombre: unNombre descripcion: unaDescripcion usuario: unUsuario [
+	| topi |
+	topi := Topico nuevoConNombre: unNombre descripcion: unaDescripcion . 
+	unUsuario agregarTopicoDeinteres: topi.
+	topicos add: topi
+]
+
 { #category : #deleting }
 Quoora >> borrarPregunta: unaPregunta [
 	preguntas remove: unaPregunta 
+]
+
+{ #category : #'as yet unclassified' }
+Quoora >> calcularPuntajeDe: unUsuario [
+	| preg |
+	preg := (self getPreguntasDeUnUsuario: unUsuario) size * 20
 ]
 
 { #category : #adding }
@@ -132,5 +140,12 @@ Quoora >> usuario: unUsuario protegidoPor: unaPassword [
 	^ usuarios
 		detect:
 			[ :each | each nombreUsuario = unUsuario & (each password = unaPassword) ]
-		ifNone: [ "Algo" ]
+		ifNone: [ nil ]
+]
+
+{ #category : #deleting }
+Quoora >> usuarioQueMacheCon: aString [
+	^ usuarios
+		select:
+			[ :each | each name asLowercase includesSubstring: aString asLowercase ]
 ]

@@ -1,6 +1,6 @@
 Class {
 	#name : #ComponenteDeAcceso,
-	#superclass : #WAComponent,
+	#superclass : #SBSComponent,
 	#instVars : [
 		'usuario',
 		'password'
@@ -37,6 +37,7 @@ ComponenteDeAcceso >> renderButtonsOn: aCanvas [
 
 { #category : #accessing }
 ComponenteDeAcceso >> renderContentOn: aCanvas [
+
 	aCanvas
 		form: [ self renderInputElementsOn: aCanvas.
 			self renderButtonsOn: aCanvas ]
@@ -44,9 +45,18 @@ ComponenteDeAcceso >> renderContentOn: aCanvas [
 
 { #category : #accessing }
 ComponenteDeAcceso >> renderInputElementsOn: aCanvas [
-	aCanvas label: 'Usuario'.
+	aCanvas displayHeading
+		class: 'text-primary';
+		level: 4;
+		with: '  Cuoora' greaseString.
+	aCanvas horizontalRule.
+	aCanvas heading
+		level: 4;
+		with: 'Usuario ' greaseString.
 	aCanvas paragraph: [ aCanvas textInput on: #usuario of: self ].
-	aCanvas label: 'Contraseña'.
+	aCanvas heading
+		level: 4;
+		with: 'Password ' greaseString.
 	aCanvas paragraph: [ aCanvas passwordInput on: #password of: self ]
 ]
 
