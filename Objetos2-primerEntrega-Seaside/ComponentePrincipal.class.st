@@ -1,22 +1,31 @@
 Class {
 	#name : #ComponentePrincipal,
-	#superclass : #WAComponent,
-	#instVars : [
-		'usuario',
-		'password'
-	],
+	#superclass : #SBSComponent,
 	#category : #'Objetos2-primerEntrega-Seaside'
 }
 
-{ #category : #accessing }
-ComponentePrincipal >> crearNuevaPregunta [
-	self call: ComponenteNuevaPregunta new.
+{ #category : #rendering }
+ComponentePrincipal >> agregar [
+	self call:  ComponenteSeguidores new
+]
+
+{ #category : #rendering }
+ComponentePrincipal >> agregarFollower: aCanvas [
+	aCanvas
+		form: [ aCanvas submitButton
+				class: 'tn btn-success';
+				callback: [ self call: ComponenteSeguidores new ];
+				with: '  Ver seguidores  ' ]
 ]
 
 { #category : #rendering }
 ComponentePrincipal >> renderContentOn: aCanvas [
-	aCanvas heading: [ 'Bienvenido ' , self session usuario name ].
+	aCanvas heading
+		level: 3;
+		with: [ 'Bienvenido ' , self session usuario name greaseString ].
 	self renderPostsOn: aCanvas.
+	aCanvas space.
+	self agregarFollower: aCanvas.
 	aCanvas horizontalRule.
 	self renderLogoutButtonOn: aCanvas
 ]
@@ -24,21 +33,28 @@ ComponentePrincipal >> renderContentOn: aCanvas [
 { #category : #rendering }
 ComponentePrincipal >> renderLogoutButtonOn: aCanvas [
 	aCanvas
-		paragraph: [ aCanvas anchor
-				callback: ComponenteLogin;
-				with: [ aCanvas button with: 'Salir' ] ]
+		form: [ aCanvas submitButton
+				class: 'btn btn-danger btn-lg';
+				callback: [ self call: ComponenteLogin new ];
+				with: 'Salir' ]
 ]
 
 { #category : #rendering }
 ComponentePrincipal >> renderPostsOn: aCanvas [
 	aCanvas heading
 		level: 2;
-		with: 'Preguntas'.
-	"aCanvas
-		unorderedList: [ self session quoora
-				getPreguntasDeUnUsuario: self session usuario;
-				do: [ :each | aCanvas listItem: each text ] ]."
-	aCanvas anchor
-		callback: [ self crearNuevaPregunta ];
-		with: [ aCanvas button: 'New post' ]
+		with: 'Preguntas' greaseString.
+	aCanvas
+		unorderedList: [ (self session quoora getPreguntasDeUnUsuario: self session usuario)
+				do: [ :each | aCanvas listItem: each titulo. ] ].
+	aCanvas
+		form: [ aCanvas submitButton
+				class: 'tn btn-outline-success';
+				callback: [ self call: ComponenteNuevaPregunta new ];
+				with: '  Nueva pregunta  '.
+			aCanvas space.
+			aCanvas submitButton
+				class: 'tn btn-outline-success';
+				callback: [ self call: ComponenteNuevoTopico new ];
+				with: '  Agregar topico ' ]
 ]
