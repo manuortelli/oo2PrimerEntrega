@@ -15,22 +15,29 @@ Like class >> initializeConUsuario: unUsuario [
 ]
 
 { #category : #'as yet unclassified' }
+Like >> agregarDislike [
+	estado := false.
+]
+
+{ #category : #'as yet unclassified' }
+Like >> agregarLike [ 
+	estado := true.
+]
+
+{ #category : #'as yet unclassified' }
 Like >> getState [ 
 	^ estado 
 ]
 
 { #category : #initialization }
-Like >> initialize [
-	estado := true.
-	fechaYHora := DateAndTime now
-	
-]
-
-{ #category : #initialization }
-Like >> initializeConUsuario: unUsuario [
+Like >> initializeConUsuario: unUsuario like: unBoolean [
 	usuario := unUsuario.
-	estado := true.
 	fechaYHora := DateAndTime now.
+	self getState
+		ifNil: [ unBoolean
+				ifTrue: [ self agregarLike ];
+				ifFalse: [ self agregarDislike ] ].
+	
 ]
 
 { #category : #initialization }

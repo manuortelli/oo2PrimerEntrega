@@ -11,9 +11,8 @@ Class {
 }
 
 { #category : #adding }
-Interaccion >> agregarLike: unUsuario [
-	
-	likes add: (Like initializeConUsuario: unUsuario).
+Interaccion >> agregarLike: unUsuario estado: unBoolean [
+	likes add: (Like initializeConUsuario: unUsuario like: unBoolean)
 ]
 
 { #category : #adding }
