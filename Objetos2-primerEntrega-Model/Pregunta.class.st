@@ -19,15 +19,6 @@ Pregunta class >> nuevaPreguntaConUsuario: unUsuario titulo: unTitulo descripcio
 
 ]
 
-{ #category : #initialization }
-Pregunta >> agregarLikeDe: unUsuario [
-	| usuario |
-	usuario := likes
-		detect: [ :l | l equals: unUsuario ]
-		ifNone: [ Like initializeConUsuario: unUsuario ].
-		usuario setState
-]
-
 { #category : #adding }
 Pregunta >> agregarRespuestaConTexto: unTexto usuario: unUsuario [
 	respuestas add: (Respuesta nuevaConTexto: unTexto usuario: unUsuario).
