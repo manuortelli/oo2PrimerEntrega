@@ -22,7 +22,8 @@ Like >> getState [
 { #category : #initialization }
 Like >> initialize [
 	estado := true.
-	fechaYHora:=DateAndTime now.
+	fechaYHora := DateAndTime now
+	
 ]
 
 { #category : #initialization }

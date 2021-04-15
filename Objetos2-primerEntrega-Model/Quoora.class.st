@@ -36,7 +36,7 @@ Quoora >> agregarFollowerName: unFollowerName usuario: unUsuario [
 
 { #category : #adding }
 Quoora >> agregarLikePregunta: unaPregunta usuario: unUsuario [
-	unaPregunta agregarLikeDe: unUsuario
+	unaPregunta agregarLike: unUsuario
 ]
 
 { #category : #adding }
