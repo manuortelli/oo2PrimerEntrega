@@ -10,8 +10,8 @@ Class {
 }
 
 { #category : #initialization }
-Like class >> initializeConUsuario: unUsuario [
-	^ self new initializeConUsuario: unUsuario
+Like class >> initializeConUsuario: unUsuario like:unBoolean [
+	^ self new initializeConUsuario: unUsuario like: unBoolean
 ]
 
 { #category : #'as yet unclassified' }
@@ -35,9 +35,8 @@ Like >> initializeConUsuario: unUsuario like: unBoolean [
 	fechaYHora := DateAndTime now.
 	self getState
 		ifNil: [ unBoolean
-				ifTrue: [ self agregarLike ];
-				ifFalse: [ self agregarDislike ] ].
-	
+				ifTrue: [ self agregarLike ]
+				ifFalse: [ self agregarDislike ] ]
 ]
 
 { #category : #initialization }
