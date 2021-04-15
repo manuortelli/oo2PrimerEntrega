@@ -6,7 +6,8 @@ Class {
 		'password',
 		'fechaYHora',
 		'topicosDeInteres',
-		'followers'
+		'followers',
+		'preguntas'
 	],
 	#category : #'Objetos2-primerEntrega-Model-Dominio'
 }
@@ -21,6 +22,11 @@ UsuarioQuoora >> agregarFollower: unFollower [
 	followers add: unFollower.
 ]
 
+{ #category : #'as yet unclassified' }
+UsuarioQuoora >> agregarPregunta: unaPregunta [
+	preguntas add: unaPregunta
+]
+
 { #category : #adding }
 UsuarioQuoora >> agregarTopicoDeinteres: unTopico [
 	topicosDeInteres add: unTopico
@@ -31,12 +37,18 @@ UsuarioQuoora >> getFollowers [
 	^ followers 
 ]
 
+{ #category : #'as yet unclassified' }
+UsuarioQuoora >> getPreguntas [
+	^ preguntas
+]
+
 { #category : #initialization }
 UsuarioQuoora >> initializeConNombre: unNombre password: unaPassword [
 	nombreDeUsuario := unNombre.
 	password := unaPassword.
 	topicosDeInteres := Set new.
 	followers := Set new.
+	preguntas:= Set new.
 	fechaYHora := DateAndTime now
 ]
 

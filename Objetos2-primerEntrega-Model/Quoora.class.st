@@ -53,6 +53,8 @@ Quoora >> agregarPreguntaConTopico: unTopico titulo: unTitulo descripcion: unaDe
 		descripcion: unaDescripcion.
 	nuevaPregunta agregarTopico: unTopico.
 	preguntas add: nuevaPregunta.
+	unUsuario agregarPregunta: nuevaPregunta.
+	unUsuario agregarTopicoDeinteres: unTopico.
 	^ nuevaPregunta
 ]
 
