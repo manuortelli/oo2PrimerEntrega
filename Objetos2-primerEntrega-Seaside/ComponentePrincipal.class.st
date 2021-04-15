@@ -19,6 +19,28 @@ ComponentePrincipal >> agregarFollower: aCanvas [
 ]
 
 { #category : #rendering }
+ComponentePrincipal >> like: unaPregunta [
+	self session quoora agregarLikePregunta: unaPregunta usuario: self session usuario  
+]
+
+{ #category : #rendering }
+ComponentePrincipal >> renderButtonLike: aCanvas pregunta: unaPregunta [
+	aCanvas submitButton
+		class: 'btn btn-outline-primary';
+		callback: [ self session quoora
+				agregarLikePregunta: unaPregunta
+				usuario: self session usuario ];
+		with: 'Like'.
+	aCanvas space.
+	aCanvas submitButton
+		class: 'btn btn-outline-primary';
+		callback: [ self session quoora
+				agregarLikePregunta: unaPregunta
+				usuario: self session usuario ];
+		with: 'Dislike'
+]
+
+{ #category : #rendering }
 ComponentePrincipal >> renderContentOn: aCanvas [
 	aCanvas heading
 		level: 3;
@@ -41,12 +63,22 @@ ComponentePrincipal >> renderLogoutButtonOn: aCanvas [
 
 { #category : #rendering }
 ComponentePrincipal >> renderPostsOn: aCanvas [
+	| preguntas |
+	preguntas := self session quoora
+		getPreguntasDeUnUsuario: self session usuario.
 	aCanvas heading
 		level: 2;
 		with: 'Preguntas' greaseString.
-	aCanvas
-		unorderedList: [ (self session quoora getPreguntasDeUnUsuario: self session usuario)
-				do: [ :each | aCanvas listItem: each titulo. ] ].
+	aCanvas unorderedList
+		with: [ preguntas
+				do: [ :each | 
+					aCanvas listItem
+						with: [ aCanvas heading: each titulo.
+							self renderButtonLike: aCanvas pregunta: each ] ] ].
+	"aCanvas
+		unorderedList:
+			[ preguntas do: [ :each | aCanvas listItem: [ 'nuevaPregunta End of statement list encountered ->' ] ] ].
+	aCanvas callback: (self renderButtonLike: aCanvas pregunta: each)"
 	aCanvas
 		form: [ aCanvas submitButton
 				class: 'tn btn-outline-success';

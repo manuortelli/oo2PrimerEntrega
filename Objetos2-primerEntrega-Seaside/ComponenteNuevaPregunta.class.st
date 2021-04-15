@@ -63,7 +63,7 @@ ComponenteNuevaPregunta >> renderInputElementon: aCanvas [
 	aCanvas heading
 		level: 5;
 		with: 'Titulo'.
-	aCanvas paragraph: [ aCanvas textInput on: #titulo of: self ].
+	aCanvas  paragraph: [ aCanvas textInput on: #titulo of: self ].
 	aCanvas heading
 		level: 5;
 		with: 'Topico ' greaseString.
