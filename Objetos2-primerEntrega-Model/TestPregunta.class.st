@@ -10,11 +10,14 @@ Class {
 { #category : #running }
 TestPregunta >> setUp [
 	"Hooks that subclasses may override to define the fixture of test."
-
-	pregunta := Pregunta 		
+	|unosTopicos|
+	unosTopicos:=Set new.
+	unosTopicos add:'Basket'.
+	pregunta := Pregunta
 		nuevaPreguntaConUsuario: 'Carlos'
 		titulo: 'Juegos de azar? '
 		descripcion: 'Manejos en los juegos de azar'
+		topicos: unosTopicos
 ]
 
 { #category : #tests }
@@ -23,8 +26,22 @@ TestPregunta >> testAgregarLike [
 	usuario := UsuarioQuoora
 		initializeConNombre: 'Manuel'
 		password: 'Sabelobelo'.
-	pregunta agregarLike: usuario.
-	self assert: (pregunta getLikes ) size equals:1
+	pregunta agregarLike: usuario estado: true.
+	self assert: pregunta getLikes equals: 1.
+	self assert: pregunta getDislikes equals: 0.
+	self assert: pregunta getReacciones size equals: 1.
+	pregunta agregarLike: usuario estado: true.
+	self assert: pregunta getLikes equals: 1.
+	self assert: pregunta getDislikes equals: 0.
+	self assert: pregunta getReacciones size equals: 1.
+	pregunta agregarLike: usuario estado: false.
+	self assert: pregunta getLikes equals: 0.
+	self assert: pregunta getDislikes equals: 1.
+	self assert: pregunta getReacciones size equals: 1.
+	pregunta agregarLike: usuario estado: false.
+	self assert: pregunta getLikes equals: 0.
+	self assert: pregunta getDislikes equals: 1.
+	self assert: pregunta getReacciones size equals: 1
 ]
 
 { #category : #tests }
@@ -45,7 +62,17 @@ TestPregunta >> testAgregarTopico [
 		agregarTopico: 'Azar';
 		agregarTopico: 'Juegos';
 		agregarTopico: 'Motos'.
-	self assert: pregunta getTopico size equals: 3.
+	self assert: pregunta getTopico size equals: 4.
 	pregunta agregarTopico: 'Gatos'.
 	self deny: pregunta getTopico size equals: 3
+]
+
+{ #category : #tests }
+TestPregunta >> testExisteInteraccion [
+	| usuario |
+	usuario := UsuarioQuoora
+		initializeConNombre: 'Manuel'
+		password: 'Sabelobelo'.
+	pregunta agregarLike: usuario estado: true.
+	self assert: (pregunta existeInteraccion: usuario) equals:true.
 ]

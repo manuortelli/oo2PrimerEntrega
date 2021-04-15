@@ -28,8 +28,8 @@ UsuarioQuoora >> agregarPregunta: unaPregunta [
 ]
 
 { #category : #adding }
-UsuarioQuoora >> agregarTopicoDeinteres: unTopico [
-	topicosDeInteres add: unTopico
+UsuarioQuoora >> agregarTopicoDeinteres: unosTopicos [
+	topicosDeInteres addAll: unosTopicos
 ]
 
 { #category : #accessing }

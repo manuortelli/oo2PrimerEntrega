@@ -11,21 +11,12 @@ Class {
 }
 
 { #category : #initialization }
-Pregunta class >> nuevaPreguntaConUsuario: unUsuario titulo: unTitulo descripcion: unaDescripcion [
+Pregunta class >> nuevaPreguntaConUsuario: unUsuario titulo: unTitulo descripcion: unaDescripcion topicos:unosTopicos [
 	^ self new
 		initializePreguntaConUsuario: unUsuario
 		titulo: unTitulo
 		descripcion: unaDescripcion
-
-]
-
-{ #category : #initialization }
-Pregunta >> agregarLikeDe: unUsuario [
-	| usuario |
-	usuario := likes
-		detect: [ :l | l equals: unUsuario ]
-		ifNone: [ Like initializeConUsuario: unUsuario ].
-		usuario setState
+		topicos: unosTopicos
 ]
 
 { #category : #adding }
@@ -49,13 +40,14 @@ Pregunta >> getTopico [
 ]
 
 { #category : #initialization }
-Pregunta >> initializePreguntaConUsuario: unUsuario titulo: unTitulo descripcion: unaDescripcion [
+Pregunta >> initializePreguntaConUsuario: unUsuario titulo: unTitulo descripcion: unaDescripcion topicos: unosTopicos [
 	usuarioCreador := unUsuario.
 	titulo := unTitulo.
 	descripcion := unaDescripcion.
 	topicos := Set new.
+	topicos addAll: unosTopicos.
 	respuestas := OrderedCollection new.
-	likes := OrderedCollection new.
+	likes := OrderedCollection new
 ]
 
 { #category : #accesing }

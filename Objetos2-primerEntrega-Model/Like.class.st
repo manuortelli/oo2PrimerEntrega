@@ -33,14 +33,17 @@ Like >> getState [
 Like >> initializeConUsuario: unUsuario like: unBoolean [
 	usuario := unUsuario.
 	fechaYHora := DateAndTime now.
-	self getState
-		ifNil: [ unBoolean
-				ifTrue: [ self agregarLike ]
-				ifFalse: [ self agregarDislike ] ]
+	estado:=unBoolean
 ]
 
 { #category : #initialization }
 Like >> setState [
 	estado := estado not.
 	fechaYHora := DateAndTime now
+]
+
+{ #category : #'as yet unclassified' }
+Like >> usuarioDeLike [
+	"Devuelve al usuario que hizo la reacción"
+	^ usuario
 ]

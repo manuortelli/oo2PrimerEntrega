@@ -36,9 +36,9 @@ Quoora >> agregarFollowerName: unFollowerName usuario: unUsuario [
 
 { #category : #adding }
 Quoora >> agregarLikePregunta: unaPregunta usuario: unUsuario estado: unBoolean [
-	((unaPregunta getLikes) detect: [ :each | each usuarioPropietario == unUsuario ])
-	ifFalse:[ 
-	unaPregunta agregarLike: unUsuario estado: unBoolean].
+	
+	unaPregunta agregarLike: unUsuario estado: unBoolean  
+		
 ]
 
 { #category : #adding }
@@ -47,16 +47,16 @@ Quoora >> agregarLikeRespuesta: unaRespuesta usuario:unUsuario [
 ]
 
 { #category : #adding }
-Quoora >> agregarPreguntaConTopico: unTopico titulo: unTitulo descripcion: unaDescripcion usuario: unUsuario [
+Quoora >> agregarPreguntaConTopico: unosTopicos titulo: unTitulo descripcion: unaDescripcion usuario: unUsuario [
 	| nuevaPregunta |
 	nuevaPregunta := Pregunta
 		nuevaPreguntaConUsuario: unUsuario
 		titulo: unTitulo
-		descripcion: unaDescripcion.
-	nuevaPregunta agregarTopico: unTopico.
+		descripcion: unaDescripcion
+		topicos: unosTopicos.
 	preguntas add: nuevaPregunta.
+	topicos addAll: unosTopicos.
 	unUsuario agregarPregunta: nuevaPregunta.
-	unUsuario agregarTopicoDeinteres: unTopico.
 	^ nuevaPregunta
 ]
 
@@ -102,7 +102,7 @@ Quoora >> crearUsuarioNombre: unNombre password: unaPassword [
 
 { #category : #accesing }
 Quoora >> getPreguntasConTopico: unTopico [
-	^ preguntas select: [ :each | each getTopico = unTopico ]
+	^ preguntas select: [ :each | each getTopico == unTopico ]
 ]
 
 { #category : #accesing }
