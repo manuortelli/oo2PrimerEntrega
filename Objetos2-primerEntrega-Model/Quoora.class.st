@@ -36,7 +36,9 @@ Quoora >> agregarFollowerName: unFollowerName usuario: unUsuario [
 
 { #category : #adding }
 Quoora >> agregarLikePregunta: unaPregunta usuario: unUsuario estado: unBoolean [
-	unaPregunta agregarLike: unUsuario estado: unBoolean
+	((unaPregunta getLikes) detect: [ :each | each usuarioPropietario == unUsuario ])
+	ifFalse:[ 
+	unaPregunta agregarLike: unUsuario estado: unBoolean].
 ]
 
 { #category : #adding }
