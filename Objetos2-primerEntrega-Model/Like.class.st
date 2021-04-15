@@ -3,8 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'estado',
-		'fecha',
-		'hora',
+		'fechaYHora',
 		'usuario'
 	],
 	#category : #'Objetos2-primerEntrega-Model-Dominio'
@@ -23,21 +22,18 @@ Like >> getState [
 { #category : #initialization }
 Like >> initialize [
 	estado := true.
-	fecha := Date today.
-	hora := Time now.
+	fechaYHora:=DateAndTime now.
 ]
 
 { #category : #initialization }
 Like >> initializeConUsuario: unUsuario [
-	usuario:=unUsuario.
+	usuario := unUsuario.
 	estado := true.
-	fecha := Date today.
-	hora := Time now
+	fechaYHora := DateAndTime now.
 ]
 
 { #category : #initialization }
 Like >> setState [
 	estado := estado not.
-	fecha := Date today.
-	hora := Time now.
+	fechaYHora := DateAndTime now
 ]

@@ -36,7 +36,8 @@ UsuarioQuoora >> initializeConNombre: unNombre password: unaPassword [
 	nombreDeUsuario := unNombre.
 	password := unaPassword.
 	topicosDeInteres := Set new.
-	followers := Set new
+	followers := Set new.
+	fechaYHora := DateAndTime now
 ]
 
 { #category : #'as yet unclassified' }
