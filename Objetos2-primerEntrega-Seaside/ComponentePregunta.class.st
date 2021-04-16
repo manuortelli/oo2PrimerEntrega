@@ -51,9 +51,10 @@ ComponentePregunta >> renderContentOn: aCanvas [
 		with:
 			'like: ' , pregunta getLikes greaseString , ' Dislike:  '
 				, pregunta getDislikes greaseString.
-	pregunta inspect.
+				
 	self renderButtonLike: aCanvas pregunta: pregunta.
 	self renderRespuesta: aCanvas pregunta: pregunta.
+	self renderRespuesta: aCanvas pregunta: pregunta
 ]
 
 { #category : #'as yet unclassified' }
@@ -62,5 +63,8 @@ ComponentePregunta >> renderRespuesta: aCanvas pregunta: unaPregunta [
 		with: [ unaPregunta getRespuestas
 				do: [ :respuesta | 
 					aCanvas
-						listItem: [aCanvas heading level3 with: 'Respuesta:  '.respuesta getRespuestas ]]]
+						listItem: [ aCanvas heading level3 with: 'Respuesta:  '.
+							respuesta getRespuestas.
+							self renderButtonLike: aCanvas pregunta: respuesta. ] ] ].
+			
 ]

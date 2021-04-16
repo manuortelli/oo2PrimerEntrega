@@ -143,7 +143,6 @@ Quoora >> getPreguntasRelevantesDeUnUsuario: unUsuario [
 	total := Set new.
 	total := unUsuario getTopicosDeInteres
 		flatCollect: [ :topico | self getPreguntasConTopico: topico ].
-	total inspect.
 	total
 		addAll:
 			(unUsuario getFollowers
@@ -178,7 +177,6 @@ Quoora >> obtenerCincoPreguntasRelevantes: unUsuario [
 	preguntasRelevantes := Set new.
 	preguntasRelevantes := self
 		getPreguntasRelevantesDeUnUsuario: unUsuario.
-	preguntasRelevantes inspect.
 	preguntasRelevantes size > 5
 		ifFalse: [ ^ preguntasRelevantes ].
 	^ preguntasRelevantes first: 5
