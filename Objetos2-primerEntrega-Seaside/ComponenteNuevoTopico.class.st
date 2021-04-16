@@ -3,7 +3,8 @@ Class {
 	#superclass : #SBSComponent,
 	#instVars : [
 		'topico',
-		'descripcion'
+		'descripcion',
+		'topicoConComa'
 	],
 	#category : #'Objetos2-primerEntrega-Seaside'
 }
@@ -61,4 +62,9 @@ ComponenteNuevoTopico >> topico [
 { #category : #accessing }
 ComponenteNuevoTopico >> topico: unTopico [ 
 	topico := unTopico 
+]
+
+{ #category : #accessing }
+ComponenteNuevoTopico >> topicoConComa: unTopico [
+	topicoConComa := unTopico 
 ]

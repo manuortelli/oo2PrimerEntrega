@@ -79,7 +79,7 @@ ComponentePrincipal >> renderPostsOn: aCanvas [
 								with: 'Topico: ' , each getTopico greaseString.
 							aCanvas heading
 								level: 5;
-								with: 'like: ' , each getLikes size greaseString.
+								with: 'like: ' , each getLikes greaseString.
 							self renderButtonLike: aCanvas pregunta: each ] ] ].
 	aCanvas
 		form: [ aCanvas submitButton
