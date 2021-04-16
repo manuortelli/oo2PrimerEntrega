@@ -4,9 +4,7 @@ Class {
 	#instVars : [
 		'usuarioCreador',
 		'fechaYHora',
-		'likes',
-		'dislikesCont',
-		'likesCont'
+		'likes'
 	],
 	#category : #'Objetos2-primerEntrega-Model-Dominio'
 }
@@ -35,6 +33,26 @@ Interaccion >> aplicarReaccion: unUsuario estado:unBoolean [
 ]
 
 { #category : #'as yet unclassified' }
+Interaccion >> coleccionDeDislikes [
+	^ self getReacciones collect:[:reaccion | reaccion getState==false]
+]
+
+{ #category : #'as yet unclassified' }
+Interaccion >> coleccionDeLikes [
+	^ self getReacciones
+		collect: [ :reaccion | reaccion getState == true ]
+]
+
+{ #category : #'as yet unclassified' }
+Interaccion >> esDeUnUsuario: unUsuario [
+	"Dice si la respuesta de de dicho usuario"
+
+	self usuarioPropietario == unUsuario
+		ifTrue: [ ^ true ].
+	^ false
+]
+
+{ #category : #'as yet unclassified' }
 Interaccion >> existeInteraccion: unUsuario [
 	"chequea si existe la interaccion del usuario"
 
@@ -59,31 +77,25 @@ Interaccion >> getReacciones [
 	^ likes
 ]
 
+{ #category : #'as yet unclassified' }
+Interaccion >> getReaccionesDeUnUsuario: unUsuario [
+	^ self getReacciones
+		select: [ :reaccion | reaccion esDeUnUsuario: unUsuario ]
+]
+
 { #category : #initialization }
 Interaccion >> initialize [
 	likes := OrderedCollection new.
 	fechaYHora := DateAndTime now.
-	dislikesCont:= 0.
-	likesCont:=0.
+
 ]
 
 { #category : #'as yet unclassified' }
-Interaccion >> quitarReaccion: unUsuario [ 
+Interaccion >> quitarReaccion: unUsuario [
 	"Quita la reaccion del usuario"
 
-	
 	likes
-		remove: (likes detect: [ :like | like usuarioDeLike = unUsuario ])
-]
-
-{ #category : #'as yet unclassified' }
-Interaccion >> quitarReaccion: unUsuario estado:unBoolean [
-	"Quita la reaccion del usuario"
-	unBoolean
-		ifTrue: [ likesCont := likesCont - 1 ]
-		ifFalse: [ dislikesCont := dislikesCont - 1 ].
-	likes
-		remove: (likes detect: [ :like | like usuarioDeLike = unUsuario ])
+		remove: (likes detect: [ :like | like usuarioDeLike == unUsuario ])
 ]
 
 { #category : #acccessing }

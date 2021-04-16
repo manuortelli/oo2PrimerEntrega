@@ -25,6 +25,11 @@ Like >> agregarLike [
 ]
 
 { #category : #'as yet unclassified' }
+Like >> esDeUnUsuario: unUsuario [ 	
+	^ self usuarioDeLike == unUsuario 
+]
+
+{ #category : #'as yet unclassified' }
 Like >> getState [ 
 	^ estado 
 ]

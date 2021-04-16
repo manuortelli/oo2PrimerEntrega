@@ -34,30 +34,31 @@ Pregunta >> cantidadDeRespuestasDe: unUsuario [
 	"Cantidad de respuestas que hizo un usuario, a otro usuario"
 
 	^ (self getRespuestas
-		collect: [ :respuesta | respuesta esDeUnUsuario: unUsuario])
-		size
+		collect: [ :respuesta | respuesta esDeUnUsuario: unUsuario ]) size
 ]
 
 { #category : #'as yet unclassified' }
 Pregunta >> getDislikesDeUnUsuario: unUsuario [
-	"Devuelve la cantidad de dislikes de un usuario"
+	"Devuleve la cantidad de likes de un usuario determinado"
 
-	^ (self getReacciones
-		collect: [ :reaccion | 
-			(reaccion usuarioPropietario == unUsuario) & (reaccion getState
-				== false) ]) size + self getRespuestas
-		sumNumbers: [ :respuesta | respuesta getDislikesDeUnUsuario: unUsuario ]
+	^ ((self getReaccionesDeUnUsuario: unUsuario)
+		select: [ :reaccion | reaccion getState == false ]) size
+		+
+			(self getRespuestas
+				collect: [ :respuesta | respuesta getDislikesDeUnUsuario: unUsuario ])
+				size
 ]
 
 { #category : #'as yet unclassified' }
 Pregunta >> getLikesDeUnUsuario: unUsuario [
 	"Devuleve la cantidad de likes de un usuario determinado"
 
-	^ (self getReacciones
-		collect:
-			[ :reaccion | (reaccion usuarioPropietario == unUsuario) & (reaccion getState) ])
-		size + self getRespuestas
-		sumNumbers: [ :respuesta | respuesta getLikesDeUnUsuario: unUsuario ]
+	^ ((self getReaccionesDeUnUsuario: unUsuario)
+		select: [ :reaccion | reaccion getState == true ]) size
+		+
+			(self getRespuestas
+				collect: [ :respuesta | respuesta getLikesDeUnUsuario: unUsuario ])
+				size
 ]
 
 { #category : #accesing }

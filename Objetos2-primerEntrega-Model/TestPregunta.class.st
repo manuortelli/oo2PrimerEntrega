@@ -34,6 +34,8 @@ TestPregunta >> testAgregarLike [
 	self assert: pregunta getLikes equals: 1.
 	self assert: pregunta getDislikes equals: 0.
 	self assert: pregunta getReacciones size equals: 1.
+	self assert: (pregunta getReacciones at: 1) getState equals: true.
+	
 	pregunta agregarLike: usuario estado: false.
 	self assert: pregunta getLikes equals: 0.
 	self assert: pregunta getDislikes equals: 1.
@@ -41,7 +43,8 @@ TestPregunta >> testAgregarLike [
 	pregunta agregarLike: usuario estado: false.
 	self assert: pregunta getLikes equals: 0.
 	self assert: pregunta getDislikes equals: 1.
-	self assert: pregunta getReacciones size equals: 1
+	self assert: pregunta getReacciones size equals: 1.
+	self assert: (pregunta getReacciones at: 1) getState equals: false
 ]
 
 { #category : #tests }
@@ -75,4 +78,33 @@ TestPregunta >> testExisteInteraccion [
 		password: 'Sabelobelo'.
 	pregunta agregarLike: usuario estado: true.
 	self assert: (pregunta existeInteraccion: usuario) equals:true.
+]
+
+{ #category : #tests }
+TestPregunta >> testGetDislikesDeUnUsuario [
+	| usuario |
+	usuario := UsuarioQuoora
+		initializeConNombre: 'Manuel'
+		password: 'Sabelobelo'.
+	pregunta agregarLike: usuario estado: false.
+	self assert: pregunta getReacciones size equals: 1.
+	self assert: (pregunta getDislikesDeUnUsuario: usuario) equals: 1.
+	pregunta agregarLike: usuario estado:true.
+	self assert: pregunta getReacciones size equals: 1.
+	self assert: (pregunta getDislikesDeUnUsuario: usuario) equals: 0.
+	
+]
+
+{ #category : #tests }
+TestPregunta >> testGetLikesDeUnUsuario [
+	| usuario |
+	usuario := UsuarioQuoora
+		initializeConNombre: 'Manuel'
+		password: 'Sabelobelo'.
+	pregunta agregarLike: usuario estado: true.
+	self assert: pregunta getReacciones size equals: 1.
+	self assert: (pregunta getLikesDeUnUsuario: usuario) equals: 1.
+	pregunta agregarLike: usuario estado: false.
+	self assert: pregunta getReacciones size equals: 1.
+	self assert: (pregunta getLikesDeUnUsuario: usuario) equals: 0
 ]

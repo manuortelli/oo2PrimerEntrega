@@ -97,11 +97,18 @@ TestQuoora >> testBorrarPregunta [
 
 { #category : #tests }
 TestQuoora >> testCalcularPuntajeDeUsuario [
-	|usuario|
+	| usuario pregunta |
 	usuario := quoora crearUsuarioNombre: 'Manuel' password: 'queseyo'.
-	quoora agregarPreguntaConTopico: 'unostopicos' titulo: 'UnTitulo'  descripcion: 'UnaDescripcion'  usuario: usuario.
-	self assert: (quoora calcularPuntajeDe: usuario) equals: 20
-	
+	pregunta := quoora
+		agregarPreguntaConTopico: 'unostopicos'
+		titulo: 'UnTitulo'
+		descripcion: 'UnaDescripcion'
+		usuario: usuario.
+	self assert: (quoora calcularPuntajeDe: usuario) equals: 20.
+	quoora agregarLikePregunta: pregunta usuario: usuario estado: true.
+	self assert: (quoora calcularPuntajeDe: usuario) equals: 21.
+	quoora agregarLikePregunta: pregunta usuario: usuario estado: false.
+	self assert: (quoora calcularPuntajeDe: usuario) equals: 19
 ]
 
 { #category : #tests }

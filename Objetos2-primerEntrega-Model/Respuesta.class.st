@@ -20,26 +20,15 @@ Respuesta >> agregarRespuestaConTexto: unTexto usuario: unUsuario [
 ]
 
 { #category : #'as yet unclassified' }
-Respuesta >> esDeUnUsuario: unUsuario [
-	"Dice si la respuesta de de dicho usuario"
-	self usuarioPropietario == unUsuario
-		ifTrue: [ ^ true ].
-	^ false
-]
-
-{ #category : #'as yet unclassified' }
 Respuesta >> getDislikesDeUnUsuario: unUsuario [
-	^ (self getReacciones
-		collect:
-			[ :reaccion | reaccion usuarioPropietario == unUsuario & (reaccion getState == false) ])
-		size
+	^ ((self getReaccionesDeUnUsuario: unUsuario)
+		select: [ :reaccion | reaccion getState == false ]) size
 ]
 
 { #category : #'as yet unclassified' }
 Respuesta >> getLikesDeUnUsuario: unUsuario [
-	^ (self getReacciones
-		collect: [ :reaccion | reaccion usuarioPropietario == unUsuario & (reaccion getState) ])
-		size
+	^ ((self getReaccionesDeUnUsuario: unUsuario)
+		select: [ :reaccion | reaccion getState == true ]) size
 ]
 
 { #category : #initialization }
