@@ -69,7 +69,7 @@ Quoora >> agregarRespuestaConPregunta: unaPregunta texto:unTexto usuario:unUsuar
 { #category : #adding }
 Quoora >> agregarTopicoNombre: unNombre descripcion: unaDescripcion usuario: unUsuario [
 	| topi |
-	topi := Topico nuevoConNombre: unNombre descripcion: unaDescripcion . 
+	topi := Topico nuevoConNombre: unNombre descripcion: unaDescripcion.
 	unUsuario agregarTopicoDeinteres: topi.
 	topicos add: topi
 ]
@@ -123,7 +123,7 @@ Quoora >> getPreguntas [
 
 { #category : #accesing }
 Quoora >> getPreguntasConTopico: unTopico [
-	^ preguntas select: [ :each | (each getTopico) getNombre = (unTopico getNombre) ]
+	^ self getPreguntas  select: [ :each | each getTopico = unTopico getNombre]   
 ]
 
 { #category : #accesing }
@@ -138,17 +138,17 @@ Quoora >> getPreguntasDeUnUsuario: unUsuario [
 { #category : #accesing }
 Quoora >> getPreguntasRelevantesDeUnUsuario: unUsuario [
 	"Se considera relevante una pregunta cuando ésta pertenece a un tópico de interés para el usuario en cuestión o bien cuando fue realizada por alguno de los usuarios que sigue en la red social"
-	
-	
+
 	| total |
 	total := Set new.
-	total:= unUsuario getTopicosDeInteres
-		flatCollect: [ :topico | self getPreguntasConTopico:topico   ].
-	total addAll: (unUsuario getFollowers
-		flatCollect: [ :follower | follower getPreguntas ]).
-	^ total asSortedCollection: [ :a :b | a getFechaYHora > b getFechaYHora ]
-		
-	
+	total := unUsuario getTopicosDeInteres
+		flatCollect: [ :topico | self getPreguntasConTopico: topico. ].
+	total
+		addAll:
+			(unUsuario getFollowers
+				flatCollect: [ :follower | (follower at:1) getPreguntas ]).
+	^ total
+		asSortedCollection: [ :a :b | a getFechaYHora > b getFechaYHora ]
 ]
 
 { #category : #accesing }
