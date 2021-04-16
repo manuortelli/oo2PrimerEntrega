@@ -76,10 +76,12 @@ ComponentePrincipal >> renderPostsOn: aCanvas [
 						with: [ aCanvas heading: each titulo.
 							aCanvas heading
 								level: 5;
-								with: 'Topico: ' , each getTopico greaseString.
+								with: 'Topico: ' , each getTopicoNombre.
 							aCanvas heading
 								level: 5;
-								with: 'like: ' , each getLikes greaseString.
+								with:
+									'like: ' , each getLikes greaseString , ' Dislike:  '
+										, each getDislikes greaseString.
 							self renderButtonLike: aCanvas pregunta: each ] ] ].
 	aCanvas
 		form: [ aCanvas submitButton

@@ -12,10 +12,10 @@ Class {
 { #category : #accessing }
 ComponenteNuevoTopico >> cargar [
 	self session quoora
-		agregarTopicoNombre: self topico
+		agregarTopicoNombre: (self topico splitOn: ',')
 		descripcion: self descripcion
 		usuario: self session usuario.
-	self answer 
+	self answer
 ]
 
 { #category : #accessing }
@@ -62,6 +62,11 @@ ComponenteNuevoTopico >> topico [
 { #category : #accessing }
 ComponenteNuevoTopico >> topico: unTopico [ 
 	topico := unTopico 
+]
+
+{ #category : #accessing }
+ComponenteNuevoTopico >> topicoConComa [
+	^ topicoConComa 
 ]
 
 { #category : #accessing }

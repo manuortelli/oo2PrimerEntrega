@@ -63,10 +63,10 @@ UsuarioQuoora >> getRespuestas [
 UsuarioQuoora >> initializeConNombre: unNombre password: unaPassword [
 	nombreDeUsuario := unNombre.
 	password := unaPassword.
-	topicosDeInteres := Set new.
-	followers := Set new.
+	topicosDeInteres := OrderedCollection  new.
+	followers := OrderedCollection  new.
 	preguntas := OrderedCollection new.
-	respuestas:= OrderedCollection new.
+	respuestas := OrderedCollection new.
 	fechaYHora := DateAndTime now
 ]
 

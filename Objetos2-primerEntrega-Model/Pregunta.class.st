@@ -70,12 +70,17 @@ Pregunta >> getTopico [
 	^ topicos 
 ]
 
+{ #category : #accesing }
+Pregunta >> getTopicoNombre [
+	^ ', ' join: topicos
+]
+
 { #category : #initialization }
 Pregunta >> initializePreguntaConUsuario: unUsuario titulo: unTitulo descripcion: unaDescripcion topicos: unosTopicos [
 	usuarioCreador := unUsuario.
 	titulo := unTitulo.
 	descripcion := unaDescripcion.
-	topicos := Set new.
+	topicos := OrderedCollection  new.
 	topicos addAll: unosTopicos.
 	respuestas := OrderedCollection new.
 	likes := OrderedCollection new

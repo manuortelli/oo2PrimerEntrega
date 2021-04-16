@@ -145,10 +145,10 @@ Quoora >> getRespuestasDeUnUsuario: unUsuario [
 ]
 
 { #category : #initialization }
-Quoora >> initialize [ 
+Quoora >> initialize [
 	preguntas := OrderedCollection new.
-	topicos := Set new.
-	usuarios := Set new.
+	topicos := OrderedCollection  new.
+	usuarios := OrderedCollection  new
 ]
 
 { #category : #adding }

@@ -24,8 +24,8 @@ ComponenteNuevaPregunta >> post [
 	"topico ifEmpty: [ ^ self ]."
 
 	self session quoora
-		agregarPreguntaConTopico: (self topico)
-		titulo: (self titulo)
+		agregarPreguntaConTopico: (self topico splitOn: ',')
+		titulo: self titulo
 		descripcion: self descripcion
 		usuario: self session usuario.
 	self answer
