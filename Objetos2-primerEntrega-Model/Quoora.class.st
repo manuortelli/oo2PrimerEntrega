@@ -123,7 +123,7 @@ Quoora >> getPreguntas [
 
 { #category : #accesing }
 Quoora >> getPreguntasConTopico: unTopico [
-	^ preguntas select: [ :each | each getTopico getNombre == unTopico getNombre ]
+	^ preguntas select: [ :each | (each getTopico) getNombre = (unTopico getNombre) ]
 ]
 
 { #category : #accesing }
@@ -175,7 +175,7 @@ Quoora >> initialize [
 Quoora >> obtenerCincoPreguntasRelevantes: unUsuario [
 	| preguntasRelevantes |
 	preguntasRelevantes:= Set new.
-	preguntasRelevantes = self
+	preguntasRelevantes := self
 		getPreguntasRelevantesDeUnUsuario: unUsuario.
 	preguntasRelevantes size > 5
 		ifFalse: [ ^ preguntasRelevantes ].
