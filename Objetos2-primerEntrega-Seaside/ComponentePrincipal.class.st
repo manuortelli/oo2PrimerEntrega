@@ -71,18 +71,18 @@ ComponentePrincipal >> renderPostsOn: aCanvas [
 		with: 'Preguntas' greaseString.
 	aCanvas unorderedList
 		with: [ preguntas
-				do: [ :each | 
+				do: [ :pregunta | 
 					aCanvas listItem
-						with: [ aCanvas heading: each titulo.
+						with: [ aCanvas heading: pregunta titulo.
 							aCanvas heading
 								level: 5;
-								with: 'Topico: ' , each getTopicoNombre.
+								with: 'Topico: ' , pregunta  getTopicoNombre.
 							aCanvas heading
 								level: 5;
 								with:
-									'like: ' , each getLikes greaseString , ' Dislike:  '
-										, each getDislikes greaseString.
-							self renderButtonLike: aCanvas pregunta: each ] ] ].
+									'like: ' , pregunta  getLikes greaseString , ' Dislike:  '
+										, pregunta  getDislikes greaseString.
+							self renderButtonLike: aCanvas pregunta: pregunta] ] ].
 	aCanvas
 		form: [ aCanvas submitButton
 				class: 'tn btn-outline-success';
