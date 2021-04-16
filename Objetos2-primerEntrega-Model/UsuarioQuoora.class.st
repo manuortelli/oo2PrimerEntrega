@@ -59,6 +59,11 @@ UsuarioQuoora >> getRespuestas [
 	^ respuestas
 ]
 
+{ #category : #'as yet unclassified' }
+UsuarioQuoora >> getTopicosDeInteres [
+	^ topicosDeInteres 
+]
+
 { #category : #initialization }
 UsuarioQuoora >> initializeConNombre: unNombre password: unaPassword [
 	nombreDeUsuario := unNombre.

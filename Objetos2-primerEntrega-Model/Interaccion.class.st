@@ -67,6 +67,11 @@ Interaccion >> getDislikes [
 	^ (likes select: [ :each | each getState == false ]) size
 ]
 
+{ #category : #'as yet unclassified' }
+Interaccion >> getFechaYHora [
+	^ fechaYHora 
+]
+
 { #category : #acccessing }
 Interaccion >> getLikes [
 	^ (likes select: [ :each | each getState == true ]) size

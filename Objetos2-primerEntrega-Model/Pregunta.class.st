@@ -38,6 +38,13 @@ Pregunta >> cantidadDeRespuestasDe: unUsuario [
 ]
 
 { #category : #'as yet unclassified' }
+Pregunta >> contieneTopico:unTopico [
+	(self getTopico detect: [ :topico | topico getNombre = unTopico getNombre ] )
+	ifNotNil:[ ^true ].
+	^ false
+]
+
+{ #category : #'as yet unclassified' }
 Pregunta >> getDislikesDeUnUsuario: unUsuario [
 	"Devuleve la cantidad de likes de un usuario determinado"
 

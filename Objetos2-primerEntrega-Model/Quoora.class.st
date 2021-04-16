@@ -123,7 +123,7 @@ Quoora >> getPreguntas [
 
 { #category : #accesing }
 Quoora >> getPreguntasConTopico: unTopico [
-	^ preguntas select: [ :each | each getTopico == unTopico ]
+	^ preguntas select: [ :each | each getTopico getNombre == unTopico getNombre ]
 ]
 
 { #category : #accesing }
@@ -136,7 +136,18 @@ Quoora >> getPreguntasDeUnUsuario: unUsuario [
 ]
 
 { #category : #accesing }
-Quoora >> getPreguntasRelevantesDeUnUsuario:unUsuario [
+Quoora >> getPreguntasRelevantesDeUnUsuario: unUsuario [
+	"Se considera relevante una pregunta cuando ésta pertenece a un tópico de interés para el usuario en cuestión o bien cuando fue realizada por alguno de los usuarios que sigue en la red social"
+	
+	
+	| total |
+	total := Set new.
+	total:= unUsuario getTopicosDeInteres
+		flatCollect: [ :topico | self getPreguntasConTopico:topico   ].
+	total addAll: (unUsuario getFollowers
+		flatCollect: [ :follower | follower getPreguntas ]).
+	^ total asSortedCollection: [ :a :b | a getFechaYHora > b getFechaYHora ]
+		
 	
 ]
 
@@ -158,6 +169,17 @@ Quoora >> initialize [
 	preguntas := OrderedCollection new.
 	topicos := OrderedCollection  new.
 	usuarios := OrderedCollection  new
+]
+
+{ #category : #'as yet unclassified' }
+Quoora >> obtenerCincoPreguntasRelevantes: unUsuario [
+	| preguntasRelevantes |
+	preguntasRelevantes:= Set new.
+	preguntasRelevantes = self
+		getPreguntasRelevantesDeUnUsuario: unUsuario.
+	preguntasRelevantes size > 5
+		ifFalse: [ ^ preguntasRelevantes ].
+	^ preguntasRelevantes first: 5
 ]
 
 { #category : #adding }
