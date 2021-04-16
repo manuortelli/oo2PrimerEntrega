@@ -123,7 +123,10 @@ Quoora >> getPreguntas [
 
 { #category : #accesing }
 Quoora >> getPreguntasConTopico: unTopico [
-	^ self getPreguntas  select: [ :each | each getTopico = unTopico getNombre]   
+	
+	^ self getPreguntas
+		select: [ :each | each getTopico = unTopico getNombre ].
+	
 ]
 
 { #category : #accesing }
