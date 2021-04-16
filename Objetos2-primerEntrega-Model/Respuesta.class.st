@@ -32,6 +32,11 @@ Respuesta >> getLikesDeUnUsuario: unUsuario [
 ]
 
 { #category : #initialization }
+Respuesta >> getRespuestas [ 	
+	^ respuestas
+]
+
+{ #category : #initialization }
 Respuesta >> initializeConTexto: unTexto usuario:unUsuario [
 	texto:=unTexto.
 	usuarioCreador := unUsuario .

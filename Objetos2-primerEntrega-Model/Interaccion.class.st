@@ -74,7 +74,7 @@ Interaccion >> getFechaYHora [
 
 { #category : #acccessing }
 Interaccion >> getLikes [
-	^ (likes select: [ :each | each getState == true ]) size
+	^ (likes select: [ :each | each getState ]) size
 ]
 
 { #category : #'as yet unclassified' }
@@ -86,6 +86,11 @@ Interaccion >> getReacciones [
 Interaccion >> getReaccionesDeUnUsuario: unUsuario [
 	^ self getReacciones
 		select: [ :reaccion | reaccion esDeUnUsuario: unUsuario ]
+]
+
+{ #category : #acccessing }
+Interaccion >> getRespuestas [ 
+	self subclassResponsibility
 ]
 
 { #category : #initialization }

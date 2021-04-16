@@ -69,7 +69,7 @@ Pregunta >> getLikesDeUnUsuario: unUsuario [
 ]
 
 { #category : #accesing }
-Pregunta >> getRespuestas [
+Pregunta >> getRespuestas [ 	
 	^ respuestas
 ]
 
