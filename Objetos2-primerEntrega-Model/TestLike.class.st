@@ -16,7 +16,5 @@ TestLike >> setUp [
 
 { #category : #initialization }
 TestLike >> testSetState [
-	self assert: test getState.
-	test setState.
-	self deny: test getState
+	
 ]
