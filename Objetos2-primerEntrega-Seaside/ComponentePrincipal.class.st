@@ -42,9 +42,8 @@ ComponentePrincipal >> renderButtonLike: aCanvas pregunta: unaPregunta [
 
 { #category : #rendering }
 ComponentePrincipal >> renderContentOn: aCanvas [
-	aCanvas heading
-		level: 3;
-		with: [ 'Bienvenido ' , self session usuario name greaseString ].
+	aCanvas heading level3
+		with: 'Bienvenido ' , self session usuario name greaseString .
 	self renderPostsOn: aCanvas.
 	aCanvas space.
 	self agregarFollower: aCanvas.
@@ -65,7 +64,7 @@ ComponentePrincipal >> renderLogoutButtonOn: aCanvas [
 ComponentePrincipal >> renderPostsOn: aCanvas [
 	| preguntas |
 	preguntas := self session quoora
-		getPreguntasDeUnUsuario: self session usuario.
+	obtenerCincoPreguntasRelevantes: self session usuario.
 	aCanvas heading
 		level: 2;
 		with: 'Preguntas' greaseString.
@@ -74,15 +73,15 @@ ComponentePrincipal >> renderPostsOn: aCanvas [
 				do: [ :pregunta | 
 					aCanvas listItem
 						with: [ aCanvas heading: pregunta titulo.
-							aCanvas heading
-								level: 5;
-								with: 'Topico: ' , pregunta  getTopicoNombre.
-							aCanvas heading
-								level: 5;
+							aCanvas heading level4
+								with: 'Topico: ' , pregunta getTopicoNombre.
+							aCanvas heading level4
+								with: 'Creado por: ' , pregunta usuarioPropietario name.
+							aCanvas heading level4
 								with:
-									'like: ' , pregunta  getLikes greaseString , ' Dislike:  '
-										, pregunta  getDislikes greaseString.
-							self renderButtonLike: aCanvas pregunta: pregunta] ] ].
+									'like: ' , pregunta getLikes greaseString , ' Dislike:  '
+										, pregunta getDislikes greaseString.
+							self renderButtonLike: aCanvas pregunta: pregunta ] ] ].
 	aCanvas
 		form: [ aCanvas submitButton
 				class: 'tn btn-outline-success';
