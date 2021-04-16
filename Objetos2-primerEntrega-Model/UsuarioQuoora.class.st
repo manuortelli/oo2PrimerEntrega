@@ -30,7 +30,7 @@ UsuarioQuoora >> agregarPregunta: unaPregunta [
 
 { #category : #adding }
 UsuarioQuoora >> agregarTopicoDeinteres: unosTopicos [
-	topicosDeInteres addAll: unosTopicos
+	topicosDeInteres add: unosTopicos
 ]
 
 { #category : #'as yet unclassified' }
