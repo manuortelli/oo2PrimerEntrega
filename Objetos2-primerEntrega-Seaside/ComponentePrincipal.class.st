@@ -27,6 +27,12 @@ ComponentePrincipal >> agregarLike: unaPregunta estado: unBoolean [
 ]
 
 { #category : #rendering }
+ComponentePrincipal >> mostrar: aCanvas pregunta: unaPregunta [
+aCanvas heading level5 with: 'Horizontal alignment'.
+
+]
+
+{ #category : #rendering }
 ComponentePrincipal >> renderButtonLike: aCanvas pregunta: unaPregunta [
 	aCanvas
 		form: [ aCanvas submitButton
@@ -57,7 +63,7 @@ ComponentePrincipal >> renderLogoutButtonOn: aCanvas [
 	aCanvas
 		form: [ aCanvas submitButton
 				class: 'btn btn-danger btn-lg';
-				callback: [ self call: ComponenteLogin new ];
+				callback: [  self session unregister. self call: ComponenteLogin new ];
 				with: 'Salir' ]
 ]
 
@@ -73,7 +79,10 @@ ComponentePrincipal >> renderPostsOn: aCanvas [
 		with: [ preguntas
 				do: [ :pregunta | 
 					aCanvas listItem
-						with: [ aCanvas heading: pregunta titulo.
+						with: [ aCanvas
+								heading: [ aCanvas anchor
+										callback: [ self mostrar: aCanvas pregunta: pregunta ];
+										with: pregunta titulo ].
 							aCanvas heading
 								level: 5;
 								with: 'Topico: ' , pregunta getTopicoNombres.
@@ -82,8 +91,7 @@ ComponentePrincipal >> renderPostsOn: aCanvas [
 								with:
 									'Like:  ' , pregunta getLikes greaseString , '   Dislike:  '
 										, pregunta getDislikes greaseString.
-							self renderButtonLike: aCanvas pregunta: pregunta ].
-				]].
+							self renderButtonLike: aCanvas pregunta: pregunta ] ] ].
 	aCanvas
 		form: [ aCanvas submitButton
 				class: 'tn btn-outline-success';
@@ -93,5 +101,5 @@ ComponentePrincipal >> renderPostsOn: aCanvas [
 			aCanvas submitButton
 				class: 'tn btn-outline-success';
 				callback: [ self call: ComponenteNuevoTopico new ];
-				with: '  Agregar topico ' ] 
+				with: '  Agregar topico ' ]
 ]
