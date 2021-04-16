@@ -142,11 +142,12 @@ Quoora >> getPreguntasRelevantesDeUnUsuario: unUsuario [
 	| total |
 	total := Set new.
 	total := unUsuario getTopicosDeInteres
-		flatCollect: [ :topico | self getPreguntasConTopico: topico. ].
+		flatCollect: [ :topico | self getPreguntasConTopico: topico ].
+	total inspect.
 	total
 		addAll:
 			(unUsuario getFollowers
-				flatCollect: [ :follower | (follower at:1) getPreguntas ]).
+				flatCollect: [ :follower | (follower at: 1) getPreguntas ]).
 	^ total
 		asSortedCollection: [ :a :b | a getFechaYHora > b getFechaYHora ]
 ]
@@ -174,9 +175,10 @@ Quoora >> initialize [
 { #category : #'as yet unclassified' }
 Quoora >> obtenerCincoPreguntasRelevantes: unUsuario [
 	| preguntasRelevantes |
-	preguntasRelevantes:= Set new.
+	preguntasRelevantes := Set new.
 	preguntasRelevantes := self
 		getPreguntasRelevantesDeUnUsuario: unUsuario.
+	preguntasRelevantes inspect.
 	preguntasRelevantes size > 5
 		ifFalse: [ ^ preguntasRelevantes ].
 	^ preguntasRelevantes first: 5
