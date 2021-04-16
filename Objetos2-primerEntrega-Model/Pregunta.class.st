@@ -41,7 +41,7 @@ Pregunta >> getTopico [
 
 { #category : #accesing }
 Pregunta >> getTopicoNombres [
-	^ (',' join: topicos)
+	^ ', ' join: topicos
 ]
 
 { #category : #initialization }

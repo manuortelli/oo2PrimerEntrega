@@ -71,18 +71,19 @@ ComponentePrincipal >> renderPostsOn: aCanvas [
 		with: 'Preguntas' greaseString.
 	aCanvas unorderedList
 		with: [ preguntas
-				do: [ :each | 
+				do: [ :pregunta | 
 					aCanvas listItem
-						with: [ aCanvas heading: each titulo.
+						with: [ aCanvas heading: pregunta titulo.
 							aCanvas heading
 								level: 5;
-								with: 'Topico: ' , each getTopicoNombres.
+								with: 'Topico: ' , pregunta getTopicoNombres.
 							aCanvas heading
 								level: 5;
 								with:
-									'Like:  ' , each getLikes greaseString , '   Dislike:  '
-										, each getDislikes greaseString.
-							self renderButtonLike: aCanvas pregunta: each ] ] ].
+									'Like:  ' , pregunta getLikes greaseString , '   Dislike:  '
+										, pregunta getDislikes greaseString.
+							self renderButtonLike: aCanvas pregunta: pregunta ].
+				]].
 	aCanvas
 		form: [ aCanvas submitButton
 				class: 'tn btn-outline-success';
@@ -92,5 +93,5 @@ ComponentePrincipal >> renderPostsOn: aCanvas [
 			aCanvas submitButton
 				class: 'tn btn-outline-success';
 				callback: [ self call: ComponenteNuevoTopico new ];
-				with: '  Agregar topico ' ]
+				with: '  Agregar topico ' ] 
 ]
