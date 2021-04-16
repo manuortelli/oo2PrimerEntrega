@@ -6,11 +6,29 @@ Class {
 
 { #category : #'private protocol' }
 ComponenteLogin >> login [
+	| usuarioss ok |
+	usuarioss := self model
+		usuario: self usuario
+		protegidoPor: self password.
+	usuarioss
+		ifNotNil: [ :it | 
+			self proceedWith: it quoora: self model.
+			ok := true ];
+		ifNil: [ ok := false ].
+	usuario := nil.
+	password := nil.
+	^ ok
+]
+
+{ #category : #'private protocol' }
+ComponenteLogin >> login: aCanvas [
 	| usuarioss |
 	usuarioss := self model
 		usuario: self usuario
 		protegidoPor: self password.
-	usuarioss ifNotNil: [ :it | self proceedWith: it quoora: self model ].
+	usuarioss
+		ifNil: [aCanvas alert beSecondary with: 'No hay usuarios seguidos' ];
+		ifNotNil: [ :it | self proceedWith: it quoora: self model ].
 	usuario := nil.
 	password := nil
 ]
@@ -32,7 +50,7 @@ ComponenteLogin >> renderSignInButtonOn: aCanvas [
 	aCanvas formButton
 		bePrimary;
 		beLarge;
-		callback: [ self login ];
+		callback: [ self login];
 		with: '   Entrar   '
 ]
 
@@ -41,7 +59,7 @@ ComponenteLogin >> renderSignUpButtonOn: aCanvas [
 	aCanvas heading
 		level:4;
 		with: [ aCanvas space.
-			aCanvas small textMuted with: '¬øDesea Registrarse?' ].
+			aCanvas small textMuted with: '¿Desea Registrarse?' ].
 	aCanvas outlineButton
 		bePrimary;
 		callback: [ self registrarNuevoUsuario ];

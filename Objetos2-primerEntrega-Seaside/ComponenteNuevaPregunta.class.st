@@ -21,11 +21,10 @@ ComponenteNuevaPregunta >> descripcion: unaDescripcion [
 
 { #category : #accessing }
 ComponenteNuevaPregunta >> post [
-	"topico ifEmpty: [ ^ self ]."
 
 	self session quoora
-		agregarPreguntaConTopico: (self topico)
-		titulo: (self titulo)
+		agregarPreguntaConTopico: (self topico splitOn: ',')
+		titulo: self titulo
 		descripcion: self descripcion
 		usuario: self session usuario.
 	self answer
@@ -63,7 +62,7 @@ ComponenteNuevaPregunta >> renderInputElementon: aCanvas [
 	aCanvas heading
 		level: 5;
 		with: 'Titulo'.
-	aCanvas paragraph: [ aCanvas textInput on: #titulo of: self ].
+	aCanvas  paragraph: [ aCanvas textInput on: #titulo of: self ].
 	aCanvas heading
 		level: 5;
 		with: 'Topico ' greaseString.

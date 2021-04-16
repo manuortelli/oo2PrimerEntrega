@@ -45,8 +45,7 @@ ComponenteDeAcceso >> renderContentOn: aCanvas [
 
 { #category : #accessing }
 ComponenteDeAcceso >> renderInputElementsOn: aCanvas [
-	aCanvas displayHeading
-		class: 'text-primary';
+	 aCanvas displayHeading class: 'text-primary';
 		level: 4;
 		with: '  Cuoora' greaseString.
 	aCanvas horizontalRule.
