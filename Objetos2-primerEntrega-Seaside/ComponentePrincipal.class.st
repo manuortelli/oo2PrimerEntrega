@@ -27,9 +27,10 @@ ComponentePrincipal >> agregarLike: unaPregunta estado: unBoolean [
 ]
 
 { #category : #rendering }
-ComponentePrincipal >> mostrar: aCanvas pregunta: unaPregunta [
-aCanvas heading level5 with: 'Horizontal alignment'.
-
+ComponentePrincipal >> mostrar: unaPregunta [ 
+	ComponentePregunta initializeCon: unaPregunta
+	
+		
 ]
 
 { #category : #rendering }
@@ -48,9 +49,8 @@ ComponentePrincipal >> renderButtonLike: aCanvas pregunta: unaPregunta [
 
 { #category : #rendering }
 ComponentePrincipal >> renderContentOn: aCanvas [
-	aCanvas heading
-		level: 3;
-		with: [ 'Bienvenido ' , self session usuario name greaseString ].
+	aCanvas heading level3
+		with:  'Bienvenido ' , self session usuario name greaseString .
 	self renderPostsOn: aCanvas.
 	aCanvas space.
 	self agregarFollower: aCanvas.
@@ -63,7 +63,7 @@ ComponentePrincipal >> renderLogoutButtonOn: aCanvas [
 	aCanvas
 		form: [ aCanvas submitButton
 				class: 'btn btn-danger btn-lg';
-				callback: [  self session unregister. self call: ComponenteLogin new ];
+				callback: [ self call: ComponenteLogin new ];
 				with: 'Salir' ]
 ]
 
@@ -79,17 +79,9 @@ ComponentePrincipal >> renderPostsOn: aCanvas [
 		with: [ preguntas
 				do: [ :pregunta | 
 					aCanvas listItem
-						with: [ aCanvas
-								heading: [ aCanvas anchor
-										callback: [ self mostrar: aCanvas pregunta: pregunta ];
-										with: pregunta titulo ].
-							aCanvas heading
-								level: 5;
-								with: 'Topico: ' , pregunta getTopicoNombres.
-							aCanvas heading
-								level: 5;
-								with:
-									'Like:  ' , pregunta getLikes greaseString , '   Dislike:  '
+						with: [ aCanvas heading: pregunta titulo.
+							aCanvas heading level5 with: 'Topico: ' , pregunta getTopicoNombre.
+							aCanvas heading level5 with:'like: ' , pregunta getLikes greaseString , ' Dislike:  '
 										, pregunta getDislikes greaseString.
 							self renderButtonLike: aCanvas pregunta: pregunta ] ] ].
 	aCanvas

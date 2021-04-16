@@ -46,12 +46,12 @@ Interaccion >> existeInteraccion: unUsuario [
 
 { #category : #acccessing }
 Interaccion >> getDislikes [
-	^ (likes select: [ :each | (each getState == false) ]) size
+	^ (likes select: [ :each | each getState == false ]) size
 ]
 
 { #category : #acccessing }
 Interaccion >> getLikes [
-	^ (likes select: [ :each | each getState ]) size
+	^ (likes select: [ :each | each getState == true ]) size
 ]
 
 { #category : #'as yet unclassified' }

@@ -21,6 +21,7 @@ ComponenteNuevaPregunta >> descripcion: unaDescripcion [
 
 { #category : #accessing }
 ComponenteNuevaPregunta >> post [
+	"topico ifEmpty: [ ^ self ]."
 
 	self session quoora
 		agregarPreguntaConTopico: (self topico splitOn: ',')

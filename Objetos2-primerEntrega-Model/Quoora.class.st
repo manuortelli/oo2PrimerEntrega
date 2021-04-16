@@ -67,6 +67,11 @@ Quoora >> agregarRespuestaConPregunta: unaPregunta texto:unTexto usuario:unUsuar
 ]
 
 { #category : #adding }
+Quoora >> agregarTopicoNombre: unNombre descripcion:unaDescripcion [
+	topicos add: (Topico nuevoConNombre: unNombre descripcion: unaDescripcion )
+]
+
+{ #category : #adding }
 Quoora >> agregarTopicoNombre: unNombre descripcion: unaDescripcion usuario: unUsuario [
 	| topi |
 	topi := Topico nuevoConNombre: unNombre descripcion: unaDescripcion . 
@@ -81,8 +86,9 @@ Quoora >> borrarPregunta: unaPregunta [
 
 { #category : #'as yet unclassified' }
 Quoora >> calcularPuntajeDe: unUsuario [
-	| preg |
-	preg := (self getPreguntasDeUnUsuario: unUsuario) size * 20
+	^ unUsuario getPreguntas size * 20
+		+ ((self getCantidadDeRespuestasDeUnUsuario: unUsuario) * 50) + (self getPreguntas sumNumbers: [ :pregunta | preguntas getLikesDeUnUsuario: unUsuario ]) +
+		self getPreguntas sumNumbers: [ :pregunta | pregunta getDislikesDeUnUsuario: unUsuario ] 
 ]
 
 { #category : #adding }
@@ -93,6 +99,17 @@ Quoora >> crearUsuarioNombre: unNombre password: unaPassword [
 		password: unaPassword.
 	usuarios add: unUsuario.
 	^ unUsuario
+]
+
+{ #category : #'as yet unclassified' }
+Quoora >> getCantidadDeRespuestasDeUnUsuario: unUsuario [
+	"Devuelve la cantidad de respuestas que hizo un usuario que no sean a preguntas que hizo el mismo"
+	(self getPreguntas collect:[:pregunta | pregunta usuarioPropietario ~= unUsuario ]) sumNumbers: [ :pregunta | pregunta cantidadDeRespuestasDe: unUsuario ]
+]
+
+{ #category : #'as yet unclassified' }
+Quoora >> getPreguntas [
+	^ preguntas
 ]
 
 { #category : #accesing }

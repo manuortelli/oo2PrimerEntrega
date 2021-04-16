@@ -7,7 +7,8 @@ Class {
 		'fechaYHora',
 		'topicosDeInteres',
 		'followers',
-		'preguntas'
+		'preguntas',
+		'respuestas'
 	],
 	#category : #'Objetos2-primerEntrega-Model-Dominio'
 }
@@ -29,7 +30,13 @@ UsuarioQuoora >> agregarPregunta: unaPregunta [
 
 { #category : #adding }
 UsuarioQuoora >> agregarTopicoDeinteres: unosTopicos [
-	topicosDeInteres add: unosTopicos
+	topicosDeInteres addAll: unosTopicos
+]
+
+{ #category : #'as yet unclassified' }
+UsuarioQuoora >> getDislikesDeUnUsuario: unUsuario [
+	"Devuelve la cantidad de dislikes de unUsuario"
+	
 ]
 
 { #category : #accessing }
@@ -38,17 +45,28 @@ UsuarioQuoora >> getFollowers [
 ]
 
 { #category : #'as yet unclassified' }
+UsuarioQuoora >> getLikesDeUnUsuario: unUsuario [
+	"Devuelve la cantidad de likes de un usuario determinado"
+]
+
+{ #category : #'as yet unclassified' }
 UsuarioQuoora >> getPreguntas [
 	^ preguntas
+]
+
+{ #category : #accesing }
+UsuarioQuoora >> getRespuestas [
+	^ respuestas
 ]
 
 { #category : #initialization }
 UsuarioQuoora >> initializeConNombre: unNombre password: unaPassword [
 	nombreDeUsuario := unNombre.
 	password := unaPassword.
-	topicosDeInteres := Set new.
-	followers := Set new.
-	preguntas:= Set new.
+	topicosDeInteres := OrderedCollection  new.
+	followers := OrderedCollection  new.
+	preguntas := OrderedCollection new.
+	respuestas := OrderedCollection new.
 	fechaYHora := DateAndTime now
 ]
 
