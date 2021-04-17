@@ -33,20 +33,9 @@ UsuarioQuoora >> agregarTopicoDeinteres: unosTopicos [
 	topicosDeInteres add: unosTopicos
 ]
 
-{ #category : #'as yet unclassified' }
-UsuarioQuoora >> getDislikesDeUnUsuario: unUsuario [
-	"Devuelve la cantidad de dislikes de unUsuario"
-	
-]
-
 { #category : #accessing }
 UsuarioQuoora >> getFollowers [
 	^ followers 
-]
-
-{ #category : #'as yet unclassified' }
-UsuarioQuoora >> getLikesDeUnUsuario: unUsuario [
-	"Devuelve la cantidad de likes de un usuario determinado"
 ]
 
 { #category : #'as yet unclassified' }
