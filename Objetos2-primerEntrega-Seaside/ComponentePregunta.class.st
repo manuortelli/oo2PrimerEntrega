@@ -45,15 +45,15 @@ ComponentePregunta >> renderButtonLike: aCanvas pregunta: unaPregunta [
 ComponentePregunta >> renderContentOn: aCanvas [
 	aCanvas anchor
 		callback: [ self renderButtonLike: aCanvas pregunta: pregunta ];
-		with: pregunta titulo. aCanvas heading level4
-		with: 'Topico: ' , pregunta getTopicoNombre.
+		with: pregunta titulo.
+	aCanvas heading level4 with: 'Topico: ' , pregunta getTopicoNombre.
 	aCanvas heading level4
 		with: 'Creado por: ' , pregunta usuarioPropietario name.
 	aCanvas heading level4
 		with:
 			'like: ' , pregunta getLikes greaseString , ' Dislike:  '
 				, pregunta getDislikes greaseString.
-	self renderRespuesta: aCanvas pregunta: pregunta.
+	self renderButtonLike: aCanvas  pregunta: pregunta.
 	self renderRespuesta: aCanvas pregunta: pregunta
 ]
 
