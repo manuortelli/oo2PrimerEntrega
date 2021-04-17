@@ -30,14 +30,17 @@ TestQuoora >> testAgregarFollower [
 
 { #category : #tests }
 TestQuoora >> testAgregarPreguntaYLike [
-	| topico usuario usuario2 pregunta |
+	| topicos topico usuario usuario2 pregunta  |
 	usuario := UsuarioQuoora
 		initializeConNombre: 'Manuel'
 		password: 'Sabelobelo'.
 	quoora crearUsuarioNombre: 'Manuel' password: 'Sabelobelo'.
+	topicos := OrderedCollection new.
 	topico := Topico
-		nuevoConNombre: 'Deporte'
+		nuevoConNombre: 'topico1'
 		descripcion: 'Todo sobre el deporte'.
+	topicos add: 'topico1'.
+	topicos add: 'topico2'.
 	pregunta := quoora
 		agregarPreguntaConTopico: topico
 		titulo: 'Pregunta?'
