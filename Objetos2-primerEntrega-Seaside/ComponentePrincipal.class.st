@@ -43,7 +43,6 @@ ComponentePrincipal >> renderPostsOn: aCanvas [
 	| preguntas |
 	preguntas := self session quoora
 		obtenerCincoPreguntasRelevantes: self session usuario.
-	preguntas inspect.
 	aCanvas heading
 		level: 2;
 		with: 'Preguntas' greaseString.
