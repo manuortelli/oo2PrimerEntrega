@@ -149,7 +149,7 @@ Quoora >> getPreguntasRelevantesDeUnUsuario: unUsuario [
 	total
 		addAll:
 			(unUsuario getFollowers
-				flatCollect: [ :follower | (follower at: 1) getPreguntas ]).
+				flatCollect: [ :follower | (follower at:1) getPreguntas ]).
 	^ total
 		asSortedCollection: [ :a :b | a getFechaYHora > b getFechaYHora ]
 ]
