@@ -40,7 +40,7 @@ Interaccion >> coleccionDeDislikes [
 { #category : #'as yet unclassified' }
 Interaccion >> coleccionDeLikes [
 	^ self getReacciones
-		collect: [ :reaccion | reaccion getState == true ]
+		collect: [ :reaccion | reaccion getState  ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -64,7 +64,12 @@ Interaccion >> existeInteraccion: unUsuario [
 
 { #category : #acccessing }
 Interaccion >> getDislikes [
-	^ (likes select: [ :each | each getState == false ]) size
+	^ (likes reject:  [ :each | each getState]) size
+]
+
+{ #category : #'as yet unclassified' }
+Interaccion >> getDislikesDeUnUsuario: unUsuario [
+	
 ]
 
 { #category : #'as yet unclassified' }
@@ -75,6 +80,11 @@ Interaccion >> getFechaYHora [
 { #category : #acccessing }
 Interaccion >> getLikes [
 	^ (likes select: [ :each | each getState ]) size
+]
+
+{ #category : #'as yet unclassified' }
+Interaccion >> getLikesDeUnUsuario: unUsuario [
+	self subclassResponsibility 
 ]
 
 { #category : #'as yet unclassified' }

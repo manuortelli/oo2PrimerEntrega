@@ -22,13 +22,13 @@ Respuesta >> agregarRespuestaConTexto: unTexto usuario: unUsuario [
 { #category : #'as yet unclassified' }
 Respuesta >> getDislikesDeUnUsuario: unUsuario [
 	^ ((self getReaccionesDeUnUsuario: unUsuario)
-		select: [ :reaccion | reaccion getState == false ]) size
+		reject: [ :reaccion | reaccion getState ]) size
 ]
 
 { #category : #'as yet unclassified' }
 Respuesta >> getLikesDeUnUsuario: unUsuario [
 	^ ((self getReaccionesDeUnUsuario: unUsuario)
-		select: [ :reaccion | reaccion getState == true ]) size
+		select: [ :reaccion | reaccion getState  ]) size
 ]
 
 { #category : #initialization }

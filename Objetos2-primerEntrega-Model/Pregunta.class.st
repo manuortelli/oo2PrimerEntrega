@@ -49,7 +49,7 @@ Pregunta >> getDislikesDeUnUsuario: unUsuario [
 	"Devuleve la cantidad de likes de un usuario determinado"
 
 	^ ((self getReaccionesDeUnUsuario: unUsuario)
-		select: [ :reaccion | reaccion getState == false ]) size
+		reject: [ :reaccion | reaccion getState ]) size
 		+
 			(self getRespuestas
 				collect: [ :respuesta | respuesta getDislikesDeUnUsuario: unUsuario ])

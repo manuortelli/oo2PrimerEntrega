@@ -44,8 +44,8 @@ ComponentePregunta >> renderButtonLike: aCanvas pregunta: unaPregunta [
 { #category : #'as yet unclassified' }
 ComponentePregunta >> renderContentOn: aCanvas [
 	aCanvas anchor
-		callback: [ self renderButtonLike: aCanvas pregunta: pregunta ];
-		with: pregunta titulo.
+		callback: [ aCanvas render: (ComponentePreguntaDetalle of: pregunta) ];
+		with:  pregunta titulo.
 	aCanvas heading level4 with: 'Topico: ' , pregunta getTopicoNombre.
 	aCanvas heading level4
 		with: 'Creado por: ' , pregunta usuarioPropietario name.
@@ -53,7 +53,7 @@ ComponentePregunta >> renderContentOn: aCanvas [
 		with:
 			'like: ' , pregunta getLikes greaseString , ' Dislike:  '
 				, pregunta getDislikes greaseString.
-	self renderButtonLike: aCanvas  pregunta: pregunta.
+	self renderButtonLike: aCanvas pregunta: pregunta.
 	self renderRespuesta: aCanvas pregunta: pregunta
 ]
 

@@ -70,11 +70,6 @@ UsuarioQuoora >> name [
 ]
 
 { #category : #'as yet unclassified' }
-UsuarioQuoora >> nombreUsuario [
-	^ nombreDeUsuario 
-]
-
-{ #category : #'as yet unclassified' }
 UsuarioQuoora >> password [ 
 	^password 
 ]

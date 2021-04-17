@@ -1,3 +1,9 @@
+"
+""(WAAdmin register: ComponenteLogin  asApplicationAt: 'cuoora')
+	sessionClass: SesionConUsuario ;
+	addLibrary: JQDeploymentLibrary;
+	addLibrary: SBSDevelopmentLibrary""
+"
 Class {
 	#name : #ComponentePrincipal,
 	#superclass : #SBSComponent,
@@ -43,14 +49,12 @@ ComponentePrincipal >> renderPostsOn: aCanvas [
 	| preguntas |
 	preguntas := self session quoora
 		obtenerCincoPreguntasRelevantes: self session usuario.
-	aCanvas heading
-		level: 2;
-		with: 'Preguntas' greaseString.
+	aCanvas heading level2 with: 'Preguntas' greaseString.
 	aCanvas unorderedList
 		with: [ preguntas
 				do: [ :pregunta | 
 					aCanvas
-						listItem: [ aCanvas render: (ComponentePregunta of: pregunta) ] ] ].
+						listItem: [ aCanvas render: (ComponentePregunta of: pregunta) ]. aCanvas horizontalRule  ] ].
 	aCanvas
 		form: [ aCanvas submitButton
 				class: 'tn btn-outline-success';
@@ -60,5 +64,5 @@ ComponentePrincipal >> renderPostsOn: aCanvas [
 			aCanvas submitButton
 				class: 'tn btn-outline-success';
 				callback: [ self call: ComponenteNuevoTopico new ];
-				with: '  Agregar topico ' ]
+				with: '  Agregar topico de Interes ' ]
 ]

@@ -189,7 +189,7 @@ Quoora >> obtenerCincoPreguntasRelevantes: unUsuario [
 Quoora >> usuario: unUsuario protegidoPor: unaPassword [
 	^ usuarios
 		detect:
-			[ :each | each nombreUsuario = unUsuario & (each password = unaPassword) ]
+			[ :each | each name = unUsuario & (each password = unaPassword) ]
 		ifNone: [ nil ]
 ]
 
