@@ -65,6 +65,5 @@ ComponentePregunta >> renderRespuesta: aCanvas pregunta: unaPregunta [
 					aCanvas
 						listItem: [ aCanvas heading level3 with: 'Respuesta:  '.
 							respuesta getRespuestas.
-							self renderButtonLike: aCanvas pregunta: respuesta. ] ] ].
-			
+							self renderButtonLike: aCanvas pregunta: respuesta ] ] ]
 ]

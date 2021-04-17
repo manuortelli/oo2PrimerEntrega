@@ -61,7 +61,7 @@ Pregunta >> getLikesDeUnUsuario: unUsuario [
 	"Devuleve la cantidad de likes de un usuario determinado"
 
 	^ ((self getReaccionesDeUnUsuario: unUsuario)
-		select: [ :reaccion | reaccion getState == true ]) size
+		select: [ :reaccion | reaccion getState ]) size
 		+
 			(self getRespuestas
 				collect: [ :respuesta | respuesta getLikesDeUnUsuario: unUsuario ])
