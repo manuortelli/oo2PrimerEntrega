@@ -70,7 +70,6 @@ Quoora >> agregarRespuestaConPregunta: unaPregunta texto:unTexto usuario:unUsuar
 Quoora >> agregarTopicoNombre: unNombre descripcion: unaDescripcion usuario: unUsuario [
 	| topi |
 	topi := Topico nuevoConNombre: unNombre descripcion: unaDescripcion.
-	unUsuario agregarTopicoDeinteres: topi.
 	topicos add: topi
 ]
 
