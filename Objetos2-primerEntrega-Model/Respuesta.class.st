@@ -2,8 +2,7 @@ Class {
 	#name : #Respuesta,
 	#superclass : #Interaccion,
 	#instVars : [
-		'texto',
-		'respuestas'
+		'texto'
 	],
 	#category : #'Objetos2-primerEntrega-Model-Dominio'
 }
@@ -13,32 +12,30 @@ Respuesta class >> nuevaConTexto: unTexto usuario:unUsuario [
 	^ self new initializeConTexto: unTexto usuario: unUsuario.
 ]
 
-{ #category : #adding }
-Respuesta >> agregarRespuestaConTexto: unTexto usuario: unUsuario [
-	respuestas
-		add: (Respuesta nuevaConTexto: unTexto usuario: unUsuario)
-]
+{ #category : #query }
+Respuesta >> dislikesDeUnUsuario: unUsuario [
+	"devuelve la cantidad de Dislikes de un Usuario"
 
-{ #category : #'as yet unclassified' }
-Respuesta >> getDislikesDeUnUsuario: unUsuario [
-	^ ((self getReaccionesDeUnUsuario: unUsuario)
-		reject: [ :reaccion | reaccion getState ]) size
-]
-
-{ #category : #'as yet unclassified' }
-Respuesta >> getLikesDeUnUsuario: unUsuario [
-	^ ((self getReaccionesDeUnUsuario: unUsuario)
-		select: [ :reaccion | reaccion getState  ]) size
+	^ ((self reaccionesDeUnUsuario: unUsuario)
+		reject: [ :reaccion | reaccion estado ]) size
 ]
 
 { #category : #initialization }
-Respuesta >> getRespuestas [ 	
-	^ respuestas
+Respuesta >> initializeConTexto: unTexto usuario: unUsuario [
+	texto := unTexto.
+	usuarioCreador := unUsuario.
+
 ]
 
-{ #category : #initialization }
-Respuesta >> initializeConTexto: unTexto usuario:unUsuario [
-	texto:=unTexto.
-	usuarioCreador := unUsuario .
-	respuestas := OrderedCollection new.
+{ #category : #query }
+Respuesta >> likesDeUnUsuario: unUsuario [
+	^ ((self reaccionesDeUnUsuario: unUsuario)
+		select: [ :reaccion | reaccion estado ]) size
+]
+
+{ #category : #query }
+Respuesta >> puntaje [
+	"devuelve la diferencia entre likes y dislikes"
+	^self cantidadLikes - self cantidadDislikes 
+	
 ]

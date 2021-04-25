@@ -6,9 +6,7 @@ Class {
 		'password',
 		'fechaYHora',
 		'topicosDeInteres',
-		'followers',
-		'preguntas',
-		'respuestas'
+		'followers'
 	],
 	#category : #'Objetos2-primerEntrega-Model-Dominio'
 }
@@ -20,52 +18,32 @@ UsuarioQuoora class >> initializeConNombre: unNombre password: unaPassword [
 
 { #category : #adding }
 UsuarioQuoora >> agregarFollower: unFollower [
-	followers add: unFollower.
-]
-
-{ #category : #'as yet unclassified' }
-UsuarioQuoora >> agregarPregunta: unaPregunta [
-	preguntas add: unaPregunta
+	"agrega un follower a la coleccion de followers del usuario logueado"
+	followers add: unFollower
 ]
 
 { #category : #adding }
-UsuarioQuoora >> agregarTopicoDeinteres: unosTopicos [
-	topicosDeInteres add: unosTopicos
+UsuarioQuoora >> agregarTopicoDeinteres: unTopico [
+	"agrega un topico de interes al usuario"
+	topicosDeInteres add: unTopico
 ]
 
 { #category : #accessing }
-UsuarioQuoora >> getFollowers [
-	^ followers 
-]
-
-{ #category : #'as yet unclassified' }
-UsuarioQuoora >> getPreguntas [
-	^ preguntas
-]
-
-{ #category : #accesing }
-UsuarioQuoora >> getRespuestas [
-	^ respuestas
-]
-
-{ #category : #'as yet unclassified' }
-UsuarioQuoora >> getTopicosDeInteres [
-	^ topicosDeInteres 
+UsuarioQuoora >> followers [
+	^ followers
 ]
 
 { #category : #initialization }
 UsuarioQuoora >> initializeConNombre: unNombre password: unaPassword [
 	nombreDeUsuario := unNombre.
 	password := unaPassword.
-	topicosDeInteres := OrderedCollection  new.
-	followers := OrderedCollection  new.
-	preguntas := OrderedCollection new.
-	respuestas := OrderedCollection new.
+	topicosDeInteres := Set new.
+	followers := Set new.
 	fechaYHora := DateAndTime now
 ]
 
 { #category : #'as yet unclassified' }
-UsuarioQuoora >> name [
+UsuarioQuoora >> nombre [
 	^ nombreDeUsuario
 ]
 

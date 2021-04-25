@@ -15,33 +15,33 @@ TestRespuesta >> setUp [
 ]
 
 { #category : #tests }
-TestRespuesta >> testGetDislikesDeUnUsuario [
+TestRespuesta >> testDislikesDeUnUsuario [
 	| usuario |
 	usuario := UsuarioQuoora
 		initializeConNombre: 'Manuel'
 		password: 'Sabelobelo'.
-	respuesta agregarLike: usuario estado: false.
-	self assert: respuesta getReacciones size equals: 1.
-	self assert: (respuesta getReacciones at: 1) getState equals: false.
-	self assert: (respuesta getDislikesDeUnUsuario: usuario) equals: 1.
-	respuesta agregarLike: usuario estado: true.
-	self assert: respuesta getReacciones size equals: 1.
-	self assert: (respuesta getReacciones at: 1) getState equals: true.
-	self assert: (respuesta getDislikesDeUnUsuario: usuario) equals: 0
+	respuesta agregarDislike: usuario.
+	self assert: respuesta reacciones size equals: 1.
+	self assert: (respuesta reacciones at: 1) estado equals: false.
+	self assert: (respuesta dislikesDeUnUsuario: usuario) equals: 1.
+	respuesta agregarLike: usuario.
+	self assert: respuesta reacciones size equals: 1.
+	self assert: (respuesta reacciones at: 1) estado equals: true.
+	self assert: (respuesta dislikesDeUnUsuario: usuario) equals: 0
 ]
 
 { #category : #tests }
-TestRespuesta >> testGetLikesDeUnUsuario [
+TestRespuesta >> testLikesDeUnUsuario [
 	| usuario |
 	usuario := UsuarioQuoora
 		initializeConNombre: 'Manuel'
 		password: 'Sabelobelo'.
-	respuesta agregarLike: usuario estado: true.
-	self assert: respuesta getReacciones size equals: 1.
-	self assert: (respuesta getLikesDeUnUsuario: usuario) equals: 1.
-	self assert: (respuesta getDislikesDeUnUsuario: usuario) equals: 0.
-	respuesta agregarLike: usuario estado: false.
-	self assert: respuesta getReacciones size equals: 1.
-	self assert: (respuesta getReacciones at: 1) getState equals: false.
-	self assert: (respuesta getLikesDeUnUsuario: usuario) equals: 0
+	respuesta agregarLike: usuario.
+	self assert: respuesta reacciones size equals: 1.
+	self assert: (respuesta likesDeUnUsuario: usuario) equals: 1.
+	self assert: (respuesta dislikesDeUnUsuario: usuario) equals: 0.
+	respuesta agregarDislike: usuario.
+	self assert: respuesta reacciones size equals: 1.
+	self assert: (respuesta reacciones at: 1) estado equals: false.
+	self assert: (respuesta likesDeUnUsuario: usuario) equals: 0
 ]

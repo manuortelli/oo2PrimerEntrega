@@ -15,23 +15,13 @@ Like class >> initializeConUsuario: unUsuario like:unBoolean [
 ]
 
 { #category : #'as yet unclassified' }
-Like >> agregarDislike [
-	estado := false.
+Like >> esDeUnUsuario: unUsuario [
+	^ self usuario == unUsuario
 ]
 
 { #category : #'as yet unclassified' }
-Like >> agregarLike [ 
-	estado := true.
-]
-
-{ #category : #'as yet unclassified' }
-Like >> esDeUnUsuario: unUsuario [ 	
-	^ self usuarioDeLike == unUsuario 
-]
-
-{ #category : #'as yet unclassified' }
-Like >> getState [ 
-	^ estado 
+Like >> estado [
+	^ estado
 ]
 
 { #category : #initialization }
@@ -41,14 +31,9 @@ Like >> initializeConUsuario: unUsuario like: unBoolean [
 	estado:=unBoolean
 ]
 
-{ #category : #initialization }
-Like >> setState [
-	estado := estado not.
-	fechaYHora := DateAndTime now
-]
-
 { #category : #'as yet unclassified' }
-Like >> usuarioDeLike [
+Like >> usuario [
 	"Devuelve al usuario que hizo la reacción"
+
 	^ usuario
 ]

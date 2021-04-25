@@ -38,49 +38,23 @@ Pregunta >> cantidadDeRespuestasDe: unUsuario [
 ]
 
 { #category : #'as yet unclassified' }
-Pregunta >> contieneTopico:unTopico [
-	(self getTopico detect: [ :topico | topico getNombre = unTopico getNombre ] )
-	ifNotNil:[ ^true ].
-	^ false
+Pregunta >> contieneTopico: unTopico [
+	"Dice si la pregunta tiene un topico en particular"
+
+	^ self topicos
+		anySatisfy: [ :topico | topico = unTopico ]
 ]
 
 { #category : #'as yet unclassified' }
-Pregunta >> getDislikesDeUnUsuario: unUsuario [
-	"Devuleve la cantidad de likes de un usuario determinado"
+Pregunta >> dislikesDeUnUsuario: unUsuario [
+	"Devuleve la cantidad de dislikes de un usuario determinado"
 
-	^ ((self getReaccionesDeUnUsuario: unUsuario)
-		reject: [ :reaccion | reaccion getState ]) size
+	^ ((self reaccionesDeUnUsuario: unUsuario)
+		reject: [ :reaccion | reaccion estado ]) size
 		+
-			(self getRespuestas
-				collect: [ :respuesta | respuesta getDislikesDeUnUsuario: unUsuario ])
+			(self respuestas
+				collect: [ :respuesta | respuesta dislikesDeUnUsuario: unUsuario ])
 				size
-]
-
-{ #category : #'as yet unclassified' }
-Pregunta >> getLikesDeUnUsuario: unUsuario [
-	"Devuleve la cantidad de likes de un usuario determinado"
-
-	^ ((self getReaccionesDeUnUsuario: unUsuario)
-		select: [ :reaccion | reaccion getState ]) size
-		+
-			(self getRespuestas
-				collect: [ :respuesta | respuesta getLikesDeUnUsuario: unUsuario ])
-				size
-]
-
-{ #category : #accesing }
-Pregunta >> getRespuestas [ 	
-	^ respuestas
-]
-
-{ #category : #accesing }
-Pregunta >> getTopico [
-	^ topicos 
-]
-
-{ #category : #accesing }
-Pregunta >> getTopicoNombre [
-	^ ', ' join: topicos
 ]
 
 { #category : #initialization }
@@ -94,7 +68,35 @@ Pregunta >> initializePreguntaConUsuario: unUsuario titulo: unTitulo descripcion
 	likes := OrderedCollection new
 ]
 
+{ #category : #'as yet unclassified' }
+Pregunta >> likesDeUnUsuario: unUsuario [
+	"Devuleve la cantidad de likes de un usuario determinado"
+
+	^ ((self reaccionesDeUnUsuario: unUsuario)
+		select: [ :reaccion | reaccion estado ]) size
+		+
+			(self respuestas
+				collect: [ :respuesta | respuesta likesDeUnUsuario: unUsuario ])
+				size
+]
+
+{ #category : #accesing }
+Pregunta >> respuestas [
+	"Retornan todas las respuestas ordenadas de mayor a menor por cantidad mayor puntaje, el que está dado por la diferencia de likes y dislikes."
+	^ respuestas asSortedCollection: [ :a :b | a puntaje > b puntaje ]
+]
+
 { #category : #accesing }
 Pregunta >> titulo [ 
 	^titulo
+]
+
+{ #category : #accesing }
+Pregunta >> topicoNombre [
+	^ ', ' join: topicos
+]
+
+{ #category : #accesing }
+Pregunta >> topicos [
+	^ topicos
 ]

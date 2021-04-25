@@ -15,13 +15,19 @@ Topico class >> nuevoConNombre: unNombre descripcion: unaDescripcion [
 		descripcion: unaDescripcion
 ]
 
-{ #category : #accesing }
-Topico >> getNombre [
-	^ nombre
+{ #category : #comparing }
+Topico >> = unTopico [
+	^ self nombre = unTopico nombre
+	
 ]
 
 { #category : #initialization }
 Topico >> initializeTopicoConNombre: unNombre descripcion: unaDescripcion [
 	nombre:= unNombre .
 	descripcion := unaDescripcion 
+]
+
+{ #category : #accesing }
+Topico >> nombre [
+	^ nombre
 ]
