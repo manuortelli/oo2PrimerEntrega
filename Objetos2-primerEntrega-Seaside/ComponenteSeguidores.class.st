@@ -9,15 +9,13 @@ Class {
 
 { #category : #'as yet unclassified' }
 ComponenteSeguidores >> mostrarSeguidores: aCanvas [
-	aCanvas heading
-		level: 2;
-		with: 'Seguidores'.
-	self session usuario getFollowers isEmpty
-		ifTrue: [ aCanvas alert beSecondary with: 'No hay usuarios seguidos'.
-				aCanvas break ];
-		ifFalse: [ aCanvas
-					unorderedList: [ self session usuario getFollowers
-							do: [ :each | each do: [ :i | aCanvas listItem: i name ] ] ] ].
+	aCanvas heading level2 with: 'Seguidores'.
+	self session usuario followers
+		ifEmpty: [ aCanvas alert beSecondary with: 'No hay usuarios seguidos'.
+			aCanvas break ].
+	aCanvas
+		unorderedList: [ self session usuario followers
+				do: [ :followers | followers do: [ :follower | aCanvas listItem: follower nombre ] ] ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -49,11 +47,9 @@ ComponenteSeguidores >> renderContentOn: aCanvas [
 ]
 
 { #category : #'as yet unclassified' }
-ComponenteSeguidores >> renderInputOn:  aCanvas [
-	aCanvas heading
-				level: 4;
-				with: 'Ingrese la persona que desea seguir'.
-			aCanvas paragraph: [ aCanvas textInput on: #seguidor of: self ].
+ComponenteSeguidores >> renderInputOn: aCanvas [
+	aCanvas heading	level4 with: 'Ingrese la persona que desea seguir'.
+	aCanvas paragraph: [ aCanvas textInput on: #seguidor of: self ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -68,9 +64,7 @@ ComponenteSeguidores >> seguidor: unSeguidor [
 
 { #category : #'as yet unclassified' }
 ComponenteSeguidores >> seguir [
-	self session quoora
-		agregarFollowerName: self seguidor
-		usuario: self session usuario.
-		 self
+	self session usuario
+		agregarFollower: seguidor. self
 		call: ComponentePrincipal new
 ]

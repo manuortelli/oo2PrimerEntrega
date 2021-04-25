@@ -27,8 +27,7 @@ ComponenteNuevaPregunta >> post [
 		agregarPreguntaConTopico: (self topico splitOn: ',')
 		titulo: self titulo
 		descripcion: self descripcion
-		usuario: self session usuario.
-	self answer
+		usuario: self session usuario. self answer
 ]
 
 { #category : #accessing }
@@ -60,17 +59,11 @@ ComponenteNuevaPregunta >> renderContentOn: aCanvas [
 
 { #category : #accessing }
 ComponenteNuevaPregunta >> renderInputElementon: aCanvas [
-	aCanvas heading
-		level: 5;
-		with: 'Titulo'.
-	aCanvas  paragraph: [ aCanvas textInput on: #titulo of: self ].
-	aCanvas heading
-		level: 5;
-		with: 'Topico ' greaseString.
+	aCanvas heading	 level5 with: 'Titulo'.
+	aCanvas paragraph: [ aCanvas textInput on: #titulo of: self ].
+	aCanvas heading level5	with: 'Topico '.
 	aCanvas paragraph: [ aCanvas textInput on: #topico of: self ].
-	aCanvas heading
-		level: 5;
-		with: 'Descripcion ' greaseString.
+	aCanvas heading level5 with: 'Descripcion '.
 	aCanvas paragraph: [ aCanvas textArea on: #descripcion of: self ]
 ]
 

@@ -11,10 +11,10 @@ Class {
 
 { #category : #accessing }
 ComponenteNuevoTopico >> cargar [
-	self session quoora
-		agregarTopicoNombre: self topico 
-		descripcion: self descripcion
-		usuario: self session usuario.
+	self session usuario
+		agregarTopicoDeinteres: topico
+		unaDescripcion: descripcion.
+	self session usuario inspect.
 	self answer
 ]
 
@@ -48,9 +48,9 @@ ComponenteNuevoTopico >> renderContentOn: aCanvas [
 
 { #category : #rendering }
 ComponenteNuevoTopico >> renderInputOn: aCanvas [
-	aCanvas heading level3 with: 'Titulo del topico' greaseString.
+	aCanvas heading level3 with: 'Titulo del topico'.
 	aCanvas paragraph: [ aCanvas textInput on: #topico of: self ].
-	aCanvas heading level3 with: 'Descripcion' greaseString.
+	aCanvas heading level3 with: 'Descripcion'.
 	aCanvas paragraph: [ aCanvas textInput on: #descripcion of: self ]
 ]
 

@@ -18,7 +18,6 @@ Topico class >> nuevoConNombre: unNombre descripcion: unaDescripcion [
 { #category : #comparing }
 Topico >> = unTopico [
 	^ self nombre = unTopico nombre
-	
 ]
 
 { #category : #initialization }

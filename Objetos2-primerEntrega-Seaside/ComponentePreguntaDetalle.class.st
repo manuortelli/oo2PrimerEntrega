@@ -1,29 +1,11 @@
 Class {
 	#name : #ComponentePreguntaDetalle,
-	#superclass : #SBSComponent,
+	#superclass : #ComponentePosteo,
 	#instVars : [
 		'pregunta'
 	],
 	#category : #'Objetos2-primerEntrega-Seaside'
 }
-
-{ #category : #'instance creation' }
-ComponentePreguntaDetalle class >> of: pregunta [
-	|instancia|
-	instancia := self new.
-	^ instancia inicialializadaCon: pregunta.
-	
-]
-
-{ #category : #'as yet unclassified' }
-ComponentePreguntaDetalle >> inicialializadaCon: unaPregunta [
-	pregunta := unaPregunta 
-]
-
-{ #category : #rendering }
-ComponentePreguntaDetalle >> pregunta [ 
-	^pregunta
-]
 
 { #category : #rendering }
 ComponentePreguntaDetalle >> renderContentOn: aCanvas [
@@ -32,12 +14,34 @@ ComponentePreguntaDetalle >> renderContentOn: aCanvas [
 
 { #category : #'as yet unclassified' }
 ComponentePreguntaDetalle >> renderDetalle: aCanvas [
-	aCanvas paragraph 
-		with: self pregunta titulo greaseString	
+	aCanvas heading level3 with: self pregunta titulo greaseString.
+	aCanvas heading level4 with: 'Topico: ' , pregunta topicoNombre.
+	aCanvas heading level4
+		with: 'Creado por: ' , pregunta usuarioPropietario nombre.
+	aCanvas heading level4
+		with:
+			'like: ' , self pregunta cantidadDislikes greaseString , ' Dislike:  '
+				, self pregunta cantidadLikes greaseString.
+	self renderButtonLike: aCanvas pregunta: pregunta.
+	self renderRespuesta: aCanvas pregunta: pregunta
+]
+
+{ #category : #rendering }
+ComponentePreguntaDetalle >> renderLikeOn: aCanvas [
+	aCanvas heading level4
+		with: 'Creado por: ' , self pregunta usuarioPropietario nombre.
+	aCanvas heading level4
+		with:
+			'like: ' , self pregunta cantidadDislikes greaseString , ' Dislike:  '
+				, self pregunta cantidadLikes greaseString
+]
+
+{ #category : #'as yet unclassified' }
+ComponentePreguntaDetalle >> renderRespuesta: aCanvas pregunta: unaPregunta [
 	aCanvas unorderedList
-		with: [ self pregunta getRespuestas
+		with: [ unaPregunta respuestas
 				do: [ :respuesta | 
 					aCanvas
 						listItem: [ aCanvas heading level3 with: 'Respuesta:  '.
-							respuesta getRespuestas ] ] ]
+							respuesta texto ] ] ].
 ]

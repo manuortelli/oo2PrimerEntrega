@@ -10,7 +10,7 @@ ComponenteRegistro >> registrarseYLoguearse [
 	elUsuario := self model
 		crearUsuarioNombre: usuario
 		password: password.
-	self proceedWith: elUsuario quoora: self model
+	self procedeCon: elUsuario quoora: self model
 ]
 
 { #category : #accessing }

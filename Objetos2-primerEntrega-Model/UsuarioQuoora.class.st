@@ -28,6 +28,17 @@ UsuarioQuoora >> agregarTopicoDeinteres: unTopico [
 	topicosDeInteres add: unTopico
 ]
 
+{ #category : #adding }
+UsuarioQuoora >> agregarTopicoDeinteres: unTitulo unaDescripcion: unaDescripcion [
+	"Crea y agrega un topico de interes al usuario"
+
+	| unTopico |
+	unTopico := Topico
+		nuevoConNombre: unTitulo
+		descripcion: unaDescripcion.
+	topicosDeInteres add: unTopico
+]
+
 { #category : #accessing }
 UsuarioQuoora >> followers [
 	^ followers

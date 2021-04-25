@@ -39,3 +39,8 @@ Respuesta >> puntaje [
 	^self cantidadLikes - self cantidadDislikes 
 	
 ]
+
+{ #category : #query }
+Respuesta >> texto [
+	^texto
+]
