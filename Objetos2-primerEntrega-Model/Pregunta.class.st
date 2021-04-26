@@ -91,11 +91,12 @@ Pregunta >> titulo [
 
 { #category : #accesing }
 Pregunta >> topicoNombre [
-	^ (', ' join: topicos)
+	|nombreTopicos|
+	nombreTopicos := self topicos collect: [ :topico | topico nombre ].
+	^ ', ' join: nombreTopicos
 ]
 
 { #category : #accesing }
 Pregunta >> topicos [
-	self halt.
 	^ topicos
 ]

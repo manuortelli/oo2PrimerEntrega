@@ -21,13 +21,14 @@ ComponenteNuevaPregunta >> descripcion: unaDescripcion [
 
 { #category : #accessing }
 ComponenteNuevaPregunta >> post [
-	"topico ifEmpty: [ ^ self ]."
+	(self titulo or: self topico ) ifEmpty: [ self answer with: false  ].
 
 	self session quoora
 		agregarPreguntaConTopico: (self topico splitOn: ',')
 		titulo: self titulo
 		descripcion: self descripcion
-		usuario: self session usuario. self answer
+		usuario: self session usuario.
+	self answer with: true. 
 ]
 
 { #category : #accessing }

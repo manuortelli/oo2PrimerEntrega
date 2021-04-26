@@ -32,6 +32,7 @@ ComponentePerfil >> mostrar: aCanvas preguntas: unasPreguntas [
 
 { #category : #'as yet unclassified' }
 ComponentePerfil >> rendenContentOn: aCanvas [
+	aCanvas heading level3 with: 'Bienvenido al perfil de:', usuario  greaseString .
 	self renderPostsOn: aCanvas
 ]
 
