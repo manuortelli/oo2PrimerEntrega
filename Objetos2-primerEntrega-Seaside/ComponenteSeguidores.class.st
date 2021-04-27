@@ -20,9 +20,11 @@ ComponenteSeguidores >> mostrarSeguidores: aCanvas [
 
 { #category : #'as yet unclassified' }
 ComponenteSeguidores >> renderButtonOn: aCanvas [
+
 	aCanvas submitButton
 		class: 'btn btn-primary';
-		callback: [ self seguir ];
+		callback: [ self seguir.
+		 ];
 		with: 'Seguir'.
 	aCanvas space.
 	aCanvas submitButton
@@ -64,7 +66,16 @@ ComponenteSeguidores >> seguidor: unSeguidor [
 
 { #category : #'as yet unclassified' }
 ComponenteSeguidores >> seguir [
-	self session usuario
-		agregarFollower: seguidor. self
-		call: ComponentePrincipal new
+	self seguidor
+		ifEmpty: [ ^ self ] .self session usuario
+		agregarFollower: seguidor.
+	self call: ComponentePrincipal new
+]
+
+{ #category : #'as yet unclassified' }
+ComponenteSeguidores >> seguir: aCanvas [
+	self seguidor
+		ifEmpty: [	^ self ].
+	self session usuario agregarFollower: seguidor.
+	self call: ComponentePrincipal new
 ]

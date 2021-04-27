@@ -22,7 +22,7 @@ ComponenteLogin >> login [
 
 { #category : #'private protocol' }
 ComponenteLogin >> registrarNuevoUsuario [
-	self call: ComponenteRegistro new.
+	self call: ComponenteRegistro new
 ]
 
 { #category : #'private protocol' }
@@ -43,10 +43,11 @@ ComponenteLogin >> renderSignInButtonOn: aCanvas [
 
 { #category : #rendering }
 ComponenteLogin >> renderSignUpButtonOn: aCanvas [
-	aCanvas heading level4 with: [ aCanvas space.
+	aCanvas heading level4
+		with: [ aCanvas space.
 			aCanvas small textMuted with: '¿Desea Registrarse?' ].
 	aCanvas outlineButton
 		bePrimary;
-		callback: [ self registrarNuevoUsuario ];
+		callback: [ self registrarNuevoUsuario];
 		with: 'Registrarse'
 ]
