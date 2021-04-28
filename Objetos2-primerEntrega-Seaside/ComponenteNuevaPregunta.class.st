@@ -4,10 +4,18 @@ Class {
 	#instVars : [
 		'descripcion',
 		'titulo',
-		'topico'
+		'topico',
+		'quoora'
 	],
 	#category : #'Objetos2-primerEntrega-Seaside'
 }
+
+{ #category : #'instance creation' }
+ComponenteNuevaPregunta class >> of: unQuoora [
+	| instancia |
+	instancia := self new.instancia inicializarCon: unQuoora.
+	^ instancia
+]
 
 { #category : #accessing }
 ComponenteNuevaPregunta >> descripcion [ 	^descripcion
@@ -19,16 +27,25 @@ ComponenteNuevaPregunta >> descripcion: unaDescripcion [
 	
 ]
 
+{ #category : #'as yet unclassified' }
+ComponenteNuevaPregunta >> inicializarCon: unQuoora [
+	quoora := unQuoora 
+]
+
 { #category : #accessing }
 ComponenteNuevaPregunta >> post [
-	"topico ifEmpty: [ ^ self ]."
-
-	self session quoora
+	(self titulo isEmpty or: self topico isEmpty ) ifTrue: [ ^ self  ].
+	self quoora
 		agregarPreguntaConTopico: (self topico splitOn: ',')
 		titulo: self titulo
 		descripcion: self descripcion
 		usuario: self session usuario.
 	self answer
+]
+
+{ #category : #'as yet unclassified' }
+ComponenteNuevaPregunta >> quoora [
+	^quoora
 ]
 
 { #category : #accessing }
@@ -60,17 +77,11 @@ ComponenteNuevaPregunta >> renderContentOn: aCanvas [
 
 { #category : #accessing }
 ComponenteNuevaPregunta >> renderInputElementon: aCanvas [
-	aCanvas heading
-		level: 5;
-		with: 'Titulo'.
-	aCanvas  paragraph: [ aCanvas textInput on: #titulo of: self ].
-	aCanvas heading
-		level: 5;
-		with: 'Topico ' greaseString.
+	aCanvas heading	 level5 with: 'Titulo'.
+	aCanvas paragraph: [ aCanvas textInput on: #titulo of: self ].
+	aCanvas heading level5	with: 'Topico '.
 	aCanvas paragraph: [ aCanvas textInput on: #topico of: self ].
-	aCanvas heading
-		level: 5;
-		with: 'Descripcion ' greaseString.
+	aCanvas heading level5 with: 'Descripcion '.
 	aCanvas paragraph: [ aCanvas textArea on: #descripcion of: self ]
 ]
 

@@ -1,33 +1,62 @@
 Class {
 	#name : #ComponentePregunta,
-	#superclass : #ComponenteNuevoTopico,
+	#superclass : #SBSComponent,
 	#instVars : [
 		'pregunta'
 	],
 	#category : #'Objetos2-primerEntrega-Seaside'
 }
 
+{ #category : #'instance creation' }
+ComponentePregunta class >> of: unaPregunta [
+	|instancia|
+	instancia := self new.
+	instancia inicializarCon: unaPregunta .
+	^ instancia
+]
+
 { #category : #'as yet unclassified' }
-ComponentePregunta class >> initializeCon: unaPregunta [
-	  ^ self initializeCon: unaPregunta 
-]
-
-{ #category : #initialization }
-ComponentePregunta >> initializeCon: unaPregunta [
-	pregunta := unaPregunta 
+ComponentePregunta >> inicializarCon: unaPregunta [
+	pregunta := unaPregunta
 ]
 
 { #category : #accessing }
+ComponentePregunta >> pregunta [ 
+	^pregunta
+]
+
+{ #category : #'as yet unclassified' }
+ComponentePregunta >> renderButtonLike: aCanvas pregunta: unaPregunta [
+	aCanvas
+		form: [ aCanvas submitButton
+				class: 'btn btn-outline-primary';
+				callback: [ unaPregunta agregarLike: self session usuario ];
+				with: 'Like'.
+			aCanvas space.
+			aCanvas submitButton
+				class: 'btn btn-outline-primary';
+				callback: [ unaPregunta agregarDislike: self session usuario ];
+				with: 'Dislike' ]
+]
+
+{ #category : #'as yet unclassified' }
 ComponentePregunta >> renderContentOn: aCanvas [
+	aCanvas anchor
+		class: 'display-4';
+		callback: [ self call: (ComponentePreguntaDetalle of: self pregunta) ];
+		with: self pregunta titulo.
+	aCanvas heading level4 with: 'Topico: ' , self pregunta topicoNombre.
+	self renderLikeOn: aCanvas.
+	self renderButtonLike: aCanvas pregunta: self pregunta
 ]
 
-{ #category : #accessing }
-ComponentePregunta >> renderPregunta: aCanvas [
-	aCanvas with: pregunta titulo.
-	aCanvas heading level5 with: 'Topico: ' , pregunta getTopicoNombre.
-	aCanvas heading level5
+{ #category : #'as yet unclassified' }
+ComponentePregunta >> renderLikeOn: aCanvas [
+	aCanvas anchor
+		callback: [ self call: (ComponentePerfil of: pregunta usuarioPropietario) ];
+		with: 'Creado por: ' , self pregunta usuarioPropietario nombre.
+	aCanvas heading level4
 		with:
-			'like: ' , pregunta getLikes greaseString , ' Dislike:  '
-				, pregunta getDislikes greaseString.
-	super renderButtonLike: aCanvas pregunta: pregunta
+			'like: ' , self pregunta cantidadLikes greaseString , ' Dislike:  '
+				, pregunta cantidadDislikes greaseString
 ]

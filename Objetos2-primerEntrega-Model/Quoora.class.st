@@ -23,72 +23,70 @@ Quoora class >> soleInstance [
 ]
 
 { #category : #adding }
-Quoora >> agregarFollower: unFollower usuario:unUsuario [ 
-	unUsuario agregarFollower: unFollower .
-]
-
-{ #category : #adding }
-Quoora >> agregarFollowerName: unFollowerName usuario: unUsuario [
-	| us |
-	us := self usuarioQueMacheCon: unFollowerName.
-	us ifNotNil: [	unUsuario agregarFollower: us ] 
-]
-
-{ #category : #adding }
-Quoora >> agregarLikePregunta: unaPregunta usuario: unUsuario estado: unBoolean [
-	
-	unaPregunta agregarLike: unUsuario estado: unBoolean  
-		
-]
-
-{ #category : #adding }
-Quoora >> agregarLikeRespuesta: unaRespuesta usuario:unUsuario [
-	unaRespuesta agregarLike: unUsuario
-]
-
-{ #category : #adding }
 Quoora >> agregarPreguntaConTopico: unosTopicos titulo: unTitulo descripcion: unaDescripcion usuario: unUsuario [
-	| nuevaPregunta |
+	| nuevaPregunta colecTopicos |
+	colecTopicos := self crearColeccionDeTopicos: unosTopicos.
 	nuevaPregunta := Pregunta
 		nuevaPreguntaConUsuario: unUsuario
 		titulo: unTitulo
 		descripcion: unaDescripcion
-		topicos: unosTopicos.
+		topicos: colecTopicos.
 	preguntas add: nuevaPregunta.
-	topicos addAll: unosTopicos.
-	unUsuario agregarPregunta: nuevaPregunta.
+	topicos addAll: colecTopicos.
 	^ nuevaPregunta
 ]
 
 { #category : #adding }
-Quoora >> agregarRespuestaConPregunta: unaPregunta texto:unTexto usuario:unUsuario [
-	
-	unaPregunta agregarRespuestaConTexto: unTexto usuario: unUsuario  
-]
-
-{ #category : #adding }
-Quoora >> agregarTopicoNombre: unNombre descripcion:unaDescripcion [
-	topicos add: (Topico nuevoConNombre: unNombre descripcion: unaDescripcion )
-]
-
-{ #category : #adding }
 Quoora >> agregarTopicoNombre: unNombre descripcion: unaDescripcion usuario: unUsuario [
-	| topi |
-	topi := Topico nuevoConNombre: unNombre descripcion: unaDescripcion . 
-	unUsuario agregarTopicoDeinteres: topi.
-	topicos add: topi
+	"Agrega un topico a la coleccion"
+	| topico |
+	topico := Topico nuevoConNombre: unNombre descripcion: unaDescripcion.
+	topicos add: topico
 ]
 
 { #category : #deleting }
 Quoora >> borrarPregunta: unaPregunta [
-	preguntas remove: unaPregunta 
+	preguntas remove: unaPregunta.
+	
 ]
 
 { #category : #'as yet unclassified' }
 Quoora >> calcularPuntajeDe: unUsuario [
-	^ unUsuario getPreguntas size * 20
-		+ ((self getCantidadDeRespuestasDeUnUsuario: unUsuario) * 50) + (self getPreguntas sumNumbers: [ :pregunta | preguntas getLikesDeUnUsuario: unUsuario ]) +
-		self getPreguntas sumNumbers: [ :pregunta | pregunta getDislikesDeUnUsuario: unUsuario ] 
+	"Calcula el puntaje de un usuario"
+
+	"Ya tengo la pregunta del usuario, "
+
+	^ ((self cantidadDePreguntasDeUnUsuario: unUsuario) * 20)
+		+ ((self cantidadDeRespuestasDeUnUsuario: unUsuario) * 50)
+		+
+			(self preguntas
+				sumNumbers: [ :pregunta | pregunta likesDeUnUsuario: unUsuario ])
+		-
+			(self preguntas
+				sumNumbers: [ :pregunta | pregunta dislikesDeUnUsuario: unUsuario ])
+]
+
+{ #category : #'as yet unclassified' }
+Quoora >> cantidadDePreguntasDeUnUsuario: unUsuario [
+	"Devuelve la cantidad de preguntas que hizo un usuario"
+
+	^ (self preguntas
+		select: [ :pregunta | pregunta esDeUnUsuario: unUsuario ]) size
+]
+
+{ #category : #'as yet unclassified' }
+Quoora >> cantidadDeRespuestasDeUnUsuario: unUsuario [
+	"Devuelve la cantidad de respuestas que hizo un usuario que no sean a preguntas que hizo el mismo"
+
+	^ (self preguntas
+		select: [ :pregunta | pregunta usuarioPropietario ~= unUsuario ])
+		sumNumbers: [ :pregunta | pregunta cantidadDeRespuestasDe: unUsuario ]
+]
+
+{ #category : #'as yet unclassified' }
+Quoora >> crearColeccionDeTopicos: unosTopicos [
+^ unosTopicos
+		collect: [ :topico | Topico nuevoConNombre: topico descripcion: nil ]
 ]
 
 { #category : #adding }
@@ -101,66 +99,75 @@ Quoora >> crearUsuarioNombre: unNombre password: unaPassword [
 	^ unUsuario
 ]
 
-{ #category : #'as yet unclassified' }
-Quoora >> getCantidadDeRespuestasDeUnUsuario: unUsuario [
-	"Devuelve la cantidad de respuestas que hizo un usuario que no sean a preguntas que hizo el mismo"
-	(self getPreguntas collect:[:pregunta | pregunta usuarioPropietario ~= unUsuario ]) sumNumbers: [ :pregunta | pregunta cantidadDeRespuestasDe: unUsuario ]
+{ #category : #initialization }
+Quoora >> initialize [
+	preguntas := OrderedCollection new.
+	topicos := Set new.
+	usuarios := OrderedCollection new
 ]
 
 { #category : #'as yet unclassified' }
-Quoora >> getPreguntas [
+Quoora >> obtenerCincoPreguntasRelevantes: unUsuario [
+	| preguntasRelevantes |
+	preguntasRelevantes := OrderedCollection new.
+	preguntasRelevantes := self preguntasRelevantesDeUnUsuario: unUsuario.
+	preguntasRelevantes size > 5
+		ifFalse: [ ^ preguntasRelevantes ].
+	^ preguntasRelevantes first: 5
+]
+
+{ #category : #'as yet unclassified' }
+Quoora >> preguntas [
 	^ preguntas
 ]
 
 { #category : #accesing }
-Quoora >> getPreguntasConTopico: unTopico [
-	^ preguntas select: [ :each | each getTopico == unTopico ]
+Quoora >> preguntasConTopico: unTopico [
+	"Devuelve las preguntas que contienen un topico determinado"
+
+	^ self preguntas select: [ :each | each contieneTopico: unTopico  ]
 ]
 
 { #category : #accesing }
-Quoora >> getPreguntasDeUnUsuario: unUsuario [
-	| pregunta |
-	pregunta := preguntas
-		select: [ :each | 
-			each usuarioPropietario = unUsuario].
-	^ pregunta
+Quoora >> preguntasDeUnUsuario: unUsuario [
+	"Devuelve todas las preguntas que hizo un usuario."
+	^ preguntas select: [ :each | each esDeUnUsuario: unUsuario ]
 ]
 
 { #category : #accesing }
-Quoora >> getPreguntasRelevantesDeUnUsuario:unUsuario [
-	
+Quoora >> preguntasRelevantesDeUnUsuario: unUsuario [
+	"Se considera relevante una pregunta cuando ésta pertenece a un tópico de interés para el usuario en cuestión 
+	o bien cuando fue realizada por alguno de los usuarios que sigue en la red social"
+
+	| total |
+	total := Set new.
+	total := unUsuario topicosDeInteres
+		flatCollect: [ :topico | self preguntasConTopico: topico ].
+	total
+		addAll:
+			(unUsuario followers
+				flatCollect: [ :follower | self preguntasDeUnUsuario: follower ]).
+	^ total
 ]
 
 { #category : #accesing }
-Quoora >> getRespuestas: unaPregunta [
-	^ unaPregunta getRespuestas
-]
+Quoora >> respuestasDeUnUsuario: unUsuario [
+	"Devuelve todas las respuestas de un usuario"
 
-{ #category : #accesing }
-Quoora >> getRespuestasDeUnUsuario: unUsuario [
-	| respuestas |
-	respuestas := preguntas collect: [ :each | each getRespuestas ].
-	^ respuestas
-		select: [ :each | each usuarioPropietario == unUsuario ]
-]
-
-{ #category : #initialization }
-Quoora >> initialize [
-	preguntas := OrderedCollection new.
-	topicos := OrderedCollection  new.
-	usuarios := OrderedCollection  new
+	^ (preguntas flatCollect: [ :pregunta | pregunta respuestas ])
+		select: [ :respuesta | respuesta esDeUnUsuario: unUsuario ]
 ]
 
 { #category : #adding }
 Quoora >> usuario: unUsuario protegidoPor: unaPassword [
 	^ usuarios
-		detect:
-			[ :each | each nombreUsuario = unUsuario & (each password = unaPassword) ]
+		detect: [ :each | each nombre = unUsuario & (each password = unaPassword) ]
 		ifNone: [ nil ]
 ]
 
 { #category : #deleting }
 Quoora >> usuarioQueMacheCon: aString [
+	"Busca si existe el usuario a la hora del login"
 	^ usuarios
 		select:
 			[ :each | each name asLowercase includesSubstring: aString asLowercase ]

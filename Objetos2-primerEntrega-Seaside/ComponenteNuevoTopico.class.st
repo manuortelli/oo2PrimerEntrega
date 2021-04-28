@@ -3,17 +3,17 @@ Class {
 	#superclass : #SBSComponent,
 	#instVars : [
 		'topico',
-		'descripcion'
+		'descripcion',
+		'topicoConComa'
 	],
 	#category : #'Objetos2-primerEntrega-Seaside'
 }
 
 { #category : #accessing }
 ComponenteNuevoTopico >> cargar [
-	self session quoora
-		agregarTopicoNombre: (self topico splitOn: ',')
-		descripcion: self descripcion
-		usuario: self session usuario.
+	self session usuario
+		agregarTopicoDeinteres: topico
+		unaDescripcion: descripcion.
 	self answer
 ]
 
@@ -32,7 +32,11 @@ ComponenteNuevoTopico >> renderButtonOn: aCanvas [
 	aCanvas submitButton
 		class: 'btn btn-primary';
 		callback: [ self cargar ];
-		with: 'Cargar topico'
+		with: 'Cargar topico'.
+	aCanvas submitButton
+		class: 'btn btn-danger';
+		callback: [ self answer ];
+		with: 'Cancelar'
 ]
 
 { #category : #rendering }
@@ -43,14 +47,10 @@ ComponenteNuevoTopico >> renderContentOn: aCanvas [
 
 { #category : #rendering }
 ComponenteNuevoTopico >> renderInputOn: aCanvas [
-	aCanvas heading
-		level: 3;
-		with: 'Titulo del topico' greaseString.
+	aCanvas heading level3 with: 'Titulo del topico'.
 	aCanvas paragraph: [ aCanvas textInput on: #topico of: self ].
-	aCanvas heading
-		level: 3;
-		with: 'Descripcion' greaseString.
-	aCanvas paragraph: [ aCanvas textInput on: #descripcion  of: self ]
+	aCanvas heading level3 with: 'Descripcion'.
+	aCanvas paragraph: [ aCanvas textInput on: #descripcion of: self ]
 ]
 
 { #category : #accessing }

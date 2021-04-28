@@ -21,12 +21,12 @@ TestUsuarioQuoora >> testAgregarFollower [
 		initializeConNombre: 'Arturo'
 		password: 'UnPichicho'.
 	usuario agregarFollower: usuario2.
-	self assert: usuario getFollowers size equals: 1.
+	self assert: usuario followers size equals: 1.
 	usuario3 := UsuarioQuoora
 		initializeConNombre: 'Nose'
 		password: 'UnPichicho2'.
 	usuario agregarFollower: usuario3.
-	self assert: usuario getFollowers size equals: 2
+	self assert: usuario followers size equals: 2
 ]
 
 { #category : #tests }

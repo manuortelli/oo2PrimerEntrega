@@ -26,45 +26,59 @@ TestPregunta >> testAgregarLike [
 	usuario := UsuarioQuoora
 		initializeConNombre: 'Manuel'
 		password: 'Sabelobelo'.
-	pregunta agregarLike: usuario estado: true.
-	self assert: pregunta getLikes equals: 1.
-	self assert: pregunta getDislikes equals: 0.
-	self assert: pregunta getReacciones size equals: 1.
-	pregunta agregarLike: usuario estado: true.
-	self assert: pregunta getLikes equals: 1.
-	self assert: pregunta getDislikes equals: 0.
-	self assert: pregunta getReacciones size equals: 1.
-	pregunta agregarLike: usuario estado: false.
-	self assert: pregunta getLikes equals: 0.
-	self assert: pregunta getDislikes equals: 1.
-	self assert: pregunta getReacciones size equals: 1.
-	pregunta agregarLike: usuario estado: false.
-	self assert: pregunta getLikes equals: 0.
-	self assert: pregunta getDislikes equals: 1.
-	self assert: pregunta getReacciones size equals: 1
+	pregunta agregarLike: usuario.
+	self assert: pregunta cantidadLikes equals: 1.
+	self assert: pregunta cantidadDislikes equals: 0.
+	self assert: pregunta reacciones size equals: 1.
+	pregunta agregarLike: usuario.
+	self assert: pregunta cantidadLikes equals: 1.
+	self assert: pregunta cantidadDislikes equals: 0.
+	self assert: pregunta reacciones size equals: 1.
+	self assert: (pregunta reacciones at: 1) estado equals: true.
+	pregunta agregarDislike: usuario.
+	self assert: pregunta cantidadLikes equals: 0.
+	self assert: pregunta cantidadDislikes equals: 1.
+	self assert: pregunta reacciones size equals: 1.
+	pregunta agregarDislike: usuario.
+	self assert: pregunta cantidadLikes equals: 0.
+	self assert: pregunta cantidadDislikes equals: 1.
+	self assert: pregunta reacciones size equals: 1.
+	self assert: (pregunta reacciones at: 1) estado equals: false
 ]
 
 { #category : #tests }
-TestPregunta >> testAgregarRespuestaConTexto: unTexto unUsuario: usuario1 [
+TestPregunta >> testAgregarRespuestaConTexto [
+	| usuario |
+	usuario := UsuarioQuoora
+		initializeConNombre: 'Manuel'
+		password: 'Sabelobelo'.
 	pregunta
 		agregarRespuestaConTexto: 'La respuesta esperada por todos'
-			usuario: 'Carlitos23';
+			usuario: usuario;
 		agregarRespuestaConTexto: 'Esa respuesta no era la que esperaba'
-			usuario: 'Poxy1'.
-	self assert: pregunta getRespuestas size equals: 2.
-	pregunta agregarRespuestaConTexto: 'La verdad que podrias esforzarte mas en un respuesta clara' usuario: 'Carlitos23'.
-	self deny: pregunta getRespuestas size equals: 2.
+			usuario: usuario.
+	self assert: pregunta respuestas size equals: 2.
+	pregunta
+		agregarRespuestaConTexto: 'La verdad que podrias esforzarte mas en un respuesta clara'
+		usuario: usuario.
+	self deny: pregunta respuestas size equals: 2.
+	self assert: pregunta respuestas size equals: 3.
 ]
 
 { #category : #tests }
-TestPregunta >> testAgregarTopico [
-	pregunta
-		agregarTopico: 'Azar';
-		agregarTopico: 'Juegos';
-		agregarTopico: 'Motos'.
-	self assert: pregunta getTopico size equals: 4.
-	pregunta agregarTopico: 'Gatos'.
-	self deny: pregunta getTopico size equals: 3
+TestPregunta >> testDislikesDeUnUsuario [
+	| usuario |
+	usuario := UsuarioQuoora
+		initializeConNombre: 'Manuel'
+		password: 'Sabelobelo'.
+	pregunta agregarDislike: usuario.
+	self assert: pregunta reacciones size equals: 1.
+	self assert: (pregunta dislikesDeUnUsuario: usuario) equals: 1.
+	self assert: (pregunta likesDeUnUsuario: usuario) equals: 0.
+	pregunta agregarLike: usuario.
+	self assert: pregunta reacciones size equals: 1.
+	self assert: (pregunta dislikesDeUnUsuario: usuario) equals: 0.
+	self assert: (pregunta likesDeUnUsuario: usuario) equals: 1
 ]
 
 { #category : #tests }
@@ -73,6 +87,24 @@ TestPregunta >> testExisteInteraccion [
 	usuario := UsuarioQuoora
 		initializeConNombre: 'Manuel'
 		password: 'Sabelobelo'.
-	pregunta agregarLike: usuario estado: true.
-	self assert: (pregunta existeInteraccion: usuario) equals:true.
+	pregunta agregarLike: usuario.
+	self assert: (pregunta existeInteraccion: usuario) equals: true
+]
+
+{ #category : #tests }
+TestPregunta >> testlikesDeUnUsuario [
+	| usuario |
+	usuario := UsuarioQuoora
+		initializeConNombre: 'Manuel'
+		password: 'Sabelobelo'.
+	pregunta agregarLike: usuario.
+	self assert: pregunta reacciones size equals: 1.
+	self assert: (pregunta likesDeUnUsuario: usuario) equals: 1.
+	self assert: (pregunta dislikesDeUnUsuario: usuario) equals: 0.
+	self assert: pregunta cantidadLikes equals:1.
+	pregunta agregarDislike: usuario.
+	self assert: pregunta reacciones size equals: 1.
+	self assert: (pregunta likesDeUnUsuario: usuario) equals: 0.
+	self assert: pregunta cantidadLikes equals:0.
+	self assert: pregunta cantidadDislikes equals:1.
 ]

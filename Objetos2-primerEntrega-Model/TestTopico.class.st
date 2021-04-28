@@ -17,5 +17,5 @@ TestTopico >> setUp [
 
 { #category : #'as yet unclassified' }
 TestTopico >> testGetTopico [
-	self assert: topico getNombre equals: 'nuevo'
+	self assert: topico nombre equals: 'nuevo'
 ]

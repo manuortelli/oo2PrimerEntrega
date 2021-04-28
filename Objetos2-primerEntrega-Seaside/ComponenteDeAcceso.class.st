@@ -24,10 +24,9 @@ ComponenteDeAcceso >> password: aPassword [
 ]
 
 { #category : #accessing }
-ComponenteDeAcceso >> proceedWith: aUser quoora: unQuoora [
-	self session quoora: unQuoora.
+ComponenteDeAcceso >> procedeCon: aUser quoora: unQuoora [
 	self session usuario: aUser.
-	self call: ComponentePrincipal new
+	self call: (ComponentePrincipal of: unQuoora)
 ]
 
 { #category : #accessing }
@@ -45,17 +44,14 @@ ComponenteDeAcceso >> renderContentOn: aCanvas [
 
 { #category : #accessing }
 ComponenteDeAcceso >> renderInputElementsOn: aCanvas [
-	 aCanvas displayHeading class: 'text-primary';
+	aCanvas displayHeading
+		class: 'text-primary';
 		level: 4;
-		with: '  Cuoora' greaseString.
+		with: '  Cuoora'.
 	aCanvas horizontalRule.
-	aCanvas heading
-		level: 4;
-		with: 'Usuario ' greaseString.
+	aCanvas heading level4 with: 'Usuario '.
 	aCanvas paragraph: [ aCanvas textInput on: #usuario of: self ].
-	aCanvas heading
-		level: 4;
-		with: 'Password ' greaseString.
+	aCanvas heading level4 with: 'Password ' .
 	aCanvas paragraph: [ aCanvas passwordInput on: #password of: self ]
 ]
 

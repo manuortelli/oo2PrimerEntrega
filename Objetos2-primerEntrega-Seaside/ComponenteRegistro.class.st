@@ -7,27 +7,24 @@ Class {
 { #category : #accessing }
 ComponenteRegistro >> registrarseYLoguearse [
 	| elUsuario |
+	(usuario isEmpty or:  password  isEmpty) ifTrue:   [ ^ 'self' ].
 	elUsuario := self model
 		crearUsuarioNombre: usuario
 		password: password.
-	self proceedWith: elUsuario quoora: self model
+	self procedeCon: elUsuario quoora: self model
 ]
 
 { #category : #accessing }
 ComponenteRegistro >> renderButtonsOn: aCanvas [
-	self renderSignUpButtonOn: aCanvas
-]
 
-{ #category : #accessing }
-ComponenteRegistro >> renderInputElementsOn: aCanvas [
-	super renderInputElementsOn: aCanvas
-]
-
-{ #category : #accessing }
-ComponenteRegistro >> renderSignUpButtonOn: aCanvas [
 	aCanvas outlineButton
 		bePrimary;
 		callback: [ self registrarseYLoguearse ];
 		with: 'Registrarse'.
 	aCanvas space
+]
+
+{ #category : #accessing }
+ComponenteRegistro >> renderInputElementsOn: aCanvas [
+	super renderInputElementsOn: aCanvas
 ]

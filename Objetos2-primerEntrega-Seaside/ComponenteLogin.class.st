@@ -6,13 +6,13 @@ Class {
 
 { #category : #'private protocol' }
 ComponenteLogin >> login [
-	| usuarioss ok |
-	usuarioss := self model
+	| usuarioLogueado  ok |
+	usuarioLogueado := self model
 		usuario: self usuario
 		protegidoPor: self password.
-	usuarioss
-		ifNotNil: [ :it | 
-			self proceedWith: it quoora: self model.
+	usuarioLogueado
+		ifNotNil: [ :user  | 
+			self procedeCon: user  quoora: self model.
 			ok := true ];
 		ifNil: [ ok := false ].
 	usuario := nil.
@@ -21,21 +21,8 @@ ComponenteLogin >> login [
 ]
 
 { #category : #'private protocol' }
-ComponenteLogin >> login: aCanvas [
-	| usuarioss |
-	usuarioss := self model
-		usuario: self usuario
-		protegidoPor: self password.
-	usuarioss
-		ifNil: [aCanvas alert beSecondary with: 'No hay usuarios seguidos' ];
-		ifNotNil: [ :it | self proceedWith: it quoora: self model ].
-	usuario := nil.
-	password := nil
-]
-
-{ #category : #'private protocol' }
 ComponenteLogin >> registrarNuevoUsuario [
-	self call: ComponenteRegistro new.
+	self call: ComponenteRegistro new
 ]
 
 { #category : #'private protocol' }
@@ -56,12 +43,11 @@ ComponenteLogin >> renderSignInButtonOn: aCanvas [
 
 { #category : #rendering }
 ComponenteLogin >> renderSignUpButtonOn: aCanvas [
-	aCanvas heading
-		level:4;
+	aCanvas heading level4
 		with: [ aCanvas space.
 			aCanvas small textMuted with: '¿Desea Registrarse?' ].
 	aCanvas outlineButton
 		bePrimary;
-		callback: [ self registrarNuevoUsuario ];
+		callback: [ self registrarNuevoUsuario];
 		with: 'Registrarse'
 ]
