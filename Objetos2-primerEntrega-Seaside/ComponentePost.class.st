@@ -2,16 +2,18 @@ Class {
 	#name : #ComponentePost,
 	#superclass : #SBSComponent,
 	#instVars : [
-		'pregunta'
+		'pregunta',
+		'parent'
 	],
 	#category : #'Objetos2-primerEntrega-Seaside'
 }
 
 { #category : #'instance creation' }
-ComponentePost class >> of: unaPregunta [
-	|instancia|
+ComponentePost class >> of: unaPregunta and: unParent [
+	| instancia |
 	instancia := self new.
 	instancia inicializarCon: unaPregunta .
+	instancia parent: unParent.
 	^ instancia
 ]
 
@@ -22,7 +24,17 @@ ComponentePost >> inicializarCon: unaPregunta [
 
 { #category : #'as yet unclassified' }
 ComponentePost >> mostrarPerfil [
-	self call: (ComponentePerfil new)
+	self parent call: (ComponentePerfil of: self pregunta)
+]
+
+{ #category : #accessing }
+ComponentePost >> parent [
+	^parent 
+]
+
+{ #category : #accessing }
+ComponentePost >> parent: unParent [
+	parent:= unParent
 ]
 
 { #category : #accessing }
@@ -71,15 +83,14 @@ ComponentePost >> renderPropietarioOn: aCanvas [
 	aCanvas text: 'Creado por:  '.
 	aCanvas anchor
 		callback: [ self mostrarPerfil ];
-		with: self pregunta usuarioPropietario nombre.
-
+		with: self pregunta usuarioPropietario nombre
 ]
 
 { #category : #rendering }
 ComponentePost >> renderTituloOn: aCanvas [
 	aCanvas anchor
 		class: 'display-4';
-		callback: [ self call: ComponentePreguntaDetalle new. ];
+		callback: [ self parent call: (ComponentePreguntaDetalle of: pregunta) ];
 		with: self pregunta titulo.
 	aCanvas heading level4 with: 'Topico: ' , self pregunta topicoNombre
 ]

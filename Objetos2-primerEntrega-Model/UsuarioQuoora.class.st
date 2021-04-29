@@ -20,8 +20,7 @@ UsuarioQuoora class >> initializeConNombre: unNombre password: unaPassword [
 UsuarioQuoora >> agregarFollower: unFollower [
 	"agrega un follower a la coleccion de followers del usuario logueado"
 
-	"( followers detect: [ :follower | followers = unFollower ])
-		ifFalse: "(followers add: unFollower)
+	followers add: unFollower
 ]
 
 { #category : #adding }

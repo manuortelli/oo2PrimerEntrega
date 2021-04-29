@@ -1,6 +1,9 @@
 Class {
 	#name : #ComponentePreguntaDetalle,
-	#superclass : #ComponentePost,
+	#superclass : #SBSComponent,
+	#instVars : [
+		'pregunta'
+	],
 	#category : #'Objetos2-primerEntrega-Seaside'
 }
 
@@ -12,10 +15,29 @@ ComponentePreguntaDetalle class >> of: unaPregunta [
 	^ instancia
 ]
 
+{ #category : #'instance creation' }
+ComponentePreguntaDetalle class >> of: unaPregunta and: parent [ 
+	| instancia |
+	instancia := self new.
+	instancia inicializarCon: unaPregunta.
+	^ instancia
+]
+
+{ #category : #accessing }
+ComponentePreguntaDetalle >> inicializarCon: unaPregunta [
+	pregunta := unaPregunta
+]
+
+{ #category : #accessing }
+ComponentePreguntaDetalle >> pregunta [
+	^pregunta
+]
+
 { #category : #rendering }
 ComponentePreguntaDetalle >> renderContentOn: aCanvas [
+	self call:  (ComponentePerfil of: self pregunta ) .
 	self renderDetalle: aCanvas.
-	self renderButtonLike: aCanvas pregunta: pregunta.
+	
 	self renderRespuesta: aCanvas pregunta: pregunta
 ]
 

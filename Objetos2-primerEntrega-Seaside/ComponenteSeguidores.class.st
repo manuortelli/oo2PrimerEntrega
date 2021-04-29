@@ -14,8 +14,8 @@ ComponenteSeguidores >> mostrarSeguidores: aCanvas [
 		ifEmpty: [ aCanvas alert beSecondary with: 'No hay usuarios seguidos'.
 			aCanvas break ].
 	aCanvas
-		unorderedList: [ self session usuario followers nombre]
-			"	do: [ :followers | followers do: [ :follower | aCanvas listItem: follower nombre ] ] ]"
+		unorderedList: [ self session usuario followers
+				do: [ :follower | aCanvas listItem: (follower  nombre) ] ]
 ]
 
 { #category : #'as yet unclassified' }

@@ -31,10 +31,10 @@ ComponenteInicial >> agregarFollower: aCanvas [
 
 { #category : #'as yet unclassified' }
 ComponenteInicial >> cerrar [
-	"self call: ComponenteLogin new	"
+	self call: ComponenteLogin new	
 
-	self session unregister.
-	self requestContext redirectTo: (self call: (ComponenteLogin new))
+	"self session unregister.
+	self requestContext redirectTo: (self call: ComponenteLogin new)"
 ]
 
 { #category : #'as yet unclassified' }
@@ -48,7 +48,7 @@ ComponenteInicial >> mostrar: aCanvas preguntas: unasPreguntas [
 		with: [ unasPreguntas
 				do: [ :pregunta | 
 					aCanvas
-						listItem: [ aCanvas render: (ComponentePost of: pregunta).
+						listItem: [ aCanvas render: (ComponentePost of: pregunta and: self).
 							aCanvas horizontalRule ].
 					aCanvas horizontalRule ] ]
 ]
