@@ -1,23 +1,16 @@
 Class {
 	#name : #ComponentePerfil,
-	#superclass : #SBSComponent,
+	#superclass : #ComponentePost,
 	#instVars : [
-		'usuario'
+		'preguntas'
 	],
 	#category : #'Objetos2-primerEntrega-Seaside'
 }
 
-{ #category : #'instance creation' }
-ComponentePerfil class >> of: unUsuario [
-	| perfil |
-	perfil := self new.
-	perfil inicializarCon: unUsuario.
-	^perfil
-]
-
 { #category : #'as yet unclassified' }
-ComponentePerfil >> inicializarCon: unUsuario [
-	usuario := unUsuario 
+ComponentePerfil >> inicialize [
+	preguntas := (Quoora soleInstance ) preguntasRelevantesDeUnUsuario: (self pregunta usuarioPropietario )
+	
 ]
 
 { #category : #rendering }
@@ -26,21 +19,26 @@ ComponentePerfil >> mostrar: aCanvas preguntas: unasPreguntas [
 		with: [ unasPreguntas
 				do: [ :pregunta | 
 					aCanvas
-						listItem: [ aCanvas render: (ComponentePregunta of: pregunta) ].
+						listItem: [ aCanvas render: (ComponentePost of: pregunta) ].
 					aCanvas horizontalRule ] ]
+]
+
+{ #category : #accessing }
+ComponentePerfil >> preguntas [
+	^ preguntas
 ]
 
 { #category : #'as yet unclassified' }
 ComponentePerfil >> rendenContentOn: aCanvas [
-	aCanvas heading level3 with: 'Bienvenido al perfil de:', usuario  greaseString .
+	aCanvas heading level3
+		with: 'Bienvenido al perfil de:' , (preguntas
+		at: 1 usuarioPropietario).
 	self renderPostsOn: aCanvas
 ]
 
 { #category : #rendering }
 ComponentePerfil >> renderPostsOn: aCanvas [
-	| preguntas |
-	preguntas := self session quoora
-		preguntasRelevantesDeUnUsuario: usuario.
+self
 	preguntas
 		ifEmpty: [ aCanvas alert beSecondary with: 'No hay preguntas de interes'.
 			aCanvas break ].

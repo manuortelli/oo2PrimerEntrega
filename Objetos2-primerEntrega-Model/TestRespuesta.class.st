@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'respuesta'
 	],
-	#category : #'Objetos2-primerEntrega-Model-Dominio'
+	#category : #'Objetos2-primerEntrega-Model-Test'
 }
 
 { #category : #running }

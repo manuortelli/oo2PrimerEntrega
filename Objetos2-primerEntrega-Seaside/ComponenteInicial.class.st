@@ -1,11 +1,5 @@
-"
-""(WAAdmin register: ComponenteLogin  asApplicationAt: 'cuoora')
-	sessionClass: SesionConUsuario ;
-	addLibrary: JQDeploymentLibrary;
-	addLibrary: SBSDevelopmentLibrary""
-"
 Class {
-	#name : #ComponentePrincipal,
+	#name : #ComponenteInicial,
 	#superclass : #SBSComponent,
 	#instVars : [
 		'quoora'
@@ -14,7 +8,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-ComponentePrincipal class >> of: unQuoora [ 	
+ComponenteInicial class >> of: unQuoora [ 	
 	| instancia |
 	instancia:= self new.
 	instancia inicializarCon: unQuoora.
@@ -22,12 +16,12 @@ ComponentePrincipal class >> of: unQuoora [
 ]
 
 { #category : #rendering }
-ComponentePrincipal >> agregar [
+ComponenteInicial >> agregar [
 	self call:  ComponenteSeguidores new
 ]
 
 { #category : #rendering }
-ComponentePrincipal >> agregarFollower: aCanvas [
+ComponenteInicial >> agregarFollower: aCanvas [
 	aCanvas
 		form: [ aCanvas submitButton
 				class: 'tn btn-success';
@@ -36,33 +30,36 @@ ComponentePrincipal >> agregarFollower: aCanvas [
 ]
 
 { #category : #'as yet unclassified' }
-ComponentePrincipal >> cerrar [
+ComponenteInicial >> cerrar [
+	"self call: ComponenteLogin new	"
+
 	self session unregister.
-	self requestContext redirectTo: (self call:ComponenteLogin new)
+	self requestContext redirectTo: (self call: (ComponenteLogin new))
 ]
 
 { #category : #'as yet unclassified' }
-ComponentePrincipal >> inicializarCon: unQuoora [.
+ComponenteInicial >> inicializarCon: unQuoora [.
 	quoora := unQuoora 
 ]
 
 { #category : #rendering }
-ComponentePrincipal >> mostrar: aCanvas preguntas: unasPreguntas [
+ComponenteInicial >> mostrar: aCanvas preguntas: unasPreguntas [
 	aCanvas unorderedList
 		with: [ unasPreguntas
 				do: [ :pregunta | 
 					aCanvas
-						listItem: [ aCanvas render: (ComponentePregunta of: pregunta) ].
+						listItem: [ aCanvas render: (ComponentePost of: pregunta).
+							aCanvas horizontalRule ].
 					aCanvas horizontalRule ] ]
 ]
 
 { #category : #'as yet unclassified' }
-ComponentePrincipal >> quoora [
+ComponenteInicial >> quoora [
 	^quoora
 ]
 
 { #category : #rendering }
-ComponentePrincipal >> renderButtonOn: aCanvas [
+ComponenteInicial >> renderButtonOn: aCanvas [
 	aCanvas
 		form: [ aCanvas submitButton
 				class: 'tn btn-outline-success';
@@ -76,7 +73,7 @@ ComponentePrincipal >> renderButtonOn: aCanvas [
 ]
 
 { #category : #rendering }
-ComponentePrincipal >> renderContentOn: aCanvas [
+ComponenteInicial >> renderContentOn: aCanvas [
 	aCanvas heading level3
 		with: 'Bienvenido ' , self session usuario nombre greaseString.
 	self renderPostsOn: aCanvas.
@@ -87,7 +84,7 @@ ComponentePrincipal >> renderContentOn: aCanvas [
 ]
 
 { #category : #rendering }
-ComponentePrincipal >> renderLogoutButtonOn: aCanvas [
+ComponenteInicial >> renderLogoutButtonOn: aCanvas [
 	aCanvas
 		form: [ aCanvas submitButton
 				class: 'btn btn-danger btn-lg';
@@ -96,7 +93,7 @@ ComponentePrincipal >> renderLogoutButtonOn: aCanvas [
 ]
 
 { #category : #rendering }
-ComponentePrincipal >> renderPostsOn: aCanvas [
+ComponenteInicial >> renderPostsOn: aCanvas [
 	| preguntas |
 	preguntas := self quoora
 		preguntasRelevantesDeUnUsuario: self session usuario.

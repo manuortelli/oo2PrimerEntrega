@@ -26,7 +26,7 @@ ComponenteDeAcceso >> password: aPassword [
 { #category : #accessing }
 ComponenteDeAcceso >> procedeCon: aUser quoora: unQuoora [
 	self session usuario: aUser.
-	self call: (ComponentePrincipal of: unQuoora)
+	self call: (ComponenteInicial of: unQuoora)
 ]
 
 { #category : #accessing }
