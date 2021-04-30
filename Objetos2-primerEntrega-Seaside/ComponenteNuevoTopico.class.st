@@ -11,6 +11,7 @@ Class {
 
 { #category : #accessing }
 ComponenteNuevoTopico >> cargar [
+(self topico isEmpty ) ifTrue: [ ^ self ]. 
 	self session usuario
 		agregarTopicoDeinteres: topico
 		unaDescripcion: descripcion.

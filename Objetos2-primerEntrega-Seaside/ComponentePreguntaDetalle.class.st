@@ -9,10 +9,11 @@ Class {
 }
 
 { #category : #'instance creation' }
-ComponentePreguntaDetalle class >> of: unaPregunta [
+ComponentePreguntaDetalle class >> of: unaPregunta and: unParent [
 	| instancia |
 	instancia := self new.
 	instancia inicializarCon: unaPregunta.
+	instancia parent: unParent.
 	^ instancia
 ]
 
@@ -41,8 +42,8 @@ ComponentePreguntaDetalle >> renderContentOn: aCanvas [
 	self renderDetalle: aCanvas.
 	self renderRespuesta: aCanvas pregunta: pregunta.
 	aCanvas render: (ComponenteFormularioRespuesta of: pregunta).
-	self renderLogoutButtonOn: aCanvas.
-	self volverAHome:aCanvas
+	self parent renderLogoutButtonOn: aCanvas.
+	self parent renderVolverOn: aCanvas.
 ]
 
 { #category : #rendering }
