@@ -40,7 +40,9 @@ Pregunta >> cantidadDeRespuestasDe: unUsuario [
 { #category : #'as yet unclassified' }
 Pregunta >> contieneTopico: unTopico [
 	"Consulta si unTopico , el cual es el nombre del topico es igual algun nombre de los topicos de la pregunta."
-	^ self topicos anySatisfy: [ :topico | topico = unTopico ]
+
+	^ self topicos
+		anySatisfy: [ :topico | topico = unTopico ]
 ]
 
 { #category : #accessing }

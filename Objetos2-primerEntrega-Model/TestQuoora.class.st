@@ -37,7 +37,7 @@ TestQuoora >> testAgregarFollower [
 
 { #category : #tests }
 TestQuoora >> testAgregarPreguntaYLike [
-	| topicos topico usuario usuario2 pregunta |
+| topicos topico usuario usuario2 pregunta |
 	usuario := UsuarioQuoora
 		initializeConNombre: 'Manuel'
 		password: 'Sabelobelo'.
