@@ -78,6 +78,7 @@ ComponenteInicial >> renderContentOn: aCanvas [
 { #category : #rendering }
 ComponenteInicial >> renderPostsOn: aCanvas [
 	| preguntas |
+	self quoora inspect.
 	preguntas := self quoora
 		preguntasRelevantesDeUnUsuario: self session usuario.
 	preguntas

@@ -24,13 +24,13 @@ Quoora class >> soleInstance [
 
 { #category : #adding }
 Quoora >> agregarPreguntaConTopico: unosTopicos titulo: unTitulo descripcion: unaDescripcion usuario: unUsuario [
-	| nuevaPregunta |
-	
+	| nuevaPregunta colecTopicos |
+	colecTopicos := self crearColeccionDeTopicos: unosTopicos.
 	nuevaPregunta := Pregunta
 		nuevaPreguntaConUsuario: unUsuario
 		titulo: unTitulo
 		descripcion: unaDescripcion
-		topicos: unosTopicos.
+		topicos: colecTopicos .
 	preguntas add: nuevaPregunta.
 	topicos addAll: unosTopicos.
 	^ nuevaPregunta
@@ -82,6 +82,13 @@ Quoora >> cantidadDeRespuestasDeUnUsuario: unUsuario [
 	^ (self preguntas
 		select: [ :pregunta | pregunta usuarioPropietario ~= unUsuario ])
 		sumNumbers: [ :pregunta | pregunta cantidadDeRespuestasDe: unUsuario ]
+]
+
+{ #category : #'as yet unclassified' }
+Quoora >> crearColeccionDeTopicos: unosTopicos [
+	^ unosTopicos
+		collect: [ :topico | Topico nuevoConNombre: topico descripcion: nil ]
+	
 ]
 
 { #category : #adding }
