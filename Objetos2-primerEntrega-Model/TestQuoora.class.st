@@ -37,16 +37,16 @@ TestQuoora >> testAgregarFollower [
 
 { #category : #tests }
 TestQuoora >> testAgregarPreguntaYLike [
-| topicos topico usuario usuario2 pregunta |
+	| topicos topico usuario usuario2 pregunta |
 	usuario := UsuarioQuoora
 		initializeConNombre: 'Manuel'
 		password: 'Sabelobelo'.
 	quoora crearUsuarioNombre: 'Manuel' password: 'Sabelobelo'.
 	topicos := OrderedCollection new.
+	topicos add: 'topico1'.
 	topico := Topico
 		nuevoConNombre: 'topico1'
 		descripcion: 'Todo sobre el deporte'.
-	topicos add: topico.
 	pregunta := quoora
 		agregarPreguntaConTopico: topicos
 		titulo: 'Pregunta?'
@@ -88,11 +88,15 @@ TestQuoora >> testAgregarRespuesta [
 
 { #category : #tests }
 TestQuoora >> testBorrarPregunta [
-	| pregunta topico1 topico2 usuario topicos  |
+	| pregunta topico1 topico2 usuario topicos |
 	topico1 := Topico nuevoConNombre: 'Skate' descripcion: 'blabla'.
-	topico2 := Topico nuevoConNombre: 'Futbol' descripcion: 'El rey del futbol'.
+	topico2 := Topico
+		nuevoConNombre: 'Futbol'
+		descripcion: 'El rey del futbol'.
 	topicos := OrderedCollection new.
-	topicos add: topico1; add:topico2.
+	topicos
+		add: 'Skate';
+		add: 'Futbol'.
 	usuario := UsuarioQuoora
 		initializeConNombre: 'Manuel'
 		password: 'blabla'.
@@ -101,17 +105,21 @@ TestQuoora >> testBorrarPregunta [
 		titulo: 'unTitulo'
 		descripcion: 'blabla'
 		usuario: usuario.
-	self assert: (quoora preguntasConTopico: topico1) size equals: 1.
+	self
+		assert: (quoora preguntasConTopico: topico1) size
+		equals: 1.
 	quoora borrarPregunta: pregunta.
 	self deny: (quoora preguntasConTopico: topico1) size equals: 1
 ]
 
 { #category : #tests }
 TestQuoora >> testCalcularPuntajeDeUsuario [
-	| usuario pregunta |
+	| usuario pregunta topicos |
+	topicos := OrderedCollection new.
 	usuario := quoora crearUsuarioNombre: 'Manuel' password: 'queseyo'.
+	topicos add: 'unostopicos'.
 	pregunta := quoora
-		agregarPreguntaConTopico: 'unostopicos'
+		agregarPreguntaConTopico: topicos
 		titulo: 'UnTitulo'
 		descripcion: 'UnaDescripcion'
 		usuario: usuario.
@@ -133,7 +141,7 @@ TestQuoora >> testCrearUsuario [
 	topico := Topico
 		nuevoConNombre: 'Deporte'
 		descripcion: 'Todo sobre el deporte'.
-	topicos add: topico.
+	topicos add: 'Deporte'.
 	quoora
 		agregarPreguntaConTopico: topicos
 		titulo: 'Pregunta?'
@@ -145,19 +153,12 @@ TestQuoora >> testCrearUsuario [
 
 { #category : #tests }
 TestQuoora >> testObtenerCincoPreguntasRelevantes [
-	| usuario1 topicos topico1 topico2 preguntaPrueba setDePreguntas|
+	| usuario1 topicos preguntaPrueba setDePreguntas |
 	topicos := OrderedCollection new.
 	setDePreguntas := Set new.
 	usuario1 := quoora crearUsuarioNombre: 'arturo' password: '123'.
-	topico2 := Topico
-		nuevoConNombre: 'Motos'
-		descripcion: 'La ax100 una maquina'.
-	topico1 := Topico
-		nuevoConNombre: 'Simpson'
-		descripcion: 'La descripcion de la tele'.
-	topicos
-		add: topico1;
-		add: topico2.
+	topicos add: 'Motos'.
+	topicos add: 'Simpson'.
 	preguntaPrueba := quoora
 		agregarPreguntaConTopico: topicos
 		titulo: 'La pregunta del los simpson?'
@@ -171,7 +172,8 @@ TestQuoora >> testObtenerCincoPreguntasRelevantes [
 		assert: (quoora obtenerCincoPreguntasRelevantes: usuario1) size
 		equals: 1.
 	self
-		assert: (quoora obtenerCincoPreguntasRelevantes: usuario1) equals: setDePreguntas .
+		assert: (quoora obtenerCincoPreguntasRelevantes: usuario1)
+		equals: setDePreguntas.
 	quoora
 		agregarPreguntaConTopico: topicos
 		titulo: 'Estan buenas las 2 tiempos?'
