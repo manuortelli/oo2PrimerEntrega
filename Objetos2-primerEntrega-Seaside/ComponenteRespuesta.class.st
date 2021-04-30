@@ -23,6 +23,7 @@ ComponenteRespuesta >> inicialializarCon: unaRespuesta [
 
 { #category : #rendering }
 ComponenteRespuesta >> mostrarLikeOn: aCanvas [
+"Visualiza los likes y dislikes y sus respectivos botones de las respuesta"
 	aCanvas heading level4
 		with:
 			'like: ' , self respuesta cantidadLikes greaseString , '   Dislike:  '
@@ -39,8 +40,9 @@ ComponenteRespuesta >> mostrarLikeOn: aCanvas [
 				with: 'Dislike' ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #rendering }
 ComponenteRespuesta >> mostrarseOn: aCanvas [
+"Se muestra toda al respuesta"
 	aCanvas
 		text: 'Respuesta de ' , self respuesta usuarioPropietario nombre.
 	aCanvas heading level5 with: self respuesta texto.
@@ -49,8 +51,8 @@ ComponenteRespuesta >> mostrarseOn: aCanvas [
 
 { #category : #rendering }
 ComponenteRespuesta >> renderContentOn: aCanvas [
-	self mostrarseOn: aCanvas.
-	
+"Se armo este nuevo componente ya que respuesta y pregunta se ven de distintas maneras"
+	self mostrarseOn: aCanvas
 ]
 
 { #category : #rendering }

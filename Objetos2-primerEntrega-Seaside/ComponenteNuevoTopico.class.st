@@ -11,7 +11,9 @@ Class {
 
 { #category : #accessing }
 ComponenteNuevoTopico >> cargar [
-(self topico isEmpty ) ifTrue: [ ^ self ]. 
+"Si ingreso un topico llama al metodo que agrega el topico y la descripcion"
+	self topico isEmpty
+		ifTrue: [ ^ self ].
 	self session usuario
 		agregarTopicoDeinteres: topico
 		unaDescripcion: descripcion.
@@ -30,6 +32,7 @@ ComponenteNuevoTopico >> descripcion: unaDescripcion [
 
 { #category : #accessing }
 ComponenteNuevoTopico >> renderButtonOn: aCanvas [
+"Muestra los botones que realizan la accion de cargar topico y cancelar"
 	aCanvas submitButton
 		class: 'btn btn-primary';
 		callback: [ self cargar ];
@@ -48,6 +51,7 @@ ComponenteNuevoTopico >> renderContentOn: aCanvas [
 
 { #category : #rendering }
 ComponenteNuevoTopico >> renderInputOn: aCanvas [
+"Muestra el formulario para el nuevo componente"
 	aCanvas heading level3 with: 'Titulo del topico'.
 	aCanvas paragraph: [ aCanvas textInput on: #topico of: self ].
 	aCanvas heading level3 with: 'Descripcion'.

@@ -81,6 +81,8 @@ ComponentePost >> renderContentOn: aCanvas [
 
 { #category : #'as yet unclassified' }
 ComponentePost >> renderLikeOn: aCanvas [
+	"Visualiza la cantidad de like y dislike que tiene el post"
+
 	aCanvas heading level4
 		with:
 			'like: ' , self pregunta cantidadLikes greaseString , '   Dislike:  '
@@ -89,19 +91,20 @@ ComponentePost >> renderLikeOn: aCanvas [
 
 { #category : #'as yet unclassified' }
 ComponentePost >> renderPropietarioOn: aCanvas [
+"Visualiza al usuario propietario"
 	aCanvas space.
 	aCanvas text: 'Creado por:  '.
 	aCanvas anchor
 		callback: [ self mostrarPerfil ];
 		with: self pregunta usuarioPropietario nombre
-
 ]
 
 { #category : #rendering }
 ComponentePost >> renderTituloOn: aCanvas [
+"Visuliza el titulo de el post"
 	aCanvas anchor
 		class: 'display-4';
 		callback: [ self parent isNotNil
-				ifTrue: [self parent call: (ComponentePreguntaDetalle of: pregunta and: self)] ];
+				ifTrue: [ self parent call: (ComponentePreguntaDetalle of: pregunta and: self) ] ];
 		with: self pregunta titulo
 ]

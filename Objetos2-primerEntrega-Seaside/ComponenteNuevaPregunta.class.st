@@ -34,7 +34,9 @@ ComponenteNuevaPregunta >> inicializarCon: unQuoora [
 
 { #category : #accessing }
 ComponenteNuevaPregunta >> post [
-	(self titulo isEmpty or: self topico isEmpty ) ifTrue: [ ^ self  ].
+"Si ingreso un titulo y un topico llama a el metodo que los agrega"
+	(self titulo isEmpty or: self topico isEmpty)
+		ifTrue: [ ^ self ].
 	self quoora
 		agregarPreguntaConTopico: (self topico splitOn: ',')
 		titulo: self titulo
@@ -50,6 +52,7 @@ ComponenteNuevaPregunta >> quoora [
 
 { #category : #accessing }
 ComponenteNuevaPregunta >> renderButtonOn: aCanvas [
+"Muestra los botones para agrear pregunta, cancelar, y salir"
 	aCanvas submitButton
 		class: 'btn btn-outline-primary';
 		callback: [ self post ];
@@ -75,9 +78,10 @@ ComponenteNuevaPregunta >> renderContentOn: aCanvas [
 
 { #category : #accessing }
 ComponenteNuevaPregunta >> renderInputElementon: aCanvas [
-	aCanvas heading	 level5 with: 'Titulo'.
+"Visualiza el formulario para la carga de la nueva pregunta"
+	aCanvas heading level5 with: 'Titulo'.
 	aCanvas paragraph: [ aCanvas textInput on: #titulo of: self ].
-	aCanvas heading level5	with: 'Topico '.
+	aCanvas heading level5 with: 'Topico '.
 	aCanvas paragraph: [ aCanvas textInput on: #topico of: self ].
 	aCanvas heading level5 with: 'Descripcion '.
 	aCanvas paragraph: [ aCanvas textArea on: #descripcion of: self ]
