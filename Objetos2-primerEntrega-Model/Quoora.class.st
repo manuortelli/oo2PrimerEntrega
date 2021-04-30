@@ -24,20 +24,22 @@ Quoora class >> soleInstance [
 
 { #category : #adding }
 Quoora >> agregarPreguntaConTopico: unosTopicos titulo: unTitulo descripcion: unaDescripcion usuario: unUsuario [
-	| nuevaPregunta  |
+	| nuevaPregunta |
+	
 	nuevaPregunta := Pregunta
 		nuevaPreguntaConUsuario: unUsuario
 		titulo: unTitulo
 		descripcion: unaDescripcion
-		topicos: unosTopicos .
+		topicos: unosTopicos.
 	preguntas add: nuevaPregunta.
-	topicos addAll: unosTopicos .
+	topicos addAll: unosTopicos.
 	^ nuevaPregunta
 ]
 
 { #category : #adding }
-Quoora >> agregarTopicoNombre: unNombre descripcion: unaDescripcion usuario: unUsuario [
+Quoora >> agregarTopicoNombre: unNombre descripcion: unaDescripcion [
 	"Agrega un topico a la coleccion"
+
 	| topico |
 	topico := Topico nuevoConNombre: unNombre descripcion: unaDescripcion.
 	topicos add: topico
