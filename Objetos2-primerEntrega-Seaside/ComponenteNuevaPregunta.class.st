@@ -1,6 +1,6 @@
 Class {
 	#name : #ComponenteNuevaPregunta,
-	#superclass : #SBSComponent,
+	#superclass : #ComponentePrincipal,
 	#instVars : [
 		'descripcion',
 		'titulo',
@@ -56,16 +56,10 @@ ComponenteNuevaPregunta >> renderButtonOn: aCanvas [
 		with: 'Agregar pregunta'.
 	aCanvas space.
 	aCanvas space.
-	aCanvas submitButton
-		class: 'btn btn-outline-secondary';
-		callback: [ self answer ];
-		with: 'Volver'.
+	self renderVolverOn: aCanvas
 	aCanvas space.
 	aCanvas space.
-	aCanvas submitButton
-		class: 'btn btn-danger';
-		callback: [ self call: ComponenteLogin new ];
-		with: 'Salir'
+	self renderLogoutButtonOn: aCanvas
 ]
 
 { #category : #rendering }

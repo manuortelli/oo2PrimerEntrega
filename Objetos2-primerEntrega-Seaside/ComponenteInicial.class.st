@@ -1,6 +1,6 @@
 Class {
 	#name : #ComponenteInicial,
-	#superclass : #SBSComponent,
+	#superclass : #ComponentePrincipal,
 	#instVars : [
 		'quoora'
 	],
@@ -27,14 +27,6 @@ ComponenteInicial >> agregarFollower: aCanvas [
 				class: 'tn btn-success';
 				callback: [ self call: ComponenteSeguidores new ];
 				with: '  Ver seguidores  ' ]
-]
-
-{ #category : #'as yet unclassified' }
-ComponenteInicial >> cerrar [
-	self call: ComponenteLogin new	
-
-	"self session unregister.
-	self requestContext redirectTo: (self call: ComponenteLogin new)"
 ]
 
 { #category : #'as yet unclassified' }
@@ -80,16 +72,7 @@ ComponenteInicial >> renderContentOn: aCanvas [
 	aCanvas space.
 	self agregarFollower: aCanvas.
 	aCanvas horizontalRule.
-	self renderLogoutButtonOn: aCanvas
-]
-
-{ #category : #rendering }
-ComponenteInicial >> renderLogoutButtonOn: aCanvas [
-	aCanvas
-		form: [ aCanvas submitButton
-				class: 'btn btn-danger btn-lg';
-				callback: [ self cerrar];
-				with: 'Salir' ]
+	self renderLogoutButtonOn: aCanvas.
 ]
 
 { #category : #rendering }

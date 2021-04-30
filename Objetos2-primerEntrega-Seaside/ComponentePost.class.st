@@ -9,11 +9,19 @@ Class {
 }
 
 { #category : #'instance creation' }
+ComponentePost class >> of: unaPregunta [
+	| instancia |
+	instancia := self new.
+	instancia inicializarCon: unaPregunta.
+	^ instancia.
+]
+
+{ #category : #'instance creation' }
 ComponentePost class >> of: unaPregunta and: unParent [
 	| instancia |
 	instancia := self new.
-	instancia inicializarCon: unaPregunta .
-	instancia parent: unParent.
+	instancia inicializarCon: unaPregunta.
+	instancia parent:  unParent.
 	^ instancia
 ]
 
@@ -24,7 +32,8 @@ ComponentePost >> inicializarCon: unaPregunta [
 
 { #category : #'as yet unclassified' }
 ComponentePost >> mostrarPerfil [
-	self parent call: (ComponentePerfil of: self pregunta)
+	self parent
+		call: (ComponentePerfil of: self pregunta usuarioPropietario)
 ]
 
 { #category : #accessing }
@@ -43,17 +52,18 @@ ComponentePost >> pregunta [
 ]
 
 { #category : #rendering }
-ComponentePost >> renderButtonLike: aCanvas pregunta: unaPregunta [
-"Muestra 2 botones , de Dislike y de Like"
+ComponentePost >> renderButtonLike: aCanvas [ 
+	"Muestra 2 botones , de Dislike y de Like"
+
 	aCanvas
 		form: [ aCanvas submitButton
 				class: 'btn btn-outline-primary';
-				callback: [ unaPregunta agregarLike: self session usuario ];
+				callback: [ self pregunta agregarLike: self session usuario ];
 				with: 'Like'.
 			aCanvas space.
 			aCanvas submitButton
 				class: 'btn btn-outline-primary';
-				callback: [ unaPregunta agregarDislike: self session usuario ];
+				callback: [ self pregunta agregarDislike: self session usuario ];
 				with: 'Dislike' ]
 ]
 
@@ -61,8 +71,9 @@ ComponentePost >> renderButtonLike: aCanvas pregunta: unaPregunta [
 ComponentePost >> renderContentOn: aCanvas [
 	self renderTituloOn: aCanvas.
 	self renderPropietarioOn: aCanvas.
+	aCanvas heading level4 with: 'Topico: ' , self pregunta topicoNombre.
 	self renderLikeOn: aCanvas.
-	self renderButtonLike: aCanvas pregunta: self pregunta
+	self renderButtonLike: aCanvas 
 ]
 
 { #category : #rendering }
@@ -80,6 +91,7 @@ ComponentePost >> renderLikeOn: aCanvas [
 
 { #category : #'as yet unclassified' }
 ComponentePost >> renderPropietarioOn: aCanvas [
+	aCanvas space.
 	aCanvas text: 'Creado por:  '.
 	aCanvas anchor
 		callback: [ self mostrarPerfil ];
@@ -90,7 +102,7 @@ ComponentePost >> renderPropietarioOn: aCanvas [
 ComponentePost >> renderTituloOn: aCanvas [
 	aCanvas anchor
 		class: 'display-4';
-		callback: [ self parent call: (ComponentePreguntaDetalle of: pregunta) ];
-		with: self pregunta titulo.
-	aCanvas heading level4 with: 'Topico: ' , self pregunta topicoNombre
+		callback: [ self parent isNotNil
+				ifTrue: [self parent call: (ComponentePreguntaDetalle of: pregunta)] ];
+		with: self pregunta titulo
 ]

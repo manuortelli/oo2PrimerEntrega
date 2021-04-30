@@ -1,6 +1,6 @@
 Class {
 	#name : #ComponenteSeguidores,
-	#superclass : #SBSComponent,
+	#superclass : #ComponentePrincipal,
 	#instVars : [
 		'seguidor'
 	],
@@ -44,14 +44,26 @@ ComponenteSeguidores >> renderContentOn: aCanvas [
 	self mostrarSeguidores: aCanvas.
 	aCanvas
 		form: [ self renderInputOn: aCanvas.
-				self renderButtonOn: aCanvas].
-			
+			self renderSeguirOn: aCanvas.
+			self renderVolverOn: aCanvas.
+			aCanvas space.
+			self renderLogoutButtonOn: aCanvas. ]
 ]
 
 { #category : #'as yet unclassified' }
 ComponenteSeguidores >> renderInputOn: aCanvas [
 	aCanvas heading	level4 with: 'Ingrese la persona que desea seguir'.
 	aCanvas paragraph: [ aCanvas textInput on: #seguidor of: self ]
+]
+
+{ #category : #'as yet unclassified' }
+ComponenteSeguidores >> renderSeguirOn: aCanvas [
+	aCanvas submitButton
+		class: 'btn btn-primary';
+		callback: [ self seguir ];
+		with: 'Seguir'.
+	aCanvas space.
+
 ]
 
 { #category : #'as yet unclassified' }
