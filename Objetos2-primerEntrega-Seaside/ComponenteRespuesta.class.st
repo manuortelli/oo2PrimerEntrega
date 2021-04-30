@@ -23,12 +23,11 @@ ComponenteRespuesta >> inicialializarCon: unaRespuesta [
 
 { #category : #rendering }
 ComponenteRespuesta >> mostrarLikeOn: aCanvas [
-
-aCanvas heading level4
+	aCanvas heading level4
 		with:
-			'like: ' , self respuesta cantidadLikes greaseString , ' Dislike:  '
+			'like: ' , self respuesta cantidadLikes greaseString , '   Dislike:  '
 				, respuesta cantidadDislikes greaseString.
-aCanvas
+	aCanvas
 		form: [ aCanvas submitButton
 				class: 'btn btn-outline-primary';
 				callback: [ self respuesta agregarLike: self session usuario ];
@@ -36,14 +35,14 @@ aCanvas
 			aCanvas space.
 			aCanvas submitButton
 				class: 'btn btn-outline-primary';
-				callback: [ self respuesta
-					 agregarDislike: self session usuario ];
+				callback: [ self respuesta agregarDislike: self session usuario ];
 				with: 'Dislike' ]
 ]
 
 { #category : #'as yet unclassified' }
 ComponenteRespuesta >> mostrarseOn: aCanvas [
-	aCanvas text: 'Respuesta de' , self respuesta usuarioPropietario nombre.
+	aCanvas
+		text: 'Respuesta de ' , self respuesta usuarioPropietario nombre.
 	aCanvas heading level5 with: self respuesta texto.
 	self mostrarLikeOn: aCanvas
 ]

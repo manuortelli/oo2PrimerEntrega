@@ -19,24 +19,8 @@ ComponenteSeguidores >> mostrarSeguidores: aCanvas [
 ]
 
 { #category : #rendering }
-ComponenteSeguidores >> renderButtonOn: aCanvas [ 
-	aCanvas space.
-	aCanvas submitButton
-		class: 'btn btn-outline-secondary';
-		callback: [ self answer ];
-		with: 'Volver'.
-	aCanvas space.
-	aCanvas
-		form: [ aCanvas submitButton
-				class: 'btn btn-danger';
-				callback: [ self call: ComponenteLogin new ];
-				with: 'Salir' ] 
-]
-
-{ #category : #rendering }
 ComponenteSeguidores >> renderContentOn: aCanvas [
 	self mostrarSeguidores: aCanvas.
-	self renderVolverOn: aCanvas.
-			aCanvas space.
-	self renderLogoutButtonOn: aCanvas. 
+	aCanvas space.
+	self renderLogoutButtonOn: aCanvas
 ]

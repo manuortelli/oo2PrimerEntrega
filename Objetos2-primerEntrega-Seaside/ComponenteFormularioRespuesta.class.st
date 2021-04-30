@@ -40,11 +40,15 @@ ComponenteFormularioRespuesta >> renderFormulario: aCanvas [
 				rows: 5.
 			aCanvas break.
 			aCanvas submitButton
+				class: 'btn btn-outline-primary';
 				callback: [ self responder ];
-				with: 'Guardar'.
+				with: 'Agregar Respuesta '.
+			aCanvas space.
+			aCanvas space.
 			aCanvas submitButton
+				class: 'btn btn-outline-secondary';
 				callback: [ self answer ];
-				value: 'Cancelar' ]
+				with: '  Cancelar  ' ]
 ]
 
 { #category : #accessing }

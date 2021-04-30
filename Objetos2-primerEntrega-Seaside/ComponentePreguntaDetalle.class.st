@@ -43,7 +43,6 @@ ComponentePreguntaDetalle >> renderContentOn: aCanvas [
 	self renderRespuesta: aCanvas pregunta: pregunta.
 	aCanvas render: (ComponenteFormularioRespuesta of: pregunta).
 	self parent renderLogoutButtonOn: aCanvas.
-	self parent renderVolverOn: aCanvas.
 ]
 
 { #category : #rendering }
@@ -57,12 +56,4 @@ ComponentePreguntaDetalle >> renderRespuesta: aCanvas pregunta: unaPregunta [
 		with: [ unaPregunta respuestas
 				do:
 					[ :respuesta | aCanvas listItem: [ aCanvas render: (ComponenteRespuesta  of: respuesta) ] ] ]
-]
-
-{ #category : #'as yet unclassified' }
-ComponentePreguntaDetalle >> volverAHome:aCanvas [
-	aCanvas submitButton
-		class: 'btn btn-outline-secondary';
-		callback: [ self call: ComponenteInicial new ];
-		with: 'Volver'.
 ]

@@ -81,9 +81,9 @@ ComponentePost >> renderContentOn: aCanvas [
 
 { #category : #'as yet unclassified' }
 ComponentePost >> renderLikeOn: aCanvas [
-		aCanvas heading level4
+	aCanvas heading level4
 		with:
-			'like: ' , self pregunta cantidadLikes greaseString , ' Dislike:  '
+			'like: ' , self pregunta cantidadLikes greaseString , '   Dislike:  '
 				, pregunta cantidadDislikes greaseString
 ]
 

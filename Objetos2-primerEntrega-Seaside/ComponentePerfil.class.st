@@ -36,7 +36,6 @@ ComponentePerfil >> renderContentOn: aCanvas [
 	self renderSeguidoresOn: aCanvas.
 	self renderPostsOn: aCanvas.
 	self renderLogoutButtonOn: aCanvas.
-	self renderVolverOn: aCanvas
 ]
 
 { #category : #rendering }

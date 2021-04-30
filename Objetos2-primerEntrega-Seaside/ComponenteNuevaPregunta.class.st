@@ -56,7 +56,12 @@ ComponenteNuevaPregunta >> renderButtonOn: aCanvas [
 		with: 'Agregar pregunta'.
 	aCanvas space.
 	aCanvas space.
-	self renderVolverOn: aCanvas. aCanvas space.
+	aCanvas submitButton
+		class: 'btn btn-outline-secondary';
+		callback: [ self answer ];
+		with: 'Cancelar'.
+	aCanvas horizontalRule.
+	aCanvas space.
 	aCanvas space.
 	self renderLogoutButtonOn: aCanvas
 ]
