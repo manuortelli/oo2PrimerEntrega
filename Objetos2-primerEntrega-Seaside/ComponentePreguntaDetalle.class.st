@@ -2,7 +2,8 @@ Class {
 	#name : #ComponentePreguntaDetalle,
 	#superclass : #ComponentePrincipal,
 	#instVars : [
-		'pregunta'
+		'pregunta',
+		'parent'
 	],
 	#category : #'Objetos2-primerEntrega-Seaside'
 }
@@ -21,6 +22,16 @@ ComponentePreguntaDetalle >> inicializarCon: unaPregunta [
 ]
 
 { #category : #accessing }
+ComponentePreguntaDetalle >> parent [
+	^parent
+]
+
+{ #category : #accessing }
+ComponentePreguntaDetalle >> parent: unParent [
+	parent:= unParent
+]
+
+{ #category : #accessing }
 ComponentePreguntaDetalle >> pregunta [
 	^pregunta
 ]
@@ -31,7 +42,7 @@ ComponentePreguntaDetalle >> renderContentOn: aCanvas [
 	self renderRespuesta: aCanvas pregunta: pregunta.
 	aCanvas render: (ComponenteFormularioRespuesta of: pregunta).
 	self renderLogoutButtonOn: aCanvas.
-	self renderVolverOn: aCanvas
+	self volverAHome:aCanvas
 ]
 
 { #category : #rendering }
@@ -45,4 +56,12 @@ ComponentePreguntaDetalle >> renderRespuesta: aCanvas pregunta: unaPregunta [
 		with: [ unaPregunta respuestas
 				do:
 					[ :respuesta | aCanvas listItem: [ aCanvas render: (ComponenteRespuesta  of: respuesta) ] ] ]
+]
+
+{ #category : #'as yet unclassified' }
+ComponentePreguntaDetalle >> volverAHome:aCanvas [
+	aCanvas submitButton
+		class: 'btn btn-outline-secondary';
+		callback: [ self call: ComponenteInicial new ];
+		with: 'Volver'.
 ]

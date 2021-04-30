@@ -26,7 +26,7 @@ ComponenteInicial >> agregarFollower: aCanvas [
 		form: [ aCanvas submitButton
 				class: 'tn btn-success';
 				callback: [ self call: ComponenteSeguidores new ];
-				with: '  Ver seguidores  ' ]
+				with: '  Ver seguidos  ' ]
 ]
 
 { #category : #'as yet unclassified' }

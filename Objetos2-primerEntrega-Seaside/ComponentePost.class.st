@@ -76,11 +76,6 @@ ComponentePost >> renderContentOn: aCanvas [
 	self renderButtonLike: aCanvas 
 ]
 
-{ #category : #rendering }
-ComponentePost >> renderDetalleOn [
-	self call: ComponentePreguntaDetalle new.
-]
-
 { #category : #'as yet unclassified' }
 ComponentePost >> renderLikeOn: aCanvas [
 		aCanvas heading level4
@@ -95,8 +90,7 @@ ComponentePost >> renderPropietarioOn: aCanvas [
 	aCanvas text: 'Creado por:  '.
 	
 	aCanvas anchor
-		callback: [ self parent isNotNil
-				ifTrue: self mostrarPerfil ];
+		callback: [  self mostrarPerfil ];
 		with: self pregunta usuarioPropietario nombre
 ]
 

@@ -32,17 +32,8 @@ ComponentePerfil >> mostrar: aCanvas preguntas: unasPreguntas [
 ]
 
 { #category : #'as yet unclassified' }
-ComponentePerfil >> rendenContentOn: aCanvas [
-
-	aCanvas heading level3
-		with: 'Bienvenido al perfil de:' , self usuario.
-	self renderPostsOn: aCanvas
-]
-
-{ #category : #'as yet unclassified' }
 ComponentePerfil >> renderContentOn: aCanvas [
-	aCanvas heading level3
-		with: 'Bienvenido al perfil de: ' , self usuario nombre.
+	self renderSeguidoresOn: aCanvas.
 	self renderPostsOn: aCanvas.
 	self renderLogoutButtonOn: aCanvas.
 	self renderVolverOn: aCanvas
@@ -52,12 +43,28 @@ ComponentePerfil >> renderContentOn: aCanvas [
 ComponentePerfil >> renderPostsOn: aCanvas [
 	| quoora preguntas |
 	quoora := Quoora soleInstance.
-	preguntas := quoora preguntasRelevantesDeUnUsuario: self usuario.
+	preguntas := quoora preguntasDeUnUsuario:  self usuario.
 	preguntas
 		ifEmpty: [ aCanvas alert beSecondary with: 'No hay preguntas de interes'.
 			aCanvas break ].
 	aCanvas heading level2 with: 'Preguntas'.
 	self mostrar: aCanvas preguntas: preguntas 
+]
+
+{ #category : #rendering }
+ComponentePerfil >> renderSeguidoresOn: aCanvas [
+	aCanvas text:
+		 ('Bienvenido al perfil de: ' , self usuario nombre, '  ').
+	aCanvas anchor
+		callback: [  self seguir.  ];
+		with: 'Seguir'.
+	
+
+]
+
+{ #category : #'as yet unclassified' }
+ComponentePerfil >> seguir [ 
+	self session usuario agregarFollower: self usuario
 ]
 
 { #category : #accessing }

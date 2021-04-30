@@ -49,18 +49,6 @@ Interaccion >> cantidadLikes [
 ]
 
 { #category : #'as yet unclassified' }
-Interaccion >> coleccionDeDislikes [
-	^ self getReacciones
-		reject: [ :reaccion | reaccion getState ]
-]
-
-{ #category : #'as yet unclassified' }
-Interaccion >> coleccionDeLikes [
-	^ self getReacciones
-		collect: [ :reaccion | reaccion getState  ]
-]
-
-{ #category : #'as yet unclassified' }
 Interaccion >> dislikesDeUnUsuario: unUsuario [
 	self subclassResponsibility
 ]
