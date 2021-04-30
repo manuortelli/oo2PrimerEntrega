@@ -1,6 +1,6 @@
 Class {
 	#name : #ComponentePost,
-	#superclass : #SBSComponent,
+	#superclass : #ComponentePrincipal,
 	#instVars : [
 		'pregunta',
 		'parent'
@@ -34,6 +34,9 @@ ComponentePost >> inicializarCon: unaPregunta [
 ComponentePost >> mostrarPerfil [
 	self parent
 		call: (ComponentePerfil of: self pregunta usuarioPropietario)
+		
+			
+
 ]
 
 { #category : #accessing }
@@ -88,10 +91,10 @@ ComponentePost >> renderLikeOn: aCanvas [
 ComponentePost >> renderPropietarioOn: aCanvas [
 	aCanvas space.
 	aCanvas text: 'Creado por:  '.
-	
 	aCanvas anchor
-		callback: [  self mostrarPerfil ];
+		callback: [ self mostrarPerfil ];
 		with: self pregunta usuarioPropietario nombre
+
 ]
 
 { #category : #rendering }
@@ -99,6 +102,6 @@ ComponentePost >> renderTituloOn: aCanvas [
 	aCanvas anchor
 		class: 'display-4';
 		callback: [ self parent isNotNil
-				ifTrue: [self parent call: (ComponentePreguntaDetalle of: pregunta)] ];
+				ifTrue: [self parent call: (ComponentePreguntaDetalle of: pregunta and: self)] ];
 		with: self pregunta titulo
 ]

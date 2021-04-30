@@ -6,7 +6,8 @@ Class {
 
 { #category : #'as yet unclassified' }
 ComponentePrincipal >> cerrar [
-	self call: ComponenteLogin new	
+	
+	self call: ComponenteLogin new
 
 	"self session unregister.
 	self requestContext redirectTo: (self call: ComponenteLogin new)"
