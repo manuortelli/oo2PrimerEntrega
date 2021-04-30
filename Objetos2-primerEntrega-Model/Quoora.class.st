@@ -13,6 +13,52 @@ Class {
 }
 
 { #category : #accessing }
+Quoora class >> InstanciaDePrueba [
+	| quoora pedro juan diego topico1 topico2 preguntaDiego preguntaPedro |
+	quoora := self soleInstance.
+	pedro := quoora
+		crearUsuarioNombre: 'pedro@cuoora.com'
+		password: 'pedro@cuoora.com'.
+	juan := quoora
+		crearUsuarioNombre: 'juan@cuoora.com'
+		password: 'juan@cuoora.com'.
+	diego := quoora
+		crearUsuarioNombre: 'diego@cuoora.com'
+		password: 'diego@cuoora.com'.
+	juan agregarFollower: diego.
+	pedro agregarFollower: juan.
+	topico1 := OrderedCollection new.
+	topico1
+		add: 'OO1';
+		add: 'Test de unidad'.
+	preguntaPedro := quoora
+		agregarPreguntaConTopico: topico1
+		titulo: '¿Para que sirve el metodo SetUp?'
+		descripcion: ''
+		usuario: pedro.
+	topico2 := OrderedCollection new.
+	topico2
+		add: 'OO1';
+		add: 'Smalltalk'.
+	preguntaDiego := quoora
+		agregarPreguntaConTopico: topico2
+		titulo: '¿Qué significa #messageNotUnderstood?'
+		descripcion: ''
+		usuario: diego.
+	preguntaDiego
+		agregarRespuestaConTexto:
+			'Significa que el objeto que recibió el mensaje
+no encontró ningún método para ejecutar en respuesta'
+		usuario: pedro.
+	preguntaPedro
+		agregarRespuestaConTexto:
+			'Sirve para instanciar los objetos que son
+evaluados por el test en un único método y que se ejecute
+siempre antes de cada test'
+		usuario: diego
+]
+
+{ #category : #accessing }
 Quoora class >> clearSoleInstance [
 	soleInstance := nil
 ]

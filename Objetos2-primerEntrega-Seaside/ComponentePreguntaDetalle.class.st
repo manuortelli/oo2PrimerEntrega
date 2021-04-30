@@ -42,7 +42,7 @@ ComponentePreguntaDetalle >> renderContentOn: aCanvas [
 	self renderDetalle: aCanvas.
 	self renderRespuesta: aCanvas pregunta: pregunta.
 	aCanvas render: (ComponenteFormularioRespuesta of: pregunta).
-	self parent renderLogoutButtonOn: aCanvas.
+	self renderLogoutButtonOn: aCanvas
 ]
 
 { #category : #rendering }

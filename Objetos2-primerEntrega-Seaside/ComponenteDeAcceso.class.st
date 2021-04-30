@@ -36,7 +36,10 @@ ComponenteDeAcceso >> renderButtonsOn: aCanvas [
 
 { #category : #accessing }
 ComponenteDeAcceso >> renderContentOn: aCanvas [
-
+"(WAAdmin register: ComponenteLogin  asApplicationAt: 'cuoora')
+ sessionClass: SesionConUsuario ;
+ addLibrary: JQDeploymentLibrary;
+ addLibrary: SBSDevelopmentLibrary"
 	aCanvas
 		form: [ self renderInputElementsOn: aCanvas.
 			self renderButtonsOn: aCanvas ]
