@@ -22,6 +22,7 @@ ComponenteInicial >> agregar [
 
 { #category : #rendering }
 ComponenteInicial >> agregarFollower: aCanvas [
+"Llama al componente que muestra los seguidores "
 	aCanvas
 		form: [ aCanvas submitButton
 				class: 'tn btn-success';
@@ -36,6 +37,7 @@ ComponenteInicial >> inicializarCon: unQuoora [.
 
 { #category : #rendering }
 ComponenteInicial >> mostrar: aCanvas preguntas: unasPreguntas [
+"Renderiza el componentePost por cada una de las preguntas  "
 	aCanvas unorderedList
 		with: [ unasPreguntas
 				do: [ :pregunta | 
@@ -52,10 +54,11 @@ ComponenteInicial >> quoora [
 
 { #category : #rendering }
 ComponenteInicial >> renderButtonOn: aCanvas [
+"Muestra el boton de nueva pregunta y agregar topico y llama a sus respectivos metodos"
 	aCanvas
 		form: [ aCanvas submitButton
 				class: 'tn btn-outline-success';
-				callback: [ self call: (ComponenteNuevaPregunta of: self quoora)];
+				callback: [ self call: (ComponenteNuevaPregunta of: self quoora) ];
 				with: '  Nueva pregunta  '.
 			aCanvas space.
 			aCanvas submitButton
@@ -72,13 +75,13 @@ ComponenteInicial >> renderContentOn: aCanvas [
 	aCanvas space.
 	self agregarFollower: aCanvas.
 	aCanvas horizontalRule.
-	self renderLogoutButtonOn: aCanvas.
+	self renderLogoutButtonOn:  aCanvas
 ]
 
 { #category : #rendering }
 ComponenteInicial >> renderPostsOn: aCanvas [
+"Obtiene las preguntas relevantes y llama a los metodos que visualizan"
 	| preguntas |
-	self quoora inspect.
 	preguntas := self quoora
 		preguntasRelevantesDeUnUsuario: self session usuario.
 	preguntas

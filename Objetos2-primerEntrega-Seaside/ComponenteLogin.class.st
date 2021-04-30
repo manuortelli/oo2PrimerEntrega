@@ -6,13 +6,14 @@ Class {
 
 { #category : #'private protocol' }
 ComponenteLogin >> login [
-	| usuarioLogueado  ok |
+"Chequea el usuario y contraseña y procede"
+	| usuarioLogueado ok |
 	usuarioLogueado := self model
 		usuario: self usuario
 		protegidoPor: self password.
 	usuarioLogueado
-		ifNotNil: [ :user  | 
-			self procedeCon: user  quoora: self model.
+		ifNotNil: [ :user | 
+			self procedeCon: user quoora: self model.
 			ok := true ];
 		ifNil: [ ok := false ].
 	usuario := nil.
@@ -43,11 +44,12 @@ ComponenteLogin >> renderSignInButtonOn: aCanvas [
 
 { #category : #rendering }
 ComponenteLogin >> renderSignUpButtonOn: aCanvas [
+"Muestra el boton de registrar y llama al metodo que registra"
 	aCanvas heading level4
 		with: [ aCanvas space.
 			aCanvas small textMuted with: '¿Desea Registrarse?' ].
 	aCanvas outlineButton
 		bePrimary;
-		callback: [ self registrarNuevoUsuario];
+		callback: [ self registrarNuevoUsuario ];
 		with: 'Registrarse'
 ]

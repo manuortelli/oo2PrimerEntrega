@@ -23,11 +23,12 @@ ComponentePerfil >> inicializarCon: unUsuario [
 
 { #category : #rendering }
 ComponentePerfil >> mostrar: aCanvas preguntas: unasPreguntas [
+	"Por cada pregunta del perfil renderiza el ComponentePost visualizando la pregunta"
+
 	aCanvas unorderedList
 		with: [ unasPreguntas
 				do: [ :pregunta | 
-					aCanvas
-						listItem: [ aCanvas render: (ComponentePost of: pregunta) ].
+					aCanvas listItem: [ aCanvas render: (ComponentePost of: pregunta) ].
 					aCanvas horizontalRule ] ]
 ]
 
@@ -40,25 +41,25 @@ ComponentePerfil >> renderContentOn: aCanvas [
 
 { #category : #rendering }
 ComponentePerfil >> renderPostsOn: aCanvas [
+"Si hay preguntas relevantes las obtiene  y llama al metodo que las muestra"
 	| quoora preguntas |
 	quoora := Quoora soleInstance.
-	preguntas := quoora preguntasDeUnUsuario:  self usuario.
+	preguntas := quoora preguntasDeUnUsuario: self usuario.
 	preguntas
 		ifEmpty: [ aCanvas alert beSecondary with: 'No hay preguntas de interes'.
 			aCanvas break ].
 	aCanvas heading level2 with: 'Preguntas'.
-	self mostrar: aCanvas preguntas: preguntas 
+	self mostrar: aCanvas preguntas: preguntas
 ]
 
 { #category : #rendering }
 ComponentePerfil >> renderSeguidoresOn: aCanvas [
-	aCanvas text:
-		 ('Bienvenido al perfil de: ' , self usuario nombre, '  ').
+"Muestra el nombre perfil y llama a los metodos correspondientes"
+	aCanvas
+		text: 'Bienvenido al perfil de: ' , self usuario nombre , '  '.
 	aCanvas anchor
-		callback: [  self seguir.  ];
-		with: 'Seguir'.
-	
-
+		callback: [ self seguir ];
+		with: 'Seguir'
 ]
 
 { #category : #'as yet unclassified' }

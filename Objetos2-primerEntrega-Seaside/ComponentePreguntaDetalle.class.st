@@ -52,8 +52,10 @@ ComponentePreguntaDetalle >> renderDetalle: aCanvas [
 
 { #category : #rendering }
 ComponentePreguntaDetalle >> renderRespuesta: aCanvas pregunta: unaPregunta [
+"Renderiza el componente respuesta por cada una de las respuesta de la pregunta actual"
 	aCanvas unorderedList
 		with: [ unaPregunta respuestas
-				do:
-					[ :respuesta | aCanvas listItem: [ aCanvas render: (ComponenteRespuesta  of: respuesta) ] ] ]
+				do: [ :respuesta | 
+					aCanvas
+						listItem: [ aCanvas render: (ComponenteRespuesta of: respuesta) ] ] ]
 ]

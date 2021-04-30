@@ -44,6 +44,7 @@ ComponenteDeAcceso >> renderContentOn: aCanvas [
 
 { #category : #accessing }
 ComponenteDeAcceso >> renderInputElementsOn: aCanvas [
+"Muestra el formulario de ingreso "
 	aCanvas displayHeading
 		class: 'text-primary';
 		level: 4;
@@ -51,7 +52,7 @@ ComponenteDeAcceso >> renderInputElementsOn: aCanvas [
 	aCanvas horizontalRule.
 	aCanvas heading level4 with: 'Usuario '.
 	aCanvas paragraph: [ aCanvas textInput on: #usuario of: self ].
-	aCanvas heading level4 with: 'Password ' .
+	aCanvas heading level4 with: 'Password '.
 	aCanvas paragraph: [ aCanvas passwordInput on: #password of: self ]
 ]
 

@@ -34,6 +34,7 @@ ComponenteFormularioRespuesta >> renderContentOn: aCanvas [
 
 { #category : #rendering }
 ComponenteFormularioRespuesta >> renderFormulario: aCanvas [
+"Muestra el formulario para cargar la respuesta"
 	aCanvas
 		form: [ (aCanvas textArea on: #texto of: self)
 				columns: 40;
