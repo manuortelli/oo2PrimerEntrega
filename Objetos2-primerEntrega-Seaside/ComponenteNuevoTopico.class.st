@@ -3,8 +3,7 @@ Class {
 	#superclass : #ComponentePrincipal,
 	#instVars : [
 		'topico',
-		'descripcion',
-		'topicoConComa'
+		'descripcion'
 	],
 	#category : #'Objetos2-primerEntrega-Seaside'
 }

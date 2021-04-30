@@ -1,9 +1,6 @@
 Class {
 	#name : #ComponenteSeguidores,
 	#superclass : #ComponentePrincipal,
-	#instVars : [
-		'seguidor'
-	],
 	#category : #'Objetos2-primerEntrega-Seaside'
 }
 
