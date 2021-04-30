@@ -56,8 +56,7 @@ ComponenteNuevaPregunta >> renderButtonOn: aCanvas [
 		with: 'Agregar pregunta'.
 	aCanvas space.
 	aCanvas space.
-	self renderVolverOn: aCanvas
-	aCanvas space.
+	self renderVolverOn: aCanvas. aCanvas space.
 	aCanvas space.
 	self renderLogoutButtonOn: aCanvas
 ]

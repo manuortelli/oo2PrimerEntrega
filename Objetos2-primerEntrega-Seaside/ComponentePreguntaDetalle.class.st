@@ -27,21 +27,22 @@ ComponentePreguntaDetalle >> pregunta [
 
 { #category : #rendering }
 ComponentePreguntaDetalle >> renderContentOn: aCanvas [
-	
 	self renderDetalle: aCanvas.
-	self renderRespuesta: aCanvas pregunta: pregunta
+	self renderRespuesta: aCanvas pregunta: pregunta.
+	aCanvas render: (ComponenteFormularioRespuesta of: pregunta).
+	self renderLogoutButtonOn: aCanvas.
+	self renderVolverOn: aCanvas
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #rendering }
 ComponentePreguntaDetalle >> renderDetalle: aCanvas [
 	aCanvas render: (ComponentePost of: self pregunta).
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #rendering }
 ComponentePreguntaDetalle >> renderRespuesta: aCanvas pregunta: unaPregunta [
 	aCanvas unorderedList
 		with: [ unaPregunta respuestas
-				do: [ :respuesta | 
-					aCanvas
-						listItem: [ aCanvas render: (ComponentePost of: respuesta) ] ] ]
+				do:
+					[ :respuesta | aCanvas listItem: [ aCanvas render: (ComponenteRespuesta  of: respuesta) ] ] ]
 ]

@@ -93,8 +93,10 @@ ComponentePost >> renderLikeOn: aCanvas [
 ComponentePost >> renderPropietarioOn: aCanvas [
 	aCanvas space.
 	aCanvas text: 'Creado por:  '.
+	
 	aCanvas anchor
-		callback: [ self mostrarPerfil ];
+		callback: [ self parent isNotNil
+				ifTrue: self mostrarPerfil ];
 		with: self pregunta usuarioPropietario nombre
 ]
 

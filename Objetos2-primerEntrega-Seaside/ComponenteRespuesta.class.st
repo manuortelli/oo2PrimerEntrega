@@ -43,17 +43,15 @@ aCanvas
 
 { #category : #'as yet unclassified' }
 ComponenteRespuesta >> mostrarseOn: aCanvas [
+	aCanvas text: 'Respuesta de' , self respuesta usuarioPropietario nombre.
 	aCanvas heading level5 with: self respuesta texto.
-	aCanvas heading level4 with: 'Topico: ' , self respuesta topicoNombre.
 	self mostrarLikeOn: aCanvas
-	
 ]
 
 { #category : #rendering }
 ComponenteRespuesta >> renderContentOn: aCanvas [
 	self mostrarseOn: aCanvas.
-	self renderLogoutButtonOn: aCanvas.
-	self renderVolverOn: aCanvas.
+	
 ]
 
 { #category : #rendering }
