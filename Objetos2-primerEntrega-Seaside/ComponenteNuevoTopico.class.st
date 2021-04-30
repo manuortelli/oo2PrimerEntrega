@@ -1,6 +1,6 @@
 Class {
 	#name : #ComponenteNuevoTopico,
-	#superclass : #SBSComponent,
+	#superclass : #ComponentePrincipal,
 	#instVars : [
 		'topico',
 		'descripcion',
@@ -32,7 +32,8 @@ ComponenteNuevoTopico >> descripcion: unaDescripcion [
 
 { #category : #accessing }
 ComponenteNuevoTopico >> renderButtonOn: aCanvas [
-"Muestra los botones que realizan la accion de cargar topico y cancelar"
+	"Muestra los botones que realizan la accion de cargar topico y cancelar"
+
 	aCanvas submitButton
 		class: 'btn btn-primary';
 		callback: [ self cargar ];
@@ -40,7 +41,9 @@ ComponenteNuevoTopico >> renderButtonOn: aCanvas [
 	aCanvas submitButton
 		class: 'btn btn-danger';
 		callback: [ self answer ];
-		with: 'Cancelar'
+		with: 'Cancelar'.
+	aCanvas space.
+	self renderLogoutButtonOn: aCanvas
 ]
 
 { #category : #rendering }
